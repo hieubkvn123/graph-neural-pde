@@ -1,4 +1,6 @@
 import wandb
+import sys
+import traceback
 import argparse
 import numpy as np
 import torch
@@ -66,6 +68,7 @@ def train(model, optimizer, data, pos_encoding=None):
     train_pred_idx = data.train_mask
 
   out = model(feat, pos_encoding)
+  print(out)
 
   if model.opt['dataset'] == 'ogbn-arxiv':
     lf = torch.nn.functional.nll_loss
@@ -285,7 +288,7 @@ def main(cmd_opt):
 
         print(log.format(epoch, time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
   except:
-        pass
+        traceback.print_exc(file=sys.stdout)
 
   print('best val accuracy {:03f} with test accuracy {:03f} at epoch {:d} and best time {:03f}'.format(val_acc, test_acc,
                                                                                                      best_epoch,

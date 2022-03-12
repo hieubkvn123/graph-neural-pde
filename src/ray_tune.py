@@ -705,6 +705,14 @@ if __name__ == "__main__":
                         help="for small datasets can do exact diffusion. If dataset is too big for matrix inversion then you can't")
     parser.add_argument('--att_samp_pct', type=float, default=1,
                         help="float in [0,1). The percentage of edges to retain based on attention scores")
+    parser.add_argument('--beltrami', type=bool, default=False,
+                        help='perform diffusion beltrami style')
+    parser.add_argument('--attention_type', type=str, default="scaled_dot",
+                      help="scaled_dot,cosine_sim,pearson, exp_kernel")
+    parser.add_argument('--square_plus', action='store_true', help='replace softmax with square plus')
+    parser.add_argument('--geom_gcn_splits', dest='geom_gcn_splits', action='store_true',
+                      help='use the 10 fixed splits from '
+                           'https://arxiv.org/abs/2002.05287')
 
     args = parser.parse_args()
 
