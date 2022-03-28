@@ -70,6 +70,8 @@ def train(model, optimizer, data, pos_encoding=None):
   if model.opt['dataset'] == 'ogbn-arxiv':
     lf = torch.nn.functional.nll_loss
     loss = lf(out.log_softmax(dim=-1)[data.train_mask], data.y.squeeze(1)[data.train_mask])
+    # lf = torch.losses.ArcFaceLoss(model.num_classes, model.config['hidden_dim'])
+    # loss = lf(out.log_softmax(dim=-1)[data.train_mask], data.y.squeeze(1)[data.train_mask])
   else:
     lf = torch.nn.CrossEntropyLoss()
     loss = lf(out[data.train_mask], data.y.squeeze()[data.train_mask])

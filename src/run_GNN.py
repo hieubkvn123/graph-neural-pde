@@ -9,6 +9,7 @@ import torch.nn.functional as F
 from GNN import GNN
 from GNN_early import GNNEarly
 from GNN_KNN import GNN_KNN
+from GNN_contrastive import GNNEarlyContrastive
 from GNN_KNN_early import GNNKNNEarly
 import time
 from data import get_dataset, set_train_val_test_split
@@ -16,6 +17,7 @@ from ogb.nodeproppred import Evaluator
 from graph_rewiring import apply_KNN, apply_beltrami, apply_edge_sampling
 from best_params import  best_params_dict
 from wandb_conf import wandb_config
+from pytorch_metric_learning import losses
 
 
 def get_optimizer(name, parameters, lr, weight_decay=0):
@@ -67,14 +69,16 @@ def train(model, optimizer, data, pos_encoding=None):
   else:
     train_pred_idx = data.train_mask
 
-  out = model(feat, pos_encoding)
+  logits, out = model(feat, pos_encoding)
 
   if model.opt['dataset'] == 'ogbn-arxiv':
     lf = torch.nn.functional.nll_loss
     loss = lf(out.log_softmax(dim=-1)[data.train_mask], data.y.squeeze(1)[data.train_mask])
   else:
-    lf = torch.nn.CrossEntropyLoss()
-    loss = lf(out[data.train_mask], data.y.squeeze()[data.train_mask])
+    # lf = torch.nn.CrossEntropyLoss()
+    print(logits.shape, out.shape)
+    lf = losses.ArcFaceLoss(embedding_size=model.opt['hidden_dim'], num_classes=model.num_classes, margin=10).to(model.device)
+    loss = lf(logits[data.train_mask], data.y.squeeze()[data.train_mask])
   if model.odeblock.nreg > 0:  # add regularisation - slower for small data, but faster and better performance for large data
     reg_states = tuple(torch.mean(rs) for rs in model.reg_states)
     regularization_coeffs = model.regularization_coeffs
@@ -137,7 +141,7 @@ def test(model, data, pos_encoding=None, opt=None):  # opt required for runtime 
   feat = data.x
   if model.opt['use_labels']:
     feat = add_labels(feat, data.y, data.train_mask, model.num_classes, model.device)
-  logits, accs = model(feat, pos_encoding), []
+  (_, logits), accs = model(feat, pos_encoding), []
   for _, mask in data('train_mask', 'val_mask', 'test_mask'):
     pred = logits[mask].max(1)[1]
     acc = pred.eq(data.y[mask]).sum().item() / mask.sum().item()
@@ -227,7 +231,7 @@ def main(cmd_opt):
   if opt['rewire_KNN'] or opt['fa_layer']:
     model = GNN_KNN(opt, dataset, device).to(device) if opt["no_early"] else GNNKNNEarly(opt, dataset, device).to(device)
   else:
-    model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
+    model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarlyContrastive(opt, dataset, device).to(device)
 
   if not opt['planetoid_split'] and opt['dataset'] in ['Cora','Citeseer','Pubmed']:
     dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_random_seeds'])
