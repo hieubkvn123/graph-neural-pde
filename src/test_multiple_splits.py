@@ -9,6 +9,7 @@ import torch.nn.functional as F
 from GNN import GNN
 from GNN_early import GNNEarly
 from GNN_KNN import GNN_KNN
+from GNN_contrastive import GNNEarlyContrastive
 from GNN_KNN_early import GNNKNNEarly
 import time
 from data import get_dataset, set_train_val_test_split
@@ -142,7 +143,7 @@ def test(model, data, pos_encoding=None, opt=None):  # opt required for runtime 
   feat = data.x
   if model.opt['use_labels']:
     feat = add_labels(feat, data.y, data.train_mask, model.num_classes, model.device)
-  logits, accs = model(feat, pos_encoding), []
+  (_, logits), accs = model(feat, pos_encoding), []
   for _, mask in data('train_mask', 'val_mask', 'test_mask'):
     pred = logits[mask].max(1)[1]
     acc = pred.eq(data.y[mask]).sum().item() / mask.sum().item()
@@ -229,7 +230,7 @@ def train_ray_rand(opt, checkpoint_dir=None, data_dir="../data"):
             model, data = CGNN(opt, adj, opt['time'], device).to(device), dataset.data.to(device)
             train_this = train_cgnn
         else:
-            model = GNN(opt, dataset, device)
+            model = GNNEarlyContrastive(opt, dataset, device).to(device)
             train_this = train
 
         if torch.cuda.device_count() > 1:
@@ -242,7 +243,6 @@ def train_ray_rand(opt, checkpoint_dir=None, data_dir="../data"):
             new_model = copy.deepcopy(model)
             parameters = [p for p in new_model.parameters() if p.requires_grad]
             optimizer = get_optimizer(opt["optimizer"], parameters, lr=opt["lr"], weight_decay=opt["decay"])
-            print(optimizer)
 
             new_model = new_model.to(device)
 
