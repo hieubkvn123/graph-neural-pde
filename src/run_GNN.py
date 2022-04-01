@@ -76,10 +76,10 @@ def train(model, optimizer, data, pos_encoding=None):
     loss = lf(out.log_softmax(dim=-1)[data.train_mask], data.y.squeeze(1)[data.train_mask])
   else:
     bce_lf = torch.nn.CrossEntropyLoss()
-    con_lf = SupConLoss(temperature=0.3) 
+    con_lf = SupConLoss(temperature=0.2) 
     f1, f2 = logits[data.train_mask], logits[data.train_mask] 
     features = torch.cat([f1.unsqueeze(1), f2.unsqueeze(1)], dim=1)
-    loss = 0.01 * con_lf(features, data.y.squeeze()[data.train_mask]) + \
+    loss = 0.00001 * con_lf(features, data.y.squeeze()[data.train_mask]) + \
             bce_lf(out[data.train_mask], data.y.squeeze()[data.train_mask])
   if model.odeblock.nreg > 0:  # add regularisation - slower for small data, but faster and better performance for large data
     reg_states = tuple(torch.mean(rs) for rs in model.reg_states)

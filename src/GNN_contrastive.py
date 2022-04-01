@@ -87,17 +87,17 @@ class GNNEarlyContrastive(BaseGNN):
       z = torch.split(z, x.shape[1] // 2, dim=1)[0]
 
     # Activation.
-    z = F.relu(z)
+    logits = F.relu(z)
 
     if self.opt['fc_out']:
-      z = self.fc(z)
-      z = F.relu(z)
+      logits = self.fc(logits)
+      logits = F.relu(logits)
 
     # Dropout.
-    logits = F.dropout(z, self.opt['dropout'], training=self.training)
+    z = F.dropout(logits, self.opt['dropout'], training=self.training)
     
     # Decode each node embedding to get node label.
-    z = self.m2(logits)
+    z = self.m2(z)
     
     return logits, z
 

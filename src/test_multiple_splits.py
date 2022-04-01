@@ -15,6 +15,7 @@ from data import get_dataset, set_train_val_test_split
 from ogb.nodeproppred import Evaluator
 from graph_rewiring import apply_KNN, apply_beltrami, apply_edge_sampling
 from best_params import  best_params_dict
+from losses import SupConLoss
 
 def get_optimizer(name, parameters, lr, weight_decay=0):
   if name == 'sgd':
@@ -65,16 +66,19 @@ def train(model, optimizer, data, pos_encoding=None):
   else:
     train_pred_idx = data.train_mask
 
-  out = model(feat, pos_encoding)
+  logits, out = model(feat, pos_encoding)
+  bsz = logits[data.train_mask].shape[0]
 
   if model.opt['dataset'] == 'ogbn-arxiv':
     lf = torch.nn.functional.nll_loss
     loss = lf(out.log_softmax(dim=-1)[data.train_mask], data.y.squeeze(1)[data.train_mask])
-    # lf = torch.losses.ArcFaceLoss(model.num_classes, model.config['hidden_dim'])
-    # loss = lf(out.log_softmax(dim=-1)[data.train_mask], data.y.squeeze(1)[data.train_mask])
   else:
-    lf = torch.nn.CrossEntropyLoss()
-    loss = lf(out[data.train_mask], data.y.squeeze()[data.train_mask])
+    bce_lf = torch.nn.CrossEntropyLoss()
+    con_lf = SupConLoss(temperature=0.2) 
+    f1, f2 = logits[data.train_mask], logits[data.train_mask] 
+    features = torch.cat([f1.unsqueeze(1), f2.unsqueeze(1)], dim=1)
+    loss = 0.00001 * con_lf(features, data.y.squeeze()[data.train_mask]) + \
+            bce_lf(out[data.train_mask], data.y.squeeze()[data.train_mask])
   if model.odeblock.nreg > 0:  # add regularisation - slower for small data, but faster and better performance for large data
     reg_states = tuple(torch.mean(rs) for rs in model.reg_states)
     regularization_coeffs = model.regularization_coeffs
