@@ -17,8 +17,7 @@ from ogb.nodeproppred import Evaluator
 from graph_rewiring import apply_KNN, apply_beltrami, apply_edge_sampling
 from best_params import  best_params_dict
 from wandb_conf import wandb_config
-from pytorch_metric_learning import losses
-
+from losses import SupConLoss 
 
 def get_optimizer(name, parameters, lr, weight_decay=0):
   if name == 'sgd':
@@ -70,15 +69,18 @@ def train(model, optimizer, data, pos_encoding=None):
     train_pred_idx = data.train_mask
 
   logits, out = model(feat, pos_encoding)
+  bsz = logits[data.train_mask].shape[0]
 
   if model.opt['dataset'] == 'ogbn-arxiv':
     lf = torch.nn.functional.nll_loss
     loss = lf(out.log_softmax(dim=-1)[data.train_mask], data.y.squeeze(1)[data.train_mask])
   else:
-    # lf = torch.nn.CrossEntropyLoss()
-    print(logits.shape, out.shape)
-    lf = losses.ArcFaceLoss(embedding_size=model.opt['hidden_dim'], num_classes=model.num_classes, margin=10).to(model.device)
-    loss = lf(logits[data.train_mask], data.y.squeeze()[data.train_mask])
+    bce_lf = torch.nn.CrossEntropyLoss()
+    con_lf = SupConLoss(temperature=0.3) 
+    f1, f2 = logits[data.train_mask], logits[data.train_mask] 
+    features = torch.cat([f1.unsqueeze(1), f2.unsqueeze(1)], dim=1)
+    loss = 0.01 * con_lf(features, data.y.squeeze()[data.train_mask]) + \
+            bce_lf(out[data.train_mask], data.y.squeeze()[data.train_mask])
   if model.odeblock.nreg > 0:  # add regularisation - slower for small data, but faster and better performance for large data
     reg_states = tuple(torch.mean(rs) for rs in model.reg_states)
     regularization_coeffs = model.regularization_coeffs
@@ -142,6 +144,7 @@ def test(model, data, pos_encoding=None, opt=None):  # opt required for runtime 
   if model.opt['use_labels']:
     feat = add_labels(feat, data.y, data.train_mask, model.num_classes, model.device)
   (_, logits), accs = model(feat, pos_encoding), []
+  print(logits.shape)
   for _, mask in data('train_mask', 'val_mask', 'test_mask'):
     pred = logits[mask].max(1)[1]
     acc = pred.eq(data.y[mask]).sum().item() / mask.sum().item()
