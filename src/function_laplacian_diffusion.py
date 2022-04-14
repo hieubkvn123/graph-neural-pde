@@ -219,9 +219,10 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     # Shape = (2045, ) (norm along dim 1)
     x_norm = torch.linalg.norm(x, 2, dim=1)
+    print('Number of norms greater than bound : ', torch.numel(x_norm[x_norm > self.clipping_bound]))
 
     # Truncate x_norm the have max=1
-    x_norm = torch.clamp(x_norm, min=None, max=self.clipping_bound)
+    # x_norm = torch.clamp(x_norm, min=None, max=self.clipping_bound)
 
     # Shape = (2045, 1)
     x_norm = x_norm.view(-1, 1)

@@ -252,6 +252,9 @@ def main(cmd_opt):
           model.odeblock.odefunc.edge_index = ei
 
         loss = train(model, optimizer, data, pos_encoding)
+
+        # Print statistics for input data
+        # print("Statistics for inputs : ", data.x.min().item(), data.x.max().item(), data.x.mean().item(), sep='\t')
         tmp_train_acc, tmp_val_acc, tmp_test_acc = this_test(model, data, pos_encoding, opt)
 
         best_time = opt['time']
