@@ -221,14 +221,17 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     # x_norm = torch.linalg.norm(x, 2, dim=1)
     # Get the column wise norm
     x_norm = torch.linalg.norm(x, 2, dim=0)
+    # print(x.shape, x_norm.shape)
+    # print(x_norm)
     x_norm = x_norm.repeat(x.shape[0], 1)
-    print('Number of norms greater than bound : ', torch.numel(x_norm[x_norm > self.clipping_bound]))
+    # print('Number of norms greater than bound : ', torch.numel(x_norm[x_norm > self.clipping_bound]))
 
     # Truncate x_norm the have max=1
-    # x_norm = torch.clamp(x_norm, min=None, max=self.clipping_bound)
+    x_norm = torch.clamp(x_norm, min=None, max=self.clipping_bound)
 
     # Shape = (2045, 1)
     # x_norm = x_norm.view(-1, 1)
+    # print(x_norm.shape)
 
     f = (ax - x) * (x_norm ** self.alpha_) 
 
