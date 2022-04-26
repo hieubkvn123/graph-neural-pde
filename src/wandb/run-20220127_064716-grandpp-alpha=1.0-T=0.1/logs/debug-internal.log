@@ -1,0 +1,45 @@
+2022-01-27 06:47:17,262 INFO    MainThread:2758 [internal.py:wandb_internal():91] W&B internal server running at pid: 2758, started at: 2022-01-27 06:47:17.262710
+2022-01-27 06:47:17,264 INFO    WriterThread:2758 [datastore.py:open_for_write():77] open: /workspace/graph-neural-pde/src/wandb/run-20220127_064716-grandpp-alpha=1.0-T=0.1/run-grandpp-alpha=1.0-T=0.1.wandb
+2022-01-27 06:47:17,264 DEBUG   HandlerThread:2758 [handler.py:handle_request():120] handle_request: check_version
+2022-01-27 06:47:17,265 DEBUG   SenderThread:2758 [sender.py:send():160] send: header
+2022-01-27 06:47:17,265 DEBUG   SenderThread:2758 [sender.py:send():160] send: request
+2022-01-27 06:47:17,265 DEBUG   SenderThread:2758 [sender.py:send_request():169] send_request: check_version
+2022-01-27 06:47:17,472 DEBUG   SenderThread:2758 [sender.py:send():160] send: run
+2022-01-27 06:47:17,967 ERROR   SenderThread:2758 [internal_api.py:execute():127] 409 response executing GraphQL.
+2022-01-27 06:47:17,968 ERROR   SenderThread:2758 [internal_api.py:execute():128] {"errors":[{"message":"Error 1062: Duplicate entry '644113-grandpp-alpha=1.0-T=0.1' for key 'PRIMARY'","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2022-01-27 06:47:19,455 ERROR   SenderThread:2758 [internal_api.py:execute():127] 409 response executing GraphQL.
+2022-01-27 06:47:19,456 ERROR   SenderThread:2758 [internal_api.py:execute():128] {"errors":[{"message":"Error 1062: Duplicate entry '644113-grandpp-alpha=1.0-T=0.1' for key 'PRIMARY'","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2022-01-27 06:47:21,562 WARNING MainThread:2758 [internal.py:wandb_internal():146] Internal process interrupt: 1
+2022-01-27 06:47:22,210 ERROR   SenderThread:2758 [internal_api.py:execute():127] 409 response executing GraphQL.
+2022-01-27 06:47:22,210 ERROR   SenderThread:2758 [internal_api.py:execute():128] {"errors":[{"message":"Error 1062: Duplicate entry '644113-grandpp-alpha=1.0-T=0.1' for key 'PRIMARY'","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2022-01-27 06:47:22,211 ERROR   SenderThread:2758 [retry.py:__call__():111] Retry attempt failed:
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/site-packages/wandb/old/retry.py", line 96, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/wandb/sdk/internal/internal_api.py", line 130, in execute
+    six.reraise(*sys.exc_info())
+  File "/opt/conda/lib/python3.6/site-packages/six.py", line 703, in reraise
+    raise value
+  File "/opt/conda/lib/python3.6/site-packages/wandb/sdk/internal/internal_api.py", line 124, in execute
+    return self.client.execute(*args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/wandb/vendor/gql-0.2.0/gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/wandb/vendor/gql-0.2.0/gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/wandb/vendor/gql-0.2.0/gql/transport/requests.py", line 39, in execute
+    request.raise_for_status()
+  File "/opt/conda/lib/python3.6/site-packages/requests/models.py", line 941, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 409 Client Error: Conflict for url: https://api.wandb.ai/graphql
+2022-01-27 06:47:26,867 ERROR   SenderThread:2758 [internal_api.py:execute():127] 409 response executing GraphQL.
+2022-01-27 06:47:26,867 ERROR   SenderThread:2758 [internal_api.py:execute():128] {"errors":[{"message":"Error 1062: Duplicate entry '644113-grandpp-alpha=1.0-T=0.1' for key 'PRIMARY'","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2022-01-27 06:47:36,398 ERROR   SenderThread:2758 [internal_api.py:execute():127] 409 response executing GraphQL.
+2022-01-27 06:47:36,399 ERROR   SenderThread:2758 [internal_api.py:execute():128] {"errors":[{"message":"Error 1062: Duplicate entry '644113-grandpp-alpha=1.0-T=0.1' for key 'PRIMARY'","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2022-01-27 06:47:55,903 ERROR   SenderThread:2758 [internal_api.py:execute():127] 409 response executing GraphQL.
+2022-01-27 06:47:55,904 ERROR   SenderThread:2758 [internal_api.py:execute():128] {"errors":[{"message":"Error 1062: Duplicate entry '644113-grandpp-alpha=1.0-T=0.1' for key 'PRIMARY'","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2022-01-27 06:48:31,269 ERROR   SenderThread:2758 [internal_api.py:execute():127] 409 response executing GraphQL.
+2022-01-27 06:48:31,270 ERROR   SenderThread:2758 [internal_api.py:execute():128] {"errors":[{"message":"Error 1062: Duplicate entry '644113-grandpp-alpha=1.0-T=0.1' for key 'PRIMARY'","path":["upsertBucket"]}],"data":{"upsertBucket":null}}
+2022-01-27 06:48:39,541 WARNING MainThread:2758 [internal.py:wandb_internal():146] Internal process interrupt: 2
+2022-01-27 06:48:39,541 ERROR   MainThread:2758 [internal.py:wandb_internal():149] Internal process interrupted.
+2022-01-27 06:48:39,572 INFO    HandlerThread:2758 [handler.py:finish():624] shutting down handler
+2022-01-27 06:48:40,493 INFO    WriterThread:2758 [datastore.py:close():258] close: /workspace/graph-neural-pde/src/wandb/run-20220127_064716-grandpp-alpha=1.0-T=0.1/run-grandpp-alpha=1.0-T=0.1.wandb

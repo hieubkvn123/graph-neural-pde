@@ -3,6 +3,7 @@ from torch import nn
 from torch_geometric.nn.conv import MessagePassing
 from utils import Meter
 from regularized_ODE_function import RegularizedODEfunc
+from weight_decay import L1
 import regularized_ODE_function as reg_lib
 import six
 
@@ -94,6 +95,14 @@ class ODEFunc(MessagePassing):
   def __repr__(self):
     return self.__class__.__name__
 
+class NoReg(torch.nn.Module):
+    def __init__(self, module, weight_decay=0.001):
+        super().__init__()
+        self.module = module
+
+    def forward(self, *args, **kwargs):
+        # Simply forward and args and kwargs to module
+        return self.module(*args, **kwargs)
 
 class BaseGNN(MessagePassing):
   def __init__(self, opt, dataset, device=torch.device('cpu')):
@@ -106,25 +115,33 @@ class BaseGNN(MessagePassing):
     self.device = device
     self.fm = Meter()
     self.bm = Meter()
+    self.reg_func = NoReg
+    self.l1_weight_decay = opt['l1_weight_decay']
+
+    if(self.opt['l1_reg']):
+        print('[INFO] L1 regularization is being used ... ')
+        self.reg_func = L1
 
     if opt['beltrami']:
-      self.mx = nn.Linear(self.num_features, opt['feat_hidden_dim'])
-      self.mp = nn.Linear(opt['pos_enc_dim'], opt['pos_enc_hidden_dim'])
+      self.mx = self.reg_func(nn.Linear(self.num_features, opt['feat_hidden_dim']), weight_decay=self.l1_weight_decay)
+      self.mp = self.reg_func(nn.Linear(opt['pos_enc_dim'], opt['pos_enc_hidden_dim']), weight_decay=self.l1_weight_decay)
       opt['hidden_dim'] = opt['feat_hidden_dim'] + opt['pos_enc_hidden_dim']
     else:
-      self.m1 = nn.Linear(self.num_features, opt['hidden_dim'])
+      self.m1 = self.reg_func(nn.Linear(self.num_features, opt['hidden_dim']), weight_decay=self.l1_weight_decay)
 
     if self.opt['use_mlp']:
-      self.m11 = nn.Linear(opt['hidden_dim'], opt['hidden_dim'])
-      self.m12 = nn.Linear(opt['hidden_dim'], opt['hidden_dim'])
+      self.m11 = self.reg_func(nn.Linear(opt['hidden_dim'], opt['hidden_dim']), weight_decay=self.l1_weight_decay)
+      self.m12 = self.reg_func(nn.Linear(opt['hidden_dim'], opt['hidden_dim']), weight_decay=self.l1_weight_decay)
     if opt['use_labels']:
       # todo - fastest way to propagate this everywhere, but error prone - refactor later
       opt['hidden_dim'] = opt['hidden_dim'] + dataset.num_classes
     else:
       self.hidden_dim = opt['hidden_dim']
     if opt['fc_out']:
-      self.fc = nn.Linear(opt['hidden_dim'], opt['hidden_dim'])
-    self.m2 = nn.Linear(opt['hidden_dim'], dataset.num_classes)
+      self.fc = self.reg_func(nn.Linear(opt['hidden_dim'], opt['hidden_dim']), weight_decay=self.l1_weight_decay)
+
+    self.m2 = self.reg_func(nn.Linear(opt['hidden_dim'], dataset.num_classes), weight_decay=self.l1_weight_decay)
+    
     if self.opt['batch_norm']:
       self.bn_in = torch.nn.BatchNorm1d(opt['hidden_dim'])
       self.bn_out = torch.nn.BatchNorm1d(opt['hidden_dim'])

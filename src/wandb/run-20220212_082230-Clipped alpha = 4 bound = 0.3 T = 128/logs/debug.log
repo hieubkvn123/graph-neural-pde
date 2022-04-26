@@ -1,0 +1,24 @@
+2022-02-12 08:22:30,576 INFO    MainThread:775 [wandb_setup.py:_flush():69] setting env: {}
+2022-02-12 08:22:30,576 INFO    MainThread:775 [wandb_setup.py:_flush():69] setting login settings: {}
+2022-02-12 08:22:30,576 INFO    MainThread:775 [wandb_init.py:_log_setup():336] Logging user logs to /workspace/Hieu/graph-neural-pde/src/wandb/run-20220212_082230-Clipped alpha = 4 bound = 0.3 T = 128/logs/debug.log
+2022-02-12 08:22:30,576 INFO    MainThread:775 [wandb_init.py:_log_setup():337] Logging internal logs to /workspace/Hieu/graph-neural-pde/src/wandb/run-20220212_082230-Clipped alpha = 4 bound = 0.3 T = 128/logs/debug-internal.log
+2022-02-12 08:22:30,577 INFO    MainThread:775 [wandb_init.py:init():369] calling init triggers
+2022-02-12 08:22:30,577 INFO    MainThread:775 [wandb_init.py:init():376] wandb.init called with sweep_config: {}
+config: {}
+2022-02-12 08:22:30,577 INFO    MainThread:775 [wandb_init.py:init():418] starting backend
+2022-02-12 08:22:30,577 INFO    MainThread:775 [backend.py:_multiprocessing_setup():71] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2022-02-12 08:22:30,592 INFO    MainThread:775 [backend.py:ensure_launched():123] starting backend process...
+2022-02-12 08:22:30,606 INFO    MainThread:775 [backend.py:ensure_launched():128] started backend process with pid: 801
+2022-02-12 08:22:30,608 INFO    MainThread:775 [wandb_init.py:init():423] backend started and connected
+2022-02-12 08:22:30,612 INFO    MainThread:775 [wandb_init.py:init():465] updated telemetry
+2022-02-12 08:22:30,612 INFO    MainThread:775 [wandb_init.py:init():484] communicating current version
+2022-02-12 08:22:31,731 INFO    MainThread:775 [wandb_init.py:init():489] got version response upgrade_message: "wandb version 0.12.10 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2022-02-12 08:22:31,731 INFO    MainThread:775 [wandb_init.py:init():497] communicating run to backend with 30 second timeout
+2022-02-12 08:23:01,732 INFO    MainThread:775 [interface.py:_communicate_run():642] couldn't get run from backend
+2022-02-12 08:23:01,733 ERROR   MainThread:775 [wandb_init.py:init():501] backend process timed out
+2022-02-12 08:23:01,733 ERROR   MainThread:775 [wandb_init.py:init():510] encountered error: Error communicating with wandb process
+try: wandb.init(settings=wandb.Settings(start_method='fork'))
+or:  wandb.init(settings=wandb.Settings(start_method='thread'))
+For more info see: https://docs.wandb.ai/library/init#init-start-error
+2022-02-12 08:23:23,410 INFO    MainThread:775 [wandb_init.py:teardown():187] tearing down wandb.init

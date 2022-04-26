@@ -1,0 +1,152 @@
+[INFO] Experiment mode is :  ON
+[INFO] ODE function :  ext_laplacian3
+[INFO] Block type :  attention
+[INFO] T value :  128.0
+[INFO] L1 regularization on :  False
+[INFO] L1 reg coefficient :  0.001
+/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: AdaptiveHeunSolver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: EarlyStopDopri5: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+****************** Extended Laplacian Function V.3 ******************
+Clipping Bound =  0.4
+Alpha =  3.0
+*********************************************************************
+****************** Extended Laplacian Function V.3 ******************
+Clipping Bound =  0.4
+Alpha =  3.0
+*********************************************************************
+GNNEarly
+m1.module.weight
+torch.Size([128, 500])
+m1.module.bias
+torch.Size([128])
+m2.module.weight
+torch.Size([3, 128])
+m2.module.bias
+torch.Size([3])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.w
+torch.Size([128, 128])
+odeblock.odefunc.d
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.w
+torch.Size([128, 128])
+odeblock.reg_odefunc.odefunc.d
+torch.Size([128])
+odeblock.multihead_att_layer.Q.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.Q.bias
+torch.Size([16])
+odeblock.multihead_att_layer.V.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.V.bias
+torch.Size([16])
+odeblock.multihead_att_layer.K.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.K.bias
+torch.Size([16])
+odeblock.multihead_att_layer.Wout.weight
+torch.Size([128, 16])
+odeblock.multihead_att_layer.Wout.bias
+torch.Size([128])
+Epoch: 001/100, Runtime 0.590830, Loss 1.097988, forward nfe 38, backward nfe 14, Train: 0.8500, Val: 0.7257, Test: 0.7256, Best time: 97.0275
+Epoch: 002/100, Runtime 1.932677, Loss 1.062129, forward nfe 252, backward nfe 230, Train: 0.8667, Val: 0.7299, Test: 0.7300, Best time: 124.7386
+Epoch: 003/100, Runtime 1.735587, Loss 0.987908, forward nfe 466, backward nfe 418, Train: 0.8667, Val: 0.7299, Test: 0.7300, Best time: 128.0000
+Epoch: 004/100, Runtime 2.163930, Loss 0.885789, forward nfe 686, backward nfe 664, Train: 0.8667, Val: 0.7299, Test: 0.7300, Best time: 128.0000
+Epoch: 005/100, Runtime 2.055217, Loss 0.751740, forward nfe 906, backward nfe 896, Train: 0.8667, Val: 0.7299, Test: 0.7300, Best time: 128.0000
+Epoch: 006/100, Runtime 2.113754, Loss 0.602111, forward nfe 1126, backward nfe 1137, Train: 0.8667, Val: 0.7340, Test: 0.7299, Best time: 243.2291
+Epoch: 007/100, Runtime 2.002220, Loss 0.494535, forward nfe 1346, backward nfe 1360, Train: 0.8667, Val: 0.7340, Test: 0.7299, Best time: 128.0000
+Epoch: 008/100, Runtime 1.439477, Loss 0.384033, forward nfe 1572, backward nfe 1504, Train: 0.9000, Val: 0.7403, Test: 0.7394, Best time: 149.9648
+Epoch: 009/100, Runtime 1.327889, Loss 0.313461, forward nfe 1798, backward nfe 1631, Train: 0.9333, Val: 0.7507, Test: 0.7552, Best time: 81.8208
+Epoch: 010/100, Runtime 1.796583, Loss 0.305555, forward nfe 2030, backward nfe 1824, Train: 0.9667, Val: 0.7688, Test: 0.7691, Best time: 76.3408
+Epoch: 011/100, Runtime 1.909385, Loss 0.215746, forward nfe 2256, backward nfe 2036, Train: 0.9667, Val: 0.7812, Test: 0.7834, Best time: 148.0277
+Epoch: 012/100, Runtime 2.243279, Loss 0.205319, forward nfe 2476, backward nfe 2232, Train: 0.9667, Val: 0.7847, Test: 0.7840, Best time: 153.4287
+Epoch: 013/100, Runtime 1.844183, Loss 0.193541, forward nfe 2696, backward nfe 2433, Train: 0.9667, Val: 0.8007, Test: 0.7966, Best time: 147.4673
+Epoch: 014/100, Runtime 1.232528, Loss 0.176552, forward nfe 2922, backward nfe 2549, Train: 0.9333, Val: 0.8083, Test: 0.8039, Best time: 211.2930
+Epoch: 015/100, Runtime 1.599405, Loss 0.156560, forward nfe 3142, backward nfe 2716, Train: 0.9333, Val: 0.8083, Test: 0.8039, Best time: 128.0000
+Epoch: 016/100, Runtime 1.284101, Loss 0.129674, forward nfe 3362, backward nfe 2840, Train: 0.9333, Val: 0.8083, Test: 0.8039, Best time: 128.0000
+Epoch: 017/100, Runtime 1.050613, Loss 0.183784, forward nfe 3582, backward nfe 2930, Train: 0.9333, Val: 0.8083, Test: 0.8039, Best time: 128.0000
+Epoch: 018/100, Runtime 1.542334, Loss 0.179561, forward nfe 3808, backward nfe 3091, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 019/100, Runtime 1.395386, Loss 0.140840, forward nfe 4016, backward nfe 3234, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 020/100, Runtime 1.242057, Loss 0.154918, forward nfe 4224, backward nfe 3354, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 021/100, Runtime 1.897392, Loss 0.159809, forward nfe 4438, backward nfe 3564, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 022/100, Runtime 1.506711, Loss 0.181294, forward nfe 4658, backward nfe 3719, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 023/100, Runtime 1.033979, Loss 0.150125, forward nfe 4878, backward nfe 3806, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 024/100, Runtime 1.892192, Loss 0.222332, forward nfe 5098, backward nfe 4016, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 025/100, Runtime 1.423229, Loss 0.181765, forward nfe 5312, backward nfe 4160, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 026/100, Runtime 2.058270, Loss 0.186881, forward nfe 5526, backward nfe 4395, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 027/100, Runtime 1.597467, Loss 0.121205, forward nfe 5734, backward nfe 4564, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 028/100, Runtime 1.868630, Loss 0.206952, forward nfe 5948, backward nfe 4771, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 029/100, Runtime 1.659804, Loss 0.127972, forward nfe 6162, backward nfe 4949, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 030/100, Runtime 1.872306, Loss 0.165551, forward nfe 6382, backward nfe 5153, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 031/100, Runtime 1.645847, Loss 0.118706, forward nfe 6602, backward nfe 5327, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 032/100, Runtime 2.146133, Loss 0.125383, forward nfe 6822, backward nfe 5573, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Epoch: 033/100, Runtime 1.775163, Loss 0.085246, forward nfe 7042, backward nfe 5765, Train: 0.9167, Val: 0.8146, Test: 0.8011, Best time: 128.0000
+Traceback (most recent call last):
+  File "/home/administrator/hieu/graph-neural-pde/src/run_GNN.py", line 256, in main
+    tmp_train_acc, tmp_val_acc, tmp_test_acc = this_test(model, data, pos_encoding, opt)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/autograd/grad_mode.py", line 28, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/administrator/hieu/graph-neural-pde/src/run_GNN.py", line 138, in test
+    logits, accs = model(feat, pos_encoding), []
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/administrator/hieu/graph-neural-pde/src/GNN_early.py", line 84, in forward
+    z = self.odeblock(x)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/administrator/hieu/graph-neural-pde/src/block_transformer_attention.py", line 64, in forward
+    rtol=self.rtol)
+  File "/home/administrator/hieu/graph-neural-pde/src/early_stop_solver.py", line 301, in __call__
+    t, solution = self.solver.integrate(t)
+  File "/home/administrator/hieu/graph-neural-pde/src/early_stop_solver.py", line 65, in integrate
+    new_t, y = self.advance(t[i])
+  File "/home/administrator/hieu/graph-neural-pde/src/early_stop_solver.py", line 79, in advance
+    train_acc, val_acc, test_acc = self.evaluate(self.rk_state)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/autograd/grad_mode.py", line 28, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/administrator/hieu/graph-neural-pde/src/early_stop_solver.py", line 119, in evaluate
+    train_acc, val_acc, test_acc = self.ode_test(z)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/autograd/grad_mode.py", line 28, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/administrator/hieu/graph-neural-pde/src/early_stop_solver.py", line 93, in test
+    acc = pred.eq(self.data.y[mask]).sum().item() / mask.sum().item()
+KeyboardInterrupt
+best val accuracy 0.814583 with test accuracy 0.801120 at epoch 18 and best time 128.000000
+[INFO] Loggin into 9_tbl_1_lr_deepgrand_pubmed.json for seed #1...
+[INFO] Experiment mode is :  ON
+[INFO] ODE function :  ext_laplacian3
+[INFO] Block type :  attention
+[INFO] T value :  128.0
+[INFO] L1 regularization on :  False
+[INFO] L1 reg coefficient :  0.001
+Traceback (most recent call last):
+  File "test_multiple_planetoid_splits.py", line 388, in <module>
+    fw_nfes, losses, train_accs, val_accs, test_accs = main(opt)
+  File "/home/administrator/hieu/graph-neural-pde/src/run_GNN.py", line 213, in main
+    dataset = get_dataset(opt, '../data', opt['not_lcc'])
+  File "/home/administrator/hieu/graph-neural-pde/src/data.py", line 57, in get_dataset
+    lcc = get_largest_connected_component(dataset)
+  File "/home/administrator/hieu/graph-neural-pde/src/data.py", line 124, in get_largest_connected_component
+    comp = get_component(dataset, start)
+  File "/home/administrator/hieu/graph-neural-pde/src/data.py", line 113, in get_component
+    neighbors = col[np.where(row == current_node)[0]]
+  File "<__array_function__ internals>", line 6, in where

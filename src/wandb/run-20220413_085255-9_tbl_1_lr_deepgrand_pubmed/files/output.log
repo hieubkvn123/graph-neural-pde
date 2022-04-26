@@ -1,0 +1,110 @@
+[INFO] Experiment mode is :  ON
+[INFO] ODE function :  ext_laplacian3
+[INFO] Block type :  attention
+[INFO] T value :  128.0
+[INFO] L1 regularization on :  False
+[INFO] L1 reg coefficient :  0.0
+/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+****************** Extended Laplacian Function V.3 ******************
+Clipping Bound =  0.4
+Alpha =  3.0
+*********************************************************************
+****************** Extended Laplacian Function V.3 ******************
+Clipping Bound =  0.4
+Alpha =  3.0
+*********************************************************************
+GNNEarly
+m1.module.weight
+torch.Size([128, 500])
+m1.module.bias
+torch.Size([128])
+m2.module.weight
+torch.Size([3, 128])
+m2.module.bias
+torch.Size([3])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.w
+torch.Size([128, 128])
+odeblock.odefunc.d
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.w
+torch.Size([128, 128])
+odeblock.reg_odefunc.odefunc.d
+torch.Size([128])
+odeblock.multihead_att_layer.Q.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.Q.bias
+torch.Size([16])
+odeblock.multihead_att_layer.V.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.V.bias
+torch.Size([16])
+odeblock.multihead_att_layer.K.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.K.bias
+torch.Size([16])
+odeblock.multihead_att_layer.Wout.weight
+torch.Size([128, 16])
+odeblock.multihead_att_layer.Wout.bias
+torch.Size([128])
+/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: AdaptiveHeunSolver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: EarlyStopDopri5: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+Epoch: 001/100, Runtime 16.225855, Loss 1.099458, forward nfe 38, backward nfe 15, Train: 0.6333, Val: 0.5715, Test: 0.5885, Best time: 20.6452
+Epoch: 002/100, Runtime 17.487887, Loss 1.101826, forward nfe 258, backward nfe 46, Train: 0.6333, Val: 0.5715, Test: 0.5885, Best time: 128.0000
+Epoch: 003/100, Runtime 23.611362, Loss 1.106174, forward nfe 466, backward nfe 109, Train: 0.6333, Val: 0.5715, Test: 0.5885, Best time: 128.0000
+Epoch: 004/100, Runtime 18.208753, Loss 1.097077, forward nfe 656, backward nfe 139, Train: 0.6333, Val: 0.5715, Test: 0.5885, Best time: 128.0000
+Epoch: 005/100, Runtime 61.038247, Loss 1.089619, forward nfe 858, backward nfe 382, Train: 0.6333, Val: 0.5715, Test: 0.5885, Best time: 128.0000
+Epoch: 006/100, Runtime 44.611584, Loss 1.071591, forward nfe 1078, backward nfe 541, Train: 0.8167, Val: 0.6347, Test: 0.6206, Best time: 280.6618
+Epoch: 007/100, Runtime 57.809376, Loss 1.040264, forward nfe 1292, backward nfe 771, Train: 0.8667, Val: 0.6944, Test: 0.6847, Best time: 224.2095
+Epoch: 008/100, Runtime 73.583943, Loss 0.987894, forward nfe 1512, backward nfe 1059, Train: 0.8667, Val: 0.7007, Test: 0.6958, Best time: 286.9659
+Traceback (most recent call last):
+  File "/home/administrator/hieu/graph-neural-pde/src/run_GNN.py", line 255, in main
+    loss = train(model, optimizer, data, pos_encoding)
+  File "/home/administrator/hieu/graph-neural-pde/src/run_GNN.py", line 87, in train
+    loss.backward()
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/_tensor.py", line 363, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/autograd/__init__.py", line 173, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/autograd/function.py", line 253, in apply
+    return user_fn(self, *args)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/adjoint.py", line 126, in backward
+    aug_state = odeint(
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/odeint.py", line 77, in odeint
+    solution = solver.integrate(t)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/solvers.py", line 30, in integrate
+    solution[i] = self._advance(t[i])
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 194, in _advance
+    self.rk_state = self._adaptive_step(self.rk_state)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 276, in _adaptive_step
+    interp_coeff = self._interp_fit(y0, y_next, k, dt)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 301, in _interp_fit
+    return _interp_fit(y0, y1, y_mid, f0, f1, dt)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/interp.py", line 19, in _interp_fit
+    c = dt * (f1 - 4 * f0) - 11 * y0 - 5 * y1 + 16 * y_mid
+KeyboardInterrupt
+best val accuracy 0.700694 with test accuracy 0.695779 at epoch 8 and best time 286.965879
+[INFO] Loggin into 9_tbl_1_lr_deepgrand_pubmed.json for seed #1...
+[INFO] Experiment mode is :  ON
+[INFO] ODE function :  ext_laplacian3
+[INFO] Block type :  attention
+[INFO] T value :  128.0
+[INFO] L1 regularization on :  False

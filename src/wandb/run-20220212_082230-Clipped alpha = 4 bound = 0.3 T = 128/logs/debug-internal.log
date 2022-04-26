@@ -1,0 +1,79 @@
+2022-02-12 08:22:31,473 INFO    MainThread:801 [internal.py:wandb_internal():91] W&B internal server running at pid: 801, started at: 2022-02-12 08:22:31.473041
+2022-02-12 08:22:31,476 DEBUG   HandlerThread:801 [handler.py:handle_request():120] handle_request: check_version
+2022-02-12 08:22:31,477 INFO    WriterThread:801 [datastore.py:open_for_write():77] open: /workspace/Hieu/graph-neural-pde/src/wandb/run-20220212_082230-Clipped alpha = 4 bound = 0.3 T = 128/run-Clipped alpha = 4 bound = 0.3 T = 128.wandb
+2022-02-12 08:22:31,479 DEBUG   SenderThread:801 [sender.py:send():160] send: header
+2022-02-12 08:22:31,479 DEBUG   SenderThread:801 [sender.py:send():160] send: request
+2022-02-12 08:22:31,479 DEBUG   SenderThread:801 [sender.py:send_request():169] send_request: check_version
+2022-02-12 08:22:31,733 DEBUG   SenderThread:801 [sender.py:send():160] send: run
+2022-02-12 08:23:01,735 DEBUG   HandlerThread:801 [handler.py:handle_request():120] handle_request: shutdown
+2022-02-12 08:23:01,736 INFO    HandlerThread:801 [handler.py:finish():624] shutting down handler
+2022-02-12 08:23:01,744 INFO    WriterThread:801 [datastore.py:close():258] close: /workspace/Hieu/graph-neural-pde/src/wandb/run-20220212_082230-Clipped alpha = 4 bound = 0.3 T = 128/run-Clipped alpha = 4 bound = 0.3 T = 128.wandb
+2022-02-12 08:23:05,421 ERROR   SenderThread:801 [retry.py:__call__():111] Retry attempt failed:
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/site-packages/urllib3/connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/opt/conda/lib/python3.6/site-packages/urllib3/connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+  File "/opt/conda/lib/python3.6/http/client.py", line 1354, in getresponse
+    response.begin()
+  File "/opt/conda/lib/python3.6/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/opt/conda/lib/python3.6/http/client.py", line 268, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/opt/conda/lib/python3.6/socket.py", line 586, in readinto
+    return self._sock.recv_into(b)
+  File "/opt/conda/lib/python3.6/ssl.py", line 1012, in recv_into
+    return self.read(nbytes, buffer)
+  File "/opt/conda/lib/python3.6/ssl.py", line 874, in read
+    return self._sslobj.read(len, buffer)
+  File "/opt/conda/lib/python3.6/ssl.py", line 631, in read
+    v = self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/opt/conda/lib/python3.6/site-packages/urllib3/connectionpool.py", line 727, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/opt/conda/lib/python3.6/site-packages/urllib3/util/retry.py", line 410, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/opt/conda/lib/python3.6/site-packages/urllib3/packages/six.py", line 735, in reraise
+    raise value
+  File "/opt/conda/lib/python3.6/site-packages/urllib3/connectionpool.py", line 677, in urlopen
+    chunked=chunked,
+  File "/opt/conda/lib/python3.6/site-packages/urllib3/connectionpool.py", line 428, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/opt/conda/lib/python3.6/site-packages/urllib3/connectionpool.py", line 336, in _raise_timeout
+    self, url, "Read timed out. (read timeout=%s)" % timeout_value
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/site-packages/wandb/old/retry.py", line 96, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/wandb/sdk/internal/internal_api.py", line 124, in execute
+    return self.client.execute(*args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/wandb/vendor/gql-0.2.0/gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/wandb/vendor/gql-0.2.0/gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/wandb/vendor/gql-0.2.0/gql/transport/requests.py", line 38, in execute
+    request = requests.post(self.url, **post_args)
+  File "/opt/conda/lib/python3.6/site-packages/requests/api.py", line 119, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/requests/sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/requests/sessions.py", line 643, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/conda/lib/python3.6/site-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.wandb.ai', port=443): Read timed out. (read timeout=10)
+2022-02-12 08:23:12,810 INFO    SenderThread:801 [sender.py:_start_run_threads():654] run started: Clipped alpha = 4 bound = 0.3 T = 128 with start time 1644654150
+2022-02-12 08:23:12,810 INFO    SenderThread:801 [sender.py:finish():884] shutting down sender
+2022-02-12 08:23:23,308 INFO    MainThread:801 [internal.py:handle_exit():78] Internal process exited

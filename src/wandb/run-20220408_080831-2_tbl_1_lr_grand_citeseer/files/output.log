@@ -1,0 +1,170 @@
+[INFO] Experiment mode is :  ON
+[INFO] ODE function :  laplacian
+[INFO] Block type :  attention
+[INFO] T value :  128.0
+[INFO] L1 regularization on :  False
+[INFO] L1 reg coefficient :  0.001
+/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+GNNEarly
+m1.module.weight
+torch.Size([80, 3703])
+m1.module.bias
+torch.Size([80])
+m2.module.weight
+torch.Size([6, 80])
+m2.module.bias
+torch.Size([6])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.w
+torch.Size([80, 80])
+odeblock.odefunc.d
+torch.Size([80])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.w
+torch.Size([80, 80])
+odeblock.reg_odefunc.odefunc.d
+torch.Size([80])
+odeblock.multihead_att_layer.output_var
+torch.Size([1])
+odeblock.multihead_att_layer.lengthscale
+torch.Size([1])
+odeblock.multihead_att_layer.Q.weight
+torch.Size([32, 80])
+odeblock.multihead_att_layer.Q.bias
+torch.Size([32])
+odeblock.multihead_att_layer.V.weight
+torch.Size([32, 80])
+odeblock.multihead_att_layer.V.bias
+torch.Size([32])
+odeblock.multihead_att_layer.K.weight
+torch.Size([32, 80])
+odeblock.multihead_att_layer.K.bias
+torch.Size([32])
+odeblock.multihead_att_layer.Wout.weight
+torch.Size([80, 4])
+odeblock.multihead_att_layer.Wout.bias
+torch.Size([80])
+/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: EarlyStopDopri5: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+Epoch: 001, Runtime 1.158355, Loss 1.795965, forward nfe 356, backward nfe 0, Train: 0.1667, Val: 0.1870, Test: 0.1742, Best time: 118.4067
+Epoch: 002, Runtime 0.991559, Loss 1.796322, forward nfe 1284, backward nfe 0, Train: 0.1500, Val: 0.2036, Test: 0.1742, Best time: 250.7427
+Epoch: 003, Runtime 1.010292, Loss 1.791314, forward nfe 2218, backward nfe 0, Train: 0.2750, Val: 0.2514, Test: 0.2645, Best time: 128.0000
+Epoch: 004, Runtime 1.012944, Loss 1.773195, forward nfe 3158, backward nfe 0, Train: 0.3167, Val: 0.3594, Test: 0.3742, Best time: 128.0000
+Epoch: 005, Runtime 1.090990, Loss 1.754278, forward nfe 4146, backward nfe 0, Train: 0.3500, Val: 0.3971, Test: 0.4161, Best time: 145.5093
+Epoch: 006, Runtime 1.140629, Loss 1.720690, forward nfe 5164, backward nfe 0, Train: 0.5083, Val: 0.4768, Test: 0.4903, Best time: 38.3718
+Epoch: 007, Runtime 1.291916, Loss 1.694818, forward nfe 6212, backward nfe 0, Train: 0.6000, Val: 0.5522, Test: 0.5532, Best time: 45.5039
+Epoch: 008, Runtime 1.136713, Loss 1.666672, forward nfe 7236, backward nfe 0, Train: 0.5833, Val: 0.5616, Test: 0.5565, Best time: 70.4596
+Epoch: 009, Runtime 1.154478, Loss 1.713713, forward nfe 8266, backward nfe 0, Train: 0.6250, Val: 0.5688, Test: 0.5613, Best time: 31.2582
+Epoch: 010, Runtime 1.131166, Loss 1.648977, forward nfe 9284, backward nfe 0, Train: 0.6917, Val: 0.7159, Test: 0.6903, Best time: 70.8148
+Epoch: 011, Runtime 1.152678, Loss 1.680401, forward nfe 10326, backward nfe 0, Train: 0.6917, Val: 0.7159, Test: 0.6903, Best time: 128.0000
+Epoch: 012, Runtime 1.143285, Loss 1.659010, forward nfe 11356, backward nfe 0, Train: 0.6917, Val: 0.7159, Test: 0.6903, Best time: 128.0000
+Epoch: 013, Runtime 1.245246, Loss 1.626558, forward nfe 12452, backward nfe 0, Train: 0.6917, Val: 0.7159, Test: 0.6903, Best time: 128.0000
+Epoch: 014, Runtime 1.205824, Loss 1.615163, forward nfe 13530, backward nfe 0, Train: 0.6917, Val: 0.7159, Test: 0.6903, Best time: 128.0000
+Epoch: 015, Runtime 1.277295, Loss 1.592324, forward nfe 14650, backward nfe 0, Train: 0.6917, Val: 0.7159, Test: 0.6903, Best time: 128.0000
+Epoch: 016, Runtime 1.188063, Loss 1.534487, forward nfe 15716, backward nfe 0, Train: 0.6917, Val: 0.7159, Test: 0.6903, Best time: 128.0000
+Epoch: 017, Runtime 1.219022, Loss 1.582774, forward nfe 16800, backward nfe 0, Train: 0.6833, Val: 0.7246, Test: 0.6984, Best time: 52.1476
+Traceback (most recent call last):
+  File "/home/administrator/hieu/graph-neural-pde/src/run_GNN.py", line 253, in main
+    loss = train(model, optimizer, data, pos_encoding)
+  File "/home/administrator/hieu/graph-neural-pde/src/run_GNN.py", line 68, in train
+    out = model(feat, pos_encoding)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/administrator/hieu/graph-neural-pde/src/GNN_early.py", line 84, in forward
+    z = self.odeblock(x)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/administrator/hieu/graph-neural-pde/src/block_transformer_attention.py", line 59, in forward
+    state_dt = integrator(
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/odeint.py", line 77, in odeint
+    solution = solver.integrate(t)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/solvers.py", line 30, in integrate
+    solution[i] = self._advance(t[i])
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 194, in _advance
+    self.rk_state = self._adaptive_step(self.rk_state)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 255, in _adaptive_step
+    y1, f1, y1_error, k = _runge_kutta_step(self.func, y0, f0, t0, dt, t1, tableau=self.tableau)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 76, in _runge_kutta_step
+    f = func(ti, yi, perturb=perturb)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py", line 185, in forward
+    t = _nextafter(t, t - 1)
+  File "/home/administrator/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py", line 322, in _nextafter
+    return _StitchGradient.apply(x1, out)
+KeyboardInterrupt
+best val accuracy 0.724638 with test accuracy 0.698387 at epoch 17 and best time 52.147619
+[INFO] Loggin into 2_tbl_1_lr_grand_citeseer.json for seed #1...
+[INFO] Experiment mode is :  ON
+[INFO] ODE function :  laplacian
+[INFO] Block type :  attention
+[INFO] T value :  128.0
+[INFO] L1 regularization on :  False
+[INFO] L1 reg coefficient :  0.001
+GNNEarly
+m1.module.weight
+torch.Size([80, 3703])
+m1.module.bias
+torch.Size([80])
+m2.module.weight
+torch.Size([6, 80])
+m2.module.bias
+torch.Size([6])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.w
+torch.Size([80, 80])
+odeblock.odefunc.d
+torch.Size([80])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.w
+torch.Size([80, 80])
+odeblock.reg_odefunc.odefunc.d
+torch.Size([80])
+odeblock.multihead_att_layer.output_var
+torch.Size([1])
+odeblock.multihead_att_layer.lengthscale
+torch.Size([1])
+odeblock.multihead_att_layer.Q.weight
+torch.Size([32, 80])
+odeblock.multihead_att_layer.Q.bias
+torch.Size([32])
+odeblock.multihead_att_layer.V.weight
+torch.Size([32, 80])
+odeblock.multihead_att_layer.V.bias
+torch.Size([32])
+odeblock.multihead_att_layer.K.weight
+torch.Size([32, 80])
+odeblock.multihead_att_layer.K.bias
+torch.Size([32])
+odeblock.multihead_att_layer.Wout.weight
+torch.Size([80, 4])
+odeblock.multihead_att_layer.Wout.bias

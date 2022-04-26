@@ -1,11 +1,11 @@
 """
 utility functions
 """
+import os
 
 import scipy
 from scipy.stats import sem
 import numpy as np
-import torch
 from torch_scatter import scatter_add
 from torch_geometric.utils import add_remaining_self_loops
 from torch_geometric.utils.num_nodes import maybe_num_nodes
@@ -13,6 +13,7 @@ from torch_geometric.utils.convert import to_scipy_sparse_matrix
 from sklearn.preprocessing import normalize
 from torch_geometric.nn.conv.gcn_conv import gcn_norm
 
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 class MaxNFEException(Exception): pass
 
@@ -181,7 +182,6 @@ def squareplus(src: Tensor, index: Optional[Tensor], ptr: Optional[Tensor] = Non
     Given a value tensor :attr:`src`, this function first groups the values
     along the first dimension based on the indices specified in :attr:`index`,
     and then proceeds to compute the softmax individually for each group.
-
     Args:
         src (Tensor): The source tensor.
         index (LongTensor): The indices of elements for applying the softmax.
@@ -189,7 +189,6 @@ def squareplus(src: Tensor, index: Optional[Tensor], ptr: Optional[Tensor] = Non
             sorted inputs in CSR representation. (default: :obj:`None`)
         num_nodes (int, optional): The number of nodes, *i.e.*
             :obj:`max_val + 1` of :attr:`index`. (default: :obj:`None`)
-
     :rtype: :class:`Tensor`
     """
   out = src - src.max()

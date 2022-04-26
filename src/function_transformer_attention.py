@@ -8,6 +8,75 @@ from data import get_dataset
 from utils import MaxNFEException, squareplus
 from base_classes import ODEFunc
 
+class ExtendedODEFuncTransformerAtt(ODEFunc):
+  # Set global attributes
+  alpha_ = 1.0
+  clipping_bound = 0.05
+
+  def __init__(self, in_features, out_features, opt, data, device):
+    super(ExtendedODEFuncTransformerAtt, self).__init__(opt, data, device)
+
+    ### Log information ###
+    print('****************** Extended Laplacian Function V.3 ******************')
+    print('Clipping Bound = ', self.clipping_bound)
+    print('Alpha = ', self.alpha_)
+    print('*********************************************************************')
+    
+    if opt['self_loop_weight'] > 0:
+      self.edge_index, self.edge_weight = add_remaining_self_loops(data.edge_index, data.edge_attr,
+                                                                   fill_value=opt['self_loop_weight'])
+    else:
+      self.edge_index, self.edge_weight = data.edge_index, data.edge_attr
+    self.multihead_att_layer = SpGraphTransAttentionLayer(in_features, out_features, opt,
+                                                          device, edge_weights=self.edge_weight).to(device)
+
+  def multiply_attention(self, x, attention, v=None):
+    # todo would be nice if this was more efficient
+    if self.opt['mix_features']:
+      vx = torch.mean(torch.stack(
+        [torch_sparse.spmm(self.edge_index, attention[:, idx], v.shape[0], v.shape[0], v[:, :, idx]) for idx in
+         range(self.opt['heads'])], dim=0),
+        dim=0)
+      ax = self.multihead_att_layer.Wout(vx)
+    else:
+      mean_attention = attention.mean(dim=1)
+      ax = torch_sparse.spmm(self.edge_index, mean_attention, x.shape[0], x.shape[0], x)
+    return ax
+
+  def forward(self, t, x):  # the t param is needed by the ODE solver.
+    if self.nfe > self.opt["max_nfe"]:
+      raise MaxNFEException
+    self.nfe += 1
+    
+    # Shape = 2045 x 80 (2045 = Number of nodes; 80 = Feature shape)
+    attention, values = self.multihead_att_layer(x, self.edge_index)
+    ax = self.multiply_attention(x, attention, values)
+
+    # Eigen-decompose the attention matrix
+
+    if not self.opt['no_alpha_sigmoid']:
+      alpha = torch.sigmoid(self.alpha_train)
+    else:
+      alpha = self.alpha_train
+
+    # Shape = (2045, ) (norm along dim 1)
+    x_norm = torch.linalg.norm(x, 2, dim=1)
+
+    # Truncate x_norm the have max=1
+    x_norm = torch.clamp(x_norm, min=None, max=self.clipping_bound)
+
+    # Shape = (2045, 1)
+    x_norm = x_norm.view(-1, 1)
+
+    f = (ax - x) * (x_norm ** self.alpha_) 
+
+    if self.opt['add_source']:
+      f = f + self.beta_train * self.x0
+
+    return f
+
+  def __repr__(self):
+    return self.__class__.__name__ + ' (' + str(self.in_features) + ' -> ' + str(self.out_features) + ')'
 
 class ODEFuncTransformerAtt(ODEFunc):
 
@@ -101,14 +170,18 @@ class SpGraphTransAttentionLayer(nn.Module):
       self.init_weights(self.Kp)
 
     else:
+      if self.opt['attention_type'] == "exp_kernel":
+        self.output_var = nn.Parameter(torch.ones(1))
+        self.lengthscale = nn.Parameter(torch.ones(1))
+
       self.Q = nn.Linear(in_features, self.attention_dim)
       self.init_weights(self.Q)
 
-    self.V = nn.Linear(in_features, self.attention_dim)
-    self.init_weights(self.V)
+      self.V = nn.Linear(in_features, self.attention_dim)
+      self.init_weights(self.V)
 
-    self.K = nn.Linear(in_features, self.attention_dim)
-    self.init_weights(self.K)
+      self.K = nn.Linear(in_features, self.attention_dim)
+      self.init_weights(self.K)
 
     self.activation = nn.Sigmoid()  # nn.LeakyReLU(self.alpha)
 
@@ -186,13 +259,13 @@ class SpGraphTransAttentionLayer(nn.Module):
       src = q[edge[0, :], :, :]
       dst_k = k[edge[1, :], :, :]
 
-    if self.opt['attention_type'] == "scaled_dot":
+    if not self.opt['beltrami'] and self.opt['attention_type'] == "exp_kernel":
+      prods = self.output_var ** 2 * torch.exp(-(torch.sum((src - dst_k) ** 2, dim=1) / (2 * self.lengthscale ** 2)))
+    elif self.opt['attention_type'] == "scaled_dot":
       prods = torch.sum(src * dst_k, dim=1) / np.sqrt(self.d_k)
-
     elif self.opt['attention_type'] == "cosine_sim":
       cos = torch.nn.CosineSimilarity(dim=1, eps=1e-5)
       prods = cos(src, dst_k)
-
     elif self.opt['attention_type'] == "pearson":
       src_mu = torch.mean(src, dim=1, keepdim=True)
       dst_mu = torch.mean(dst_k, dim=1, keepdim=True)

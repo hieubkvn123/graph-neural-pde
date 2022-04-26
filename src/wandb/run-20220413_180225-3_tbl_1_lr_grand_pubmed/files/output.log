@@ -1,0 +1,118 @@
+[INFO] Experiment mode is :  ON
+[INFO] ODE function :  laplacian
+[INFO] Block type :  attention
+[INFO] T value :  128.0
+[INFO] L1 regularization on :  False
+[INFO] L1 reg coefficient :  0.001
+/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: AdaptiveHeunSolver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+GNNEarly
+m1.module.weight
+torch.Size([128, 500])
+m1.module.bias
+torch.Size([128])
+m2.module.weight
+torch.Size([3, 128])
+m2.module.bias
+torch.Size([3])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.w
+torch.Size([128, 128])
+odeblock.odefunc.d
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.w
+torch.Size([128, 128])
+odeblock.reg_odefunc.odefunc.d
+torch.Size([128])
+odeblock.multihead_att_layer.Q.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.Q.bias
+torch.Size([16])
+odeblock.multihead_att_layer.V.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.V.bias
+torch.Size([16])
+odeblock.multihead_att_layer.K.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.K.bias
+torch.Size([16])
+odeblock.multihead_att_layer.Wout.weight
+torch.Size([128, 16])
+odeblock.multihead_att_layer.Wout.bias
+torch.Size([128])
+Traceback (most recent call last):
+  File "/home/administrator/hieu/graph-neural-pde/src/run_GNN.py", line 255, in main
+    loss = train(model, optimizer, data, pos_encoding)
+  File "/home/administrator/hieu/graph-neural-pde/src/run_GNN.py", line 87, in train
+    loss.backward()
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/_tensor.py", line 307, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/autograd/__init__.py", line 156, in backward
+    allow_unreachable=True, accumulate_grad=True)  # allow_unreachable flag
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/autograd/function.py", line 199, in apply
+    return user_fn(self, *args)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/adjoint.py", line 129, in backward
+    rtol=adjoint_rtol, atol=adjoint_atol, method=adjoint_method, options=adjoint_options
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/odeint.py", line 77, in odeint
+    solution = solver.integrate(t)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/solvers.py", line 30, in integrate
+    solution[i] = self._advance(t[i])
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/rk_common.py", line 194, in _advance
+    self.rk_state = self._adaptive_step(self.rk_state)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/rk_common.py", line 255, in _adaptive_step
+    y1, f1, y1_error, k = _runge_kutta_step(self.func, y0, f0, t0, dt, t1, tableau=self.tableau)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/rk_common.py", line 76, in _runge_kutta_step
+    f = func(ti, yi, perturb=perturb)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/misc.py", line 189, in forward
+    return self.base_func(t, y)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/misc.py", line 159, in forward
+    return self.mul * self.base_func(-t, y)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/misc.py", line 138, in forward
+    f = self.base_func(t, _flat_to_shape(y, (), self.shapes))
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/adjoint.py", line 88, in augmented_dynamics
+    func_eval = func(t if t_requires_grad else t_, y)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torchdiffeq/_impl/misc.py", line 189, in forward
+    return self.base_func(t, y)
+  File "/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/administrator/hieu/graph-neural-pde/src/function_laplacian_diffusion.py", line 40, in forward
+    raise MaxNFEException
+utils.MaxNFEException
+best val accuracy 0.000000 with test accuracy 0.000000 at epoch 0 and best time 0.000000
+/home/administrator/hieu/graph-neural-pde/src/run_GNN.py:290: RuntimeWarning: Mean of empty slice.
+  mean_fw_nfe = np.array(fw_nfe_ls).mean()
+/home/administrator/anaconda3/envs/grand/lib/python3.7/site-packages/numpy/core/_methods.py:189: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+/home/administrator/hieu/graph-neural-pde/src/run_GNN.py:291: RuntimeWarning: Mean of empty slice.
+  mean_run_time = np.array(run_time_ls).mean()
+Traceback (most recent call last):
+  File "test_multiple_planetoid_splits.py", line 388, in <module>
+    fw_nfes, losses, train_accs, val_accs, test_accs = main(opt)
+  File "/home/administrator/hieu/graph-neural-pde/src/run_GNN.py", line 292, in main
+    min_run_time = min(run_time_ls)
+ValueError: min() arg is an empty sequence
