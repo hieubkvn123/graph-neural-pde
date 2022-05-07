@@ -1,4 +1,4 @@
 wandb_config = {
-    'project' : 'graph-neural-pde',
+    'project' : 'ScaleGRAND',
     'entity' : 'khangnguyen2001'
 }
