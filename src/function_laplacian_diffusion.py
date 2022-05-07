@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 from torch import nn
 import torch_sparse
 
@@ -228,17 +229,24 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     # Shape = 2045 x 80 (2045 = Number of nodes; 80 = Feature shape)
     ax = self.sparse_multiply(x)
+    I = torch.eye(x.shape[0]).to(x)
 
     if(self.A is None):
-        I = torch.eye(x.shape[0]).to(x)
         self.A = self.construct_dense_att_matrix(self.edge_index, self.edge_weight, x.shape[0]).to(x)
         self.A = torch.transpose(self.A, 0, 1) # Make A right-stochastic
         self.A = self.A - I # Now A should be negative-semidefinite
     
     # Eigen-decompose A
     if(self.P_inv is None):
-        L, P = torch.eig(self.A, eigenvectors=True) # torch.linalg.eig(self.A) # For torch > 1.8.0
-        self.P_inv = torch.linalg.inv(P).to(x.device) 
+        ### For torch > 1.8.x ###
+        # L, P = torch.linalg.eig(self.A) 
+        # self.P_inv = torch.linalg.inv(P).to(x.device) 
+
+        ### For torch 1.8.x ###
+        L, P = np.linalg.eig(self.A.numpy())
+        self.P_inv = np.linalg.inv(P)
+        self.P_inv = torch.tensor(self.P_inv)
+
 
     # Compute Z = P^{-1}X as a complex matrix
     x_complex = torch.complex(x, torch.zeros_like(x))
@@ -253,17 +261,12 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     # Calculate Column-wise norm of Z
     z_real, z_imag = z.real, z.imag
-    z_real = torch.sum(z_real ** 2, dim=1)
-    z_imag = torch.sum(z_imag ** 2, dim=1)
-    colwise_norm = torch.sqrt(z_real + z_imag)
-
-    ### NO CLAMPING ###
-    # elemwise_norm = torch.clamp(elemwise_norm, max = 0.5)
-    # elemwise_norm = elemwise_norm / torch.norm(elemwise_norm, 2, dim=1).view(-1,1)
+    z_real_ss = torch.sum(z_real ** 2, dim=0)
+    z_imag_ss = torch.sum(z_imag ** 2, dim=0)
+    colwise_norm = torch.sqrt(z_real_ss + z_imag_ss)
 
     ### DeepGRAND FORMULA ###
     # Compute AX
-    I = torch.eye(x.shape[0]).to(x)
     ax = torch.matmul(self.A - I * 1e5, x)
     
     # Formula (19)
