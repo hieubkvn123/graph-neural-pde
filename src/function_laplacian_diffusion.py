@@ -231,11 +231,14 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     ax = self.sparse_multiply(x)
     I = torch.eye(x.shape[0]).to(x)
 
+    # Construct negative-semidefinite A
     if(self.A is None):
         self.A = self.construct_dense_att_matrix(self.edge_index, self.edge_weight, x.shape[0]).to(x)
         self.A = torch.transpose(self.A, 0, 1) # Make A right-stochastic
         self.A = self.A - I # Now A should be negative-semidefinite
     
+    # Inverse A and calculate Z
+    '''
     # Eigen-decompose A
     if(self.P_inv is None):
         ### For torch > 1.8.x ###
@@ -247,10 +250,10 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
         self.P_inv = np.linalg.inv(P)
         self.P_inv = torch.tensor(self.P_inv)
 
-
     # Compute Z = P^{-1}X as a complex matrix
     x_complex = torch.complex(x, torch.zeros_like(x))
     z = torch.matmul(self.P_inv, x_complex)
+    '''
 
     # Calculate Element-wise norm of Z
     '''
@@ -260,16 +263,22 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     '''
 
     # Calculate Column-wise norm of Z
+    '''
     z_real, z_imag = z.real, z.imag
     z_real_ss = torch.sum(z_real ** 2, dim=0)
     z_imag_ss = torch.sum(z_imag ** 2, dim=0)
     colwise_norm = torch.sqrt(z_real_ss + z_imag_ss)
+    '''
+
+    # Calculate Column-wise norm of X
+    colwise_norm = torch.norm(x, p=2, dim=0)
 
     ### DeepGRAND FORMULA ###
     # Compute AX
-    ax = torch.matmul(self.A - I * 1e5, x)
+    ax = torch.matmul(self.A - I * 1e-5, x)
+    # print(colwise_norm)
     
-    # Formula (19)
+    # Formula (18)
     f = ax * (colwise_norm ** self.alpha_)
     f = torch.nan_to_num(f)
     
@@ -280,7 +289,6 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     return f
 
 class NormLaplacianODEFunc(ODEFunc):
-
   # currently requires in_features = out_features
   def __init__(self, in_features, out_features, opt, data, device):
     super(NormLaplacianODEFunc, self).__init__(opt, data, device)
