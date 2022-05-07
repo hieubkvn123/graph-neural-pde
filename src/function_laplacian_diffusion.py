@@ -230,30 +230,47 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     ax = self.sparse_multiply(x)
 
     if(self.A is None):
-        mean_attention = self.attention_weights.mean(dim=1)
         I = torch.eye(x.shape[0]).to(x)
         self.A = self.construct_dense_att_matrix(self.edge_index, self.edge_weight, x.shape[0]).to(x)
-        self.A = torch.transpose(self.A, 0, 1)
-
-        self.A = self.A - I
+        self.A = torch.transpose(self.A, 0, 1) # Make A right-stochastic
+        self.A = self.A - I # Now A should be negative-semidefinite
     
     # Eigen-decompose A
     if(self.P_inv is None):
-        L, P = torch.linalg.eig(self.A) 
+        L, P = torch.eig(self.A, eigenvectors=True) # torch.linalg.eig(self.A) # For torch > 1.8.0
         self.P_inv = torch.linalg.inv(P).to(x.device) 
 
-    ax = torch.matmul(self.A, x)
+    # Compute Z = P^{-1}X as a complex matrix
     x_complex = torch.complex(x, torch.zeros_like(x))
     z = torch.matmul(self.P_inv, x_complex)
 
+    # Calculate Element-wise norm of Z
+    '''
     z_real, z_imag = z.real, z.imag
     elemwise_norm = torch.sqrt(z_real ** 2 + z_imag ** 2)
     elemwise_norm = torch.nan_to_num(elemwise_norm)
-    elemwise_norm = torch.clamp(elemwise_norm, max = 0.5)
-    # elemwise_norm = elemwise_norm / torch.norm(elemwise_norm, 2, dim=1).view(-1,1)
-    f = ax * (elemwise_norm ** self.alpha_)
-    f = torch.nan_to_num(f)
+    '''
 
+    # Calculate Column-wise norm of Z
+    z_real, z_imag = z.real, z.imag
+    z_real = torch.sum(z_real ** 2, dim=1)
+    z_imag = torch.sum(z_imag ** 2, dim=1)
+    colwise_norm = torch.sqrt(z_real + z_imag)
+
+    ### NO CLAMPING ###
+    # elemwise_norm = torch.clamp(elemwise_norm, max = 0.5)
+    # elemwise_norm = elemwise_norm / torch.norm(elemwise_norm, 2, dim=1).view(-1,1)
+
+    ### DeepGRAND FORMULA ###
+    # Compute AX
+    I = torch.eye(x.shape[0]).to(x)
+    ax = torch.matmul(self.A - I * 1e5, x)
+    
+    # Formula (19)
+    f = ax * (colwise_norm ** self.alpha_)
+    f = torch.nan_to_num(f)
+    
+    f = ax * alpha
     if self.opt['add_source']:
       f = f + self.beta_train * self.x0
 
