@@ -17,11 +17,7 @@ bounds = np.arange(args['clip_low'], args['clip_high'], args['clip_step'])
 cmd = """
     python3 run_GNN.py --function {}
                        --block attention 
-                       --dataset Photo
-                       --epoch 200
-                       --dataset Computers
                        --experiment 
-                       --lr 0.0000001 
                        --max_iters 1000 
                        --max_nfe 100000000 
                        --alpha_ {} 
