@@ -150,17 +150,17 @@ class ExtendedLaplacianODEFunc2(ODEFunc):
     ax = self.sparse_multiply(x)
 
     # Shape = (2045, ) (norm along dim 1)
-    x_norm = torch.linalg.norm(x, 2, dim=1)
+    # x_norm = torch.linalg.norm(x, 2, dim=1)
     
     # Truncate x_norm the have max=1
-    x_norm = torch.clamp(x_norm, min=None, max=self.clipping_bound)
+    # x_norm = torch.clamp(x_norm, min=None, max=self.clipping_bound)
 
     # Shape = (2045, 1)
-    x_norm = x_norm.view(-1, 1)
+    # x_norm = x_norm.view(-1, 1)
 
     # Previously : f = (ax - x) * (x_norm ** self.alpha_) * 1e-6
-    f = (ax * (x_norm ** self.alpha_) - x) # * 1e-6
-
+    # f = (ax * (x_norm ** self.alpha_) - x) # * 1e-6
+    f = (ax - x) * self.clipping_bound
     # Check if norm of f explodes 
     # norm_f = torch.linalg.norm(f, 1, dim=1)
     # norm_f = torch.mean(norm_f)
@@ -247,11 +247,17 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     z = torch.matmul(self.P_inv, x_complex)
 
     z_real, z_imag = z.real, z.imag
-    elemwise_norm = torch.sqrt(z_real ** 2 + z_imag ** 2)
-    elemwise_norm = torch.nan_to_num(elemwise_norm)
-    elemwise_norm = torch.clamp(elemwise_norm, max = 0.5)
+    # elemwise_norm = torch.sqrt(z_real ** 2 + z_imag ** 2)
+    # elemwise_norm = torch.nan_to_num(elemwise_norm)
+    # elemwise_norm = torch.clamp(elemwise_norm, max = 0.5)
     # elemwise_norm = elemwise_norm / torch.norm(elemwise_norm, 2, dim=1).view(-1,1)
-    f = ax * (elemwise_norm ** self.alpha_)
+    z_real[0] = torch.zeros_like(x[0])
+    z_imag[0] = torch.zeros_like(x[0])
+    z_norm = z_real ** 2 + z_imag **2
+    z_norm = z_norm.sum(axis = 1)
+    print('shape of z_norm \n', z_norm.shape)
+    # f = ax * (elemwise_norm ** self.alpha_)
+    f = ax * (z_norm ** self.alpha)
     f = torch.nan_to_num(f)
 
     if self.opt['add_source']:
