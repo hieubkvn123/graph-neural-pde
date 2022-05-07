@@ -4,7 +4,7 @@ import numpy as np
 from argparse import ArgumentParser
 
 parser = ArgumentParser()
-parser.add_argument("--function", required=False, default="ext_laplacian3", help="The extended laplacian function to use")
+parser.add_argument("--function", required=False, default="ext_laplacian2", help="The extended laplacian function to use")
 parser.add_argument("--clip_low", required=False, type = float, default=0.05, help="Lower bound for clipping value")
 parser.add_argument("--clip_high", required=False, type = float,  default=1.05, help="Upper bound for clipping value")
 parser.add_argument("--clip_step", required=False, default=0.05, help="Step size for clipping values")
