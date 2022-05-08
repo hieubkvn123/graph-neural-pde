@@ -11,6 +11,7 @@ parser.add_argument("--clip_step", required=False, default=0.1, help="Step size 
 args = vars(parser.parse_args())
 
 alphas = [4.0, 3.0, 2.0, 1.0]
+k_values = [3,4,5,6,7,8]
 t_values = [128.0, 64.0, 32.0]
 bounds = np.arange(args['clip_low'], args['clip_high'], args['clip_step'])
 
@@ -22,13 +23,15 @@ cmd = """
                        --max_nfe 100000000 
                        --alpha_ {} 
                        --time {}
+                       --k {}
 """
 
 for alpha in alphas:
     for t in t_values:
-        cmd_ = cmd.format(args['function'], alpha, t).replace("\n", "").replace("\t", "")
-        
-        print(cmd_)
-        os.system(cmd_)
+        for k in k_values:
+            cmd_ = cmd.format(args['function'], alpha, t, k).replace("\n", "").replace("\t", "")
+            
+            print(cmd_)
+            os.system(cmd_)
 
     

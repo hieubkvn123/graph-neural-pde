@@ -177,6 +177,7 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
   # Set global attributes
   alpha_ = 1.0
   clipping_bound = 0.05
+  k = 5
 
   # currently requires in_features = out_features
   def __init__(self, in_features, out_features, opt, data, device):
@@ -184,7 +185,7 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     ### Log information ###
     print('****************** Extended Laplacian Function V.3 ******************')
-    print('Clipping Bound = ', self.clipping_bound)
+    print('K = ', self.k)
     print('Alpha = ', self.alpha_)
     print('*********************************************************************')
 
@@ -275,7 +276,7 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     ### DeepGRAND FORMULA ###
     # Compute AX
-    ax = torch.matmul(self.A - I * 1e-5, x)
+    ax = torch.matmul(self.A - I * (10 ** -self.k), x)
     # print(colwise_norm)
     
     # Formula (18)

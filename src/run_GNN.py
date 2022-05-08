@@ -193,6 +193,7 @@ def main(cmd_opt):
     opt['time'] = cmd_opt['time']
     opt['alpha_'] = cmd_opt['alpha_']
     opt['clip_bound'] = cmd_opt['clip_bound']
+    opt['k'] = cmd_opt['k']
     opt['num_splits'] = cmd_opt['num_splits']
     opt['geom_gcn_splits'] = cmd_opt['geom_gcn_splits']
     opt['planetoid_split'] = cmd_opt['planetoid_split']
@@ -205,6 +206,8 @@ def main(cmd_opt):
   print('[INFO] ODE function : ', opt['function'])
   print('[INFO] Block type : ', opt['block'])
   print('[INFO] T value : ', opt['time'])
+  print('[INFO] Alpha value : ', opt['alpha'])
+  print('[INFO] K value : ', opt['k'])
   print('[INFO] L1 regularization on : ', opt['l1_reg'])
   print('[INFO] L1 reg coefficient : ', opt['l1_weight_decay'])
 
@@ -295,7 +298,7 @@ def main(cmd_opt):
 
   # Store run history variables
   with open("tests/history.csv", "a") as f:
-      f.write(f"{opt['time']},{opt['alpha_']},{opt['clip_bound']},{best_val_acc},{best_test_acc},{mean_fw_nfe},{mean_run_time},{min_run_time},{max_run_time}\n")
+      f.write(f"{opt['time']},{opt['alpha_']},{opt['k']},{best_val_acc},{best_test_acc},{mean_fw_nfe},{mean_run_time},{min_run_time},{max_run_time}\n")
 
   return fw_nfe_ls, losses, train_accs, val_accs, test_accs
 
@@ -467,6 +470,7 @@ if __name__ == '__main__':
   parser.add_argument("--alpha_", type=float, required=False, default=1.0, help='Alpha value')
   parser.add_argument("--clip_bound", type=float, required=False, default=0.05, help='Norm clipping bound')
   parser.add_argument("--only_cpu", action='store_true', required=False, help="Use only CPU")
+  parser.add_argument("--k", type=float, required=False, help="Hyper-parameter k for the new DeepGRAND model")
 
   args = parser.parse_args()
 

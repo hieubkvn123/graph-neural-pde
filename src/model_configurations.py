@@ -57,6 +57,7 @@ def set_function(opt):
   elif ode_str == 'ext_laplacian3': # Exnteded laplacian function 3 (truncated norm_x)
     ExtendedLaplacianODEFunc3.alpha_ = opt['alpha_']
     ExtendedLaplacianODEFunc3.clipping_bound = opt['clip_bound']
+    ExtendedLaplacianODEFunc3.k = opt['k']
     f = ExtendedLaplacianODEFunc3
   elif ode_str == 'ext_transformer':
     ExtendedODEFuncTransformerAtt.alpha_ = opt['alpha_']
