@@ -229,7 +229,7 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
       alpha = self.alpha_train
 
     # Shape = 2045 x 80 (2045 = Number of nodes; 80 = Feature shape)
-    ax = self.sparse_multiply(x)
+    ax = self.sparse_multiply(x) # Original AX
     I = torch.eye(x.shape[0]).to(x)
 
     # Construct negative-semidefinite A
@@ -276,14 +276,12 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     ### DeepGRAND FORMULA ###
     # Compute AX
-    # ax = torch.matmul(self.A - I * (10 ** -self.k), x)
-    # print(colwise_norm)
+    ax = torch.matmul(self.A - I * (10 ** (-self.k)), x)
     
     # Formula (18)
     f = ax * (colwise_norm ** self.alpha_)
     f = torch.nan_to_num(f)
     
-    f = ax * alpha
     if self.opt['add_source']:
       f = f + self.beta_train * self.x0
 
