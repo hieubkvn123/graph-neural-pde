@@ -276,7 +276,7 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     ### DeepGRAND FORMULA ###
     # Compute AX
-    ax = torch.matmul(self.A - I * (10 ** -self.k), x)
+    # ax = torch.matmul(self.A - I * (10 ** -self.k), x)
     # print(colwise_norm)
     
     # Formula (18)

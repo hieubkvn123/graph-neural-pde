@@ -18,6 +18,7 @@ bounds = np.arange(args['clip_low'], args['clip_high'], args['clip_step'])
 cmd = """
     python3 run_GNN.py --function {}
                        --block attention 
+                       --dataset Cora
                        --experiment 
                        --max_iters 1000 
                        --max_nfe 100000000 
