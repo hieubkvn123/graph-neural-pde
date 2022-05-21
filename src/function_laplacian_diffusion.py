@@ -239,25 +239,18 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
         elif(self.opt['block'] == 'constant'):
             self.A = self.construct_dense_att_matrix(self.edge_index, self.edge_weight, x.shape[0]).to(x)
 
-        #print('A multiply by ones vector (x to the left): ', torch.matmul(torch.ones_like(x).T, self.A))
-        #print('A multiply by ones vector (x to the right): ', torch.matmul(self.A, torch.ones_like(x)))
-        #print('Difference between ax and ax : ', torch.matmul(self.A, x) - ax)
-        #print('Original ax with x = ones : ', self.sparse_multiply(torch.ones_like(x)))
-
-        self.A = torch.transpose(self.A, 0, 1) # Make A right-stochastic
-        self.A = (self.A.T + self.A)/2
-        self.A = self.A - I # Now A should be negative-semidefinite
+        # self.A = torch.transpose(self.A, 0, 1) # Make A right-stochastic
+        self.A = (self.A - self.A.T)/2
 
     # Calculate Column-wise norm of X
     colwise_norm = torch.norm(x, p=2, dim=0)
 
-    ### DeepGRAND FORMULA ###
     # Compute AX
-    ax = torch.matmul(self.A - I * (10 ** (-self.k)), x)
-    
+    # ax = torch.matmul(self.A - I * (1 + 10 ** (-self.k)), x)
+
     # Formula (18)
-    f = ax * (colwise_norm ** self.alpha_)
-    f = torch.nan_to_num(f)
+    ax = torch.matmul(self.A, x)
+    f = ax # * (colwise_norm ** self.alpha_)
     
     if self.opt['add_source']:
       f = f + self.beta_train * self.x0
