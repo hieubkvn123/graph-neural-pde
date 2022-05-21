@@ -234,42 +234,19 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     # Construct negative-semidefinite A
     if(self.A is None):
-        self.A = self.construct_dense_att_matrix(self.edge_index, self.edge_weight, x.shape[0]).to(x)
+        if(self.opt['block'] == 'attention'):
+            self.A = self.construct_dense_att_matrix(self.edge_index, self.attention_weights.mean(dim=1), x.shape[0]).to(x)
+        elif(self.opt['block'] == 'constant'):
+            self.A = self.construct_dense_att_matrix(self.edge_index, self.edge_weight, x.shape[0]).to(x)
+
+        #print('A multiply by ones vector (x to the left): ', torch.matmul(torch.ones_like(x).T, self.A))
+        #print('A multiply by ones vector (x to the right): ', torch.matmul(self.A, torch.ones_like(x)))
+        #print('Difference between ax and ax : ', torch.matmul(self.A, x) - ax)
+        #print('Original ax with x = ones : ', self.sparse_multiply(torch.ones_like(x)))
+
         self.A = torch.transpose(self.A, 0, 1) # Make A right-stochastic
+        self.A = (self.A.T + self.A)/2
         self.A = self.A - I # Now A should be negative-semidefinite
-    
-    # Inverse A and calculate Z
-    '''
-    # Eigen-decompose A
-    if(self.P_inv is None):
-        ### For torch > 1.8.x ###
-        # L, P = torch.linalg.eig(self.A) 
-        # self.P_inv = torch.linalg.inv(P).to(x.device) 
-
-        ### For torch 1.8.x ###
-        L, P = np.linalg.eig(self.A.numpy())
-        self.P_inv = np.linalg.inv(P)
-        self.P_inv = torch.tensor(self.P_inv)
-
-    # Compute Z = P^{-1}X as a complex matrix
-    x_complex = torch.complex(x, torch.zeros_like(x))
-    z = torch.matmul(self.P_inv, x_complex)
-    '''
-
-    # Calculate Element-wise norm of Z
-    '''
-    z_real, z_imag = z.real, z.imag
-    elemwise_norm = torch.sqrt(z_real ** 2 + z_imag ** 2)
-    elemwise_norm = torch.nan_to_num(elemwise_norm)
-    '''
-
-    # Calculate Column-wise norm of Z
-    '''
-    z_real, z_imag = z.real, z.imag
-    z_real_ss = torch.sum(z_real ** 2, dim=0)
-    z_imag_ss = torch.sum(z_imag ** 2, dim=0)
-    colwise_norm = torch.sqrt(z_real_ss + z_imag_ss)
-    '''
 
     # Calculate Column-wise norm of X
     colwise_norm = torch.norm(x, p=2, dim=0)
