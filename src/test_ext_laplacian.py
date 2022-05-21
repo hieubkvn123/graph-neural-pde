@@ -10,29 +10,24 @@ parser.add_argument("--clip_high", required=False, type = float,  default=1.0005
 parser.add_argument("--clip_step", required=False, default=0.1, help="Step size for clipping values")
 args = vars(parser.parse_args())
 
-alphas = [4.0, 3.0, 2.0, 1.0]
-k_values = [3,4,5,6,7,8]
-t_values = [128.0, 64.0, 32.0]
 bounds = np.arange(args['clip_low'], args['clip_high'], args['clip_step'])
+t_values = np.array(list(range(1, 21))) * 5
 
 cmd = """
-    python3 run_GNN.py --function {}
+    python3 run_GNN.py --function ext_laplacian3
                        --block attention 
                        --dataset Cora
                        --experiment 
                        --max_iters 1000 
                        --max_nfe 100000000 
-                       --alpha_ {} 
                        --time {}
-                       --k {}
+                       --run_name 'adaptive_grand_T={}'
 """
 
-for alpha in alphas:
-    for t in t_values:
-        for k in k_values:
-            cmd_ = cmd.format(args['function'], alpha, t, k).replace("\n", "").replace("\t", "")
-            
-            print(cmd_)
-            os.system(cmd_)
+for t in t_values:
+    cmd_ = cmd.format(t, t).replace("\n", "").replace("\t", "")
+    
+    print(cmd_)
+    os.system(cmd_)
 
     

@@ -1,4 +1,6 @@
 import sys
+import wandb
+from wandb_conf import wandb_config
 import traceback
 import argparse
 import numpy as np
@@ -202,6 +204,7 @@ def main(cmd_opt):
     opt['l1_weight_decay'] = cmd_opt['l1_weight_decay']
     opt['epoch'] = cmd_opt['epoch']
     opt['max_nfe'] = cmd_opt['max_nfe']
+    opt['run_name'] = cmd_opt['run_name']
 
   print('[INFO] ODE function : ', opt['function'])
   print('[INFO] Block type : ', opt['block'])
@@ -210,6 +213,8 @@ def main(cmd_opt):
   print('[INFO] K value : ', opt['k'])
   print('[INFO] L1 regularization on : ', opt['l1_reg'])
   print('[INFO] L1 reg coefficient : ', opt['l1_weight_decay'])
+
+  wandb.init(project=wandb_config['project'], entity=wandb_config['entity'], id=opt['run_name'], notes=opt['run_notes'])
 
   if cmd_opt['beltrami']:
     opt['beltrami'] = True
@@ -274,6 +279,14 @@ def main(cmd_opt):
           best_time = model.odeblock.test_integrator.solver.best_time
 
         log = 'Epoch: {:03d}/{:03d}, Runtime {:03f}, Loss {:03f}, forward nfe {:d}, backward nfe {:d}, Train: {:.4f}, Val: {:.4f}, Test: {:.4f}, Best time: {:.4f}'
+
+        wandb.log({
+            'run_time' : time.time() - start_time,
+            'loss' : loss,
+            'train_acc' : train_acc,
+            'val_acc' : val_acc,
+            'test_acc' : test_acc
+        })
         
         fw_nfe_ls.append(model.fm.sum)
         run_time_ls.append(time.time() - start_time)
@@ -284,7 +297,7 @@ def main(cmd_opt):
         if(best_val_acc < val_acc): best_val_acc = val_acc
         if(best_test_acc < test_acc) : best_test_acc = test_acc
 
-        print("K_d = ", model.odeblock.odefunc.k_d)
+        # print("K_d = ", model.odeblock.odefunc.k_d)
         print(log.format(epoch, opt['epoch'], time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
   except:
         traceback.print_exc(file=sys.stdout)
@@ -466,6 +479,7 @@ if __name__ == '__main__':
   # Experiment mode - do not overwrite command options with best params
   parser.add_argument("--experiment", action="store_true", help="Turn on or off experiment mode.")
   parser.add_argument("--run_notes", required=False, default=None, help="Additional description of the run")
+  parser.add_argument("--run_name", required=False, default=None, help="Run ID for wandb project")
 
   # For extended laplacian functions with clipping bounds.
   parser.add_argument("--alpha_", type=float, required=False, default=1.0, help='Alpha value')
