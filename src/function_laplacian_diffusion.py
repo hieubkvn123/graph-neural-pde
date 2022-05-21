@@ -195,6 +195,7 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     self.d = nn.Parameter(torch.zeros(opt['hidden_dim']) + 1)
     self.alpha_sc = nn.Parameter(torch.ones(1))
     self.beta_sc = nn.Parameter(torch.ones(1))
+    self.k_d = nn.Parameter(torch.ones(80)) 
 
     # For attention matrices
     self.A = None
@@ -230,27 +231,7 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     # Shape = 2045 x 80 (2045 = Number of nodes; 80 = Feature shape)
     ax = self.sparse_multiply(x) # Original AX
-    I = torch.eye(x.shape[0]).to(x)
-
-    # Construct negative-semidefinite A
-    if(self.A is None):
-        if(self.opt['block'] == 'attention'):
-            self.A = self.construct_dense_att_matrix(self.edge_index, self.attention_weights.mean(dim=1), x.shape[0]).to(x)
-        elif(self.opt['block'] == 'constant'):
-            self.A = self.construct_dense_att_matrix(self.edge_index, self.edge_weight, x.shape[0]).to(x)
-
-        # self.A = torch.transpose(self.A, 0, 1) # Make A right-stochastic
-        self.A = (self.A - self.A.T)/2
-
-    # Calculate Column-wise norm of X
-    colwise_norm = torch.norm(x, p=2, dim=0)
-
-    # Compute AX
-    # ax = torch.matmul(self.A - I * (1 + 10 ** (-self.k)), x)
-
-    # Formula (18)
-    ax = torch.matmul(self.A, x)
-    f = ax # * (colwise_norm ** self.alpha_)
+    f = (ax - x) * self.k_d * alpha
     
     if self.opt['add_source']:
       f = f + self.beta_train * self.x0
