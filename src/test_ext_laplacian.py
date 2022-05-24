@@ -13,6 +13,7 @@ args = vars(parser.parse_args())
 bounds = np.arange(args['clip_low'], args['clip_high'], args['clip_step'])
 t_values = np.array(list(range(1, 21))) * 5
 datasets = ['Cora', 'Citeseer', 'Pubmed', 'Computers', 'Photo', 'CoauthorCS']
+num_seeds_per_run = 5
 
 # Running Linear Adaptive GRAND for all datasets
 cmd = """
@@ -27,7 +28,7 @@ cmd = """
 """
 
 for t in t_values:
-    for seed in range(5):
+    for seed in range(num_seeds_per_run):
         cmd_ = cmd.format(dataset, t, t, seed+1, dataset).replace("\n", "").replace("\t", "")
         print(cmd_)
         os.system(cmd_)
@@ -45,7 +46,7 @@ cmd = """
 """
 
 for t in t_values:
-    for seed in range(5):
+    for seed in range(num_seeds_per_run):
         cmd_ = cmd.format(dataset, t, t, seed+1, dataset).replace("\n", "").replace("\t", "")
         print(cmd_)
         os.system(cmd_)
