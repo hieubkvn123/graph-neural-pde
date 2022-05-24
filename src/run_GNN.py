@@ -292,7 +292,7 @@ def main(cmd_opt):
         if(best_val_acc < val_acc): best_val_acc = val_acc
         if(best_test_acc < test_acc) : best_test_acc = test_acc
 
-        print("K_d = ", model.odeblock.odefunc.k_d)
+        # print("K_d = ", model.odeblock.odefunc.k_d)
         print(log.format(epoch, opt['epoch'], time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
   except:
         traceback.print_exc(file=sys.stdout)
