@@ -27,11 +27,12 @@ cmd = """
                        --run_name 'adaptive_grand-lr_T={},seed={},dataset={}'
 """
 
-for t in t_values:
-    for seed in range(num_seeds_per_run):
-        cmd_ = cmd.format(dataset, t, t, seed+1, dataset).replace("\n", "").replace("\t", "")
-        print(cmd_)
-        os.system(cmd_)
+for dataset in datasets:
+    for t in t_values:
+        for seed in range(num_seeds_per_run):
+            cmd_ = cmd.format(dataset, t, t, seed+1, dataset).replace("\n", "").replace("\t", "")
+            print(cmd_)
+            os.system(cmd_)
 
 # Running Non-linear Adaptive GRAND for all datasets
 cmd = """
@@ -45,8 +46,9 @@ cmd = """
                        --run_name 'adaptive_grand-nlr_T={},seed={},dataset={}'
 """
 
-for t in t_values:
-    for seed in range(num_seeds_per_run):
-        cmd_ = cmd.format(dataset, t, t, seed+1, dataset).replace("\n", "").replace("\t", "")
-        print(cmd_)
-        os.system(cmd_)
+for dataset in datasets:
+    for t in t_values:
+        for seed in range(num_seeds_per_run):
+            cmd_ = cmd.format(dataset, t, t, seed+1, dataset).replace("\n", "").replace("\t", "")
+            print(cmd_)
+            os.system(cmd_)
