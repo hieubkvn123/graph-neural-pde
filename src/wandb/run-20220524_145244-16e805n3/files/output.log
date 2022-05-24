@@ -1,0 +1,186 @@
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1, 'max_iters': 100}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: EarlyStopDopri5: Unexpected arguments {'step_size': 1, 'max_iters': 100}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+****************** Adaptive GRAND transformer function ******************
+****************** Adaptive GRAND transformer function ******************
+GNNEarly
+m1.module.weight
+torch.Size([80, 1433])
+m1.module.bias
+torch.Size([80])
+m2.module.weight
+torch.Size([7, 80])
+m2.module.bias
+torch.Size([7])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.k_d
+torch.Size([80])
+odeblock.odefunc.multihead_att_layer.Q.weight
+torch.Size([128, 80])
+odeblock.odefunc.multihead_att_layer.Q.bias
+torch.Size([128])
+odeblock.odefunc.multihead_att_layer.V.weight
+torch.Size([128, 80])
+odeblock.odefunc.multihead_att_layer.V.bias
+torch.Size([128])
+odeblock.odefunc.multihead_att_layer.K.weight
+torch.Size([128, 80])
+odeblock.odefunc.multihead_att_layer.K.bias
+torch.Size([128])
+odeblock.odefunc.multihead_att_layer.Wout.weight
+torch.Size([80, 16])
+odeblock.odefunc.multihead_att_layer.Wout.bias
+torch.Size([80])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.k_d
+torch.Size([80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Q.weight
+torch.Size([128, 80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Q.bias
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.V.weight
+torch.Size([128, 80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.V.bias
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.K.weight
+torch.Size([128, 80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.K.bias
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Wout.weight
+torch.Size([80, 16])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Wout.bias
+torch.Size([80])
+K_d =  Parameter containing:
+tensor([0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771,
+        0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771,
+        0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771,
+        0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771,
+        0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771,
+        0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771,
+        0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771,
+        0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771,
+        0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771, 0.9771],
+       device='cuda:0', requires_grad=True)
+Epoch: 001/100, Runtime 1.002106, Loss 1.952160, forward nfe 14, backward nfe 0, Train: 0.8571, Val: 0.4294, Test: 0.4335, Best time: 2.5705
+K_d =  Parameter containing:
+tensor([0.9544, 0.9542, 0.9548, 0.9545, 0.9554, 0.9551, 0.9542, 0.9548, 0.9543,
+        0.9547, 0.9542, 0.9547, 0.9546, 0.9551, 0.9549, 0.9548, 0.9542, 0.9544,
+        0.9545, 0.9550, 0.9544, 0.9548, 0.9542, 0.9545, 0.9544, 0.9547, 0.9549,
+        0.9552, 0.9545, 0.9547, 0.9548, 0.9553, 0.9544, 0.9544, 0.9549, 0.9542,
+        0.9550, 0.9546, 0.9548, 0.9559, 0.9544, 0.9545, 0.9550, 0.9544, 0.9545,
+        0.9548, 0.9548, 0.9547, 0.9542, 0.9542, 0.9546, 0.9546, 0.9547, 0.9543,
+        0.9547, 0.9547, 0.9545, 0.9542, 0.9547, 0.9547, 0.9547, 0.9546, 0.9550,
+        0.9547, 0.9548, 0.9545, 0.9546, 0.9553, 0.9546, 0.9546, 0.9546, 0.9549,
+        0.9547, 0.9545, 0.9541, 0.9543, 0.9542, 0.9545, 0.9542, 0.9547],
+       device='cuda:0', requires_grad=True)
+Epoch: 002/100, Runtime 0.928896, Loss 1.775727, forward nfe 54, backward nfe 0, Train: 0.9500, Val: 0.5912, Test: 0.6051, Best time: 3.9969
+K_d =  Parameter containing:
+tensor([0.9319, 0.9318, 0.9331, 0.9322, 0.9332, 0.9332, 0.9322, 0.9325, 0.9323,
+        0.9321, 0.9326, 0.9323, 0.9323, 0.9330, 0.9328, 0.9326, 0.9317, 0.9320,
+        0.9318, 0.9327, 0.9317, 0.9333, 0.9313, 0.9317, 0.9326, 0.9326, 0.9325,
+        0.9330, 0.9324, 0.9330, 0.9325, 0.9335, 0.9321, 0.9321, 0.9325, 0.9314,
+        0.9333, 0.9336, 0.9331, 0.9347, 0.9323, 0.9318, 0.9326, 0.9319, 0.9320,
+        0.9326, 0.9327, 0.9327, 0.9318, 0.9317, 0.9321, 0.9319, 0.9324, 0.9316,
+        0.9337, 0.9331, 0.9321, 0.9315, 0.9327, 0.9324, 0.9330, 0.9320, 0.9328,
+        0.9335, 0.9331, 0.9324, 0.9325, 0.9334, 0.9331, 0.9323, 0.9331, 0.9326,
+        0.9324, 0.9346, 0.9317, 0.9316, 0.9323, 0.9319, 0.9314, 0.9325],
+       device='cuda:0', requires_grad=True)
+Epoch: 003/100, Runtime 0.937415, Loss 1.506190, forward nfe 94, backward nfe 0, Train: 0.9714, Val: 0.6272, Test: 0.6538, Best time: 3.8140
+K_d =  Parameter containing:
+tensor([0.9107, 0.9094, 0.9113, 0.9098, 0.9110, 0.9112, 0.9110, 0.9101, 0.9105,
+        0.9107, 0.9109, 0.9103, 0.9104, 0.9108, 0.9107, 0.9105, 0.9091, 0.9096,
+        0.9104, 0.9105, 0.9091, 0.9127, 0.9085, 0.9096, 0.9106, 0.9105, 0.9103,
+        0.9109, 0.9112, 0.9117, 0.9108, 0.9129, 0.9097, 0.9103, 0.9103, 0.9091,
+        0.9123, 0.9122, 0.9113, 0.9135, 0.9104, 0.9096, 0.9101, 0.9097, 0.9107,
+        0.9102, 0.9114, 0.9114, 0.9094, 0.9093, 0.9103, 0.9105, 0.9117, 0.9095,
+        0.9123, 0.9111, 0.9106, 0.9086, 0.9105, 0.9100, 0.9114, 0.9106, 0.9106,
+        0.9124, 0.9113, 0.9104, 0.9106, 0.9114, 0.9121, 0.9105, 0.9125, 0.9103,
+        0.9102, 0.9142, 0.9093, 0.9092, 0.9105, 0.9092, 0.9089, 0.9101],
+       device='cuda:0', requires_grad=True)
+Epoch: 004/100, Runtime 1.213457, Loss 1.209904, forward nfe 140, backward nfe 0, Train: 0.9857, Val: 0.6566, Test: 0.6711, Best time: 3.2229
+K_d =  Parameter containing:
+tensor([0.8892, 0.8878, 0.8897, 0.8872, 0.8894, 0.8893, 0.8896, 0.8880, 0.8888,
+        0.8890, 0.8907, 0.8884, 0.8887, 0.8884, 0.8892, 0.8886, 0.8867, 0.8871,
+        0.8890, 0.8887, 0.8866, 0.8917, 0.8865, 0.8873, 0.8888, 0.8892, 0.8895,
+        0.8886, 0.8899, 0.8907, 0.8894, 0.8937, 0.8883, 0.8886, 0.8882, 0.8867,
+        0.8919, 0.8905, 0.8895, 0.8922, 0.8885, 0.8873, 0.8886, 0.8874, 0.8893,
+        0.8889, 0.8904, 0.8900, 0.8869, 0.8868, 0.8894, 0.8889, 0.8905, 0.8873,
+        0.8910, 0.8890, 0.8894, 0.8858, 0.8886, 0.8878, 0.8898, 0.8892, 0.8883,
+        0.8909, 0.8893, 0.8898, 0.8887, 0.8895, 0.8906, 0.8886, 0.8916, 0.8879,
+        0.8892, 0.8934, 0.8869, 0.8868, 0.8888, 0.8865, 0.8871, 0.8883],
+       device='cuda:0', requires_grad=True)
+Epoch: 005/100, Runtime 1.121043, Loss 0.871354, forward nfe 186, backward nfe 0, Train: 0.9929, Val: 0.6949, Test: 0.7015, Best time: 3.7270
+K_d =  Parameter containing:
+tensor([0.8677, 0.8664, 0.8685, 0.8647, 0.8678, 0.8674, 0.8685, 0.8664, 0.8669,
+        0.8673, 0.8701, 0.8667, 0.8669, 0.8665, 0.8676, 0.8670, 0.8646, 0.8646,
+        0.8674, 0.8669, 0.8642, 0.8709, 0.8646, 0.8653, 0.8675, 0.8679, 0.8687,
+        0.8663, 0.8686, 0.8700, 0.8681, 0.8740, 0.8668, 0.8672, 0.8662, 0.8644,
+        0.8711, 0.8686, 0.8681, 0.8707, 0.8667, 0.8650, 0.8670, 0.8654, 0.8677,
+        0.8674, 0.8693, 0.8684, 0.8653, 0.8642, 0.8685, 0.8672, 0.8694, 0.8654,
+        0.8696, 0.8667, 0.8682, 0.8633, 0.8667, 0.8656, 0.8679, 0.8676, 0.8666,
+        0.8698, 0.8675, 0.8691, 0.8667, 0.8675, 0.8694, 0.8666, 0.8705, 0.8660,
+        0.8679, 0.8725, 0.8646, 0.8643, 0.8677, 0.8639, 0.8657, 0.8664],
+       device='cuda:0', requires_grad=True)
+Epoch: 006/100, Runtime 1.420846, Loss 0.629291, forward nfe 244, backward nfe 0, Train: 0.9929, Val: 0.7199, Test: 0.7289, Best time: 3.6850
+K_d =  Parameter containing:
+tensor([0.8464, 0.8452, 0.8476, 0.8427, 0.8466, 0.8456, 0.8472, 0.8450, 0.8452,
+        0.8459, 0.8497, 0.8454, 0.8453, 0.8450, 0.8462, 0.8459, 0.8431, 0.8424,
+        0.8458, 0.8451, 0.8422, 0.8505, 0.8428, 0.8437, 0.8463, 0.8474, 0.8481,
+        0.8447, 0.8473, 0.8491, 0.8475, 0.8545, 0.8454, 0.8465, 0.8446, 0.8421,
+        0.8503, 0.8471, 0.8472, 0.8503, 0.8453, 0.8425, 0.8458, 0.8434, 0.8460,
+        0.8462, 0.8487, 0.8469, 0.8441, 0.8420, 0.8477, 0.8455, 0.8484, 0.8435,
+        0.8481, 0.8447, 0.8471, 0.8410, 0.8455, 0.8441, 0.8461, 0.8457, 0.8451,
+        0.8489, 0.8462, 0.8483, 0.8453, 0.8458, 0.8482, 0.8452, 0.8496, 0.8444,
+        0.8469, 0.8518, 0.8425, 0.8421, 0.8469, 0.8418, 0.8446, 0.8448],
+       device='cuda:0', requires_grad=True)
+Epoch: 007/100, Runtime 1.090931, Loss 0.438014, forward nfe 296, backward nfe 0, Train: 1.0000, Val: 0.7346, Test: 0.7401, Best time: 3.9866
+K_d =  Parameter containing:
+tensor([0.8255, 0.8243, 0.8270, 0.8212, 0.8256, 0.8237, 0.8265, 0.8241, 0.8240,
+        0.8249, 0.8294, 0.8243, 0.8238, 0.8238, 0.8252, 0.8251, 0.8218, 0.8205,
+        0.8242, 0.8237, 0.8205, 0.8307, 0.8213, 0.8226, 0.8259, 0.8273, 0.8281,
+        0.8238, 0.8270, 0.8283, 0.8273, 0.8355, 0.8242, 0.8261, 0.8230, 0.8202,
+        0.8301, 0.8262, 0.8267, 0.8301, 0.8240, 0.8206, 0.8251, 0.8217, 0.8243,
+        0.8252, 0.8286, 0.8258, 0.8235, 0.8201, 0.8271, 0.8242, 0.8274, 0.8220,
+        0.8269, 0.8231, 0.8265, 0.8191, 0.8247, 0.8229, 0.8249, 0.8242, 0.8239,
+        0.8282, 0.8253, 0.8280, 0.8243, 0.8248, 0.8275, 0.8239, 0.8291, 0.8230,
+        0.8261, 0.8314, 0.8210, 0.8202, 0.8265, 0.8200, 0.8241, 0.8234],
+       device='cuda:0', requires_grad=True)
+Epoch: 008/100, Runtime 1.269884, Loss 0.300089, forward nfe 354, backward nfe 0, Train: 1.0000, Val: 0.7346, Test: 0.7401, Best time: 1.0000
+K_d =  Parameter containing:
+tensor([0.8050, 0.8040, 0.8073, 0.8000, 0.8047, 0.8023, 0.8062, 0.8036, 0.8033,
+        0.8046, 0.8095, 0.8036, 0.8025, 0.8031, 0.8044, 0.8047, 0.8009, 0.7991,
+        0.8030, 0.8027, 0.7992, 0.8118, 0.8002, 0.8015, 0.8062, 0.8080, 0.8086,
+        0.8033, 0.8074, 0.8077, 0.8077, 0.8172, 0.8035, 0.8060, 0.8015, 0.7986,
+        0.8105, 0.8063, 0.8066, 0.8105, 0.8033, 0.7989, 0.8049, 0.8003, 0.8036,
+        0.8047, 0.8089, 0.8051, 0.8033, 0.7987, 0.8069, 0.8032, 0.8071, 0.8008,
+        0.8067, 0.8020, 0.8062, 0.7976, 0.8043, 0.8021, 0.8044, 0.8031, 0.8030,
+        0.8084, 0.8050, 0.8083, 0.8038, 0.8042, 0.8075, 0.8028, 0.8088, 0.8019,
+        0.8058, 0.8117, 0.8003, 0.7991, 0.8068, 0.7986, 0.8041, 0.8030],
+       device='cuda:0', requires_grad=True)
+Epoch: 009/100, Runtime 1.038097, Loss 0.210898, forward nfe 400, backward nfe 0, Train: 1.0000, Val: 0.7346, Test: 0.7401, Best time: 1.0000
+Traceback (most recent call last):
+  File "run_GNN.py", line 259, in main
+    loss = train(model, optimizer, data, pos_encoding)
+  File "run_GNN.py", line 89, in train
+    loss.backward()
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/_tensor.py", line 363, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/autograd/__init__.py", line 173, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+best val accuracy 0.734559 with test accuracy 0.740102 at epoch 7 and best time 1.000000

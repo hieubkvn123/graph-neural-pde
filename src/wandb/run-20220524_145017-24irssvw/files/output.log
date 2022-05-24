@@ -1,0 +1,122 @@
+****************** Adaptive GRAND transformer function ******************
+****************** Adaptive GRAND transformer function ******************
+GNNEarly
+m1.module.weight
+torch.Size([80, 1433])
+m1.module.bias
+torch.Size([80])
+m2.module.weight
+torch.Size([7, 80])
+m2.module.bias
+torch.Size([7])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.k_d
+torch.Size([80])
+odeblock.odefunc.multihead_att_layer.Q.weight
+torch.Size([128, 80])
+odeblock.odefunc.multihead_att_layer.Q.bias
+torch.Size([128])
+odeblock.odefunc.multihead_att_layer.V.weight
+torch.Size([128, 80])
+odeblock.odefunc.multihead_att_layer.V.bias
+torch.Size([128])
+odeblock.odefunc.multihead_att_layer.K.weight
+torch.Size([128, 80])
+odeblock.odefunc.multihead_att_layer.K.bias
+torch.Size([128])
+odeblock.odefunc.multihead_att_layer.Wout.weight
+torch.Size([80, 16])
+odeblock.odefunc.multihead_att_layer.Wout.bias
+torch.Size([80])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.k_d
+torch.Size([80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Q.weight
+torch.Size([128, 80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Q.bias
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.V.weight
+torch.Size([128, 80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.V.bias
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.K.weight
+torch.Size([128, 80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.K.bias
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Wout.weight
+torch.Size([80, 16])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Wout.bias
+torch.Size([80])
+odeblock.multihead_att_layer.Q.weight
+torch.Size([128, 80])
+odeblock.multihead_att_layer.Q.bias
+torch.Size([128])
+odeblock.multihead_att_layer.V.weight
+torch.Size([128, 80])
+odeblock.multihead_att_layer.V.bias
+torch.Size([128])
+odeblock.multihead_att_layer.K.weight
+torch.Size([128, 80])
+odeblock.multihead_att_layer.K.bias
+torch.Size([128])
+odeblock.multihead_att_layer.Wout.weight
+torch.Size([80, 16])
+odeblock.multihead_att_layer.Wout.bias
+torch.Size([80])
+Traceback (most recent call last):
+  File "run_GNN.py", line 260, in main
+    tmp_train_acc, tmp_val_acc, tmp_test_acc = this_test(model, data, pos_encoding, opt)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "run_GNN.py", line 140, in test
+    logits, accs = model(feat, pos_encoding), []
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/GNN_early.py", line 84, in forward
+    z = self.odeblock(x)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/block_transformer_attention.py", line 61, in forward
+    state_dt = integrator(
+  File "/media/data-share/hieunm60/graph-neural-pde/src/early_stop_solver.py", line 301, in __call__
+    t, solution = self.solver.integrate(t)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/early_stop_solver.py", line 65, in integrate
+    new_t, y = self.advance(t[i])
+  File "/media/data-share/hieunm60/graph-neural-pde/src/early_stop_solver.py", line 77, in advance
+    self.rk_state = self._adaptive_step(self.rk_state)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 255, in _adaptive_step
+    y1, f1, y1_error, k = _runge_kutta_step(self.func, y0, f0, t0, dt, t1, tableau=self.tableau)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 68, in _runge_kutta_step
+    if alpha_i == 1.:
+KeyboardInterrupt
+best val accuracy 0.000000 with test accuracy 0.000000 at epoch 0 and best time 0.000000
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: EarlyStopDopri5: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+run_GNN.py:303: RuntimeWarning: Mean of empty slice.
+  mean_fw_nfe = np.array(fw_nfe_ls).mean()
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/numpy/core/_methods.py:189: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+run_GNN.py:304: RuntimeWarning: Mean of empty slice.
+  mean_run_time = np.array(run_time_ls).mean()
+Traceback (most recent call last):
+  File "run_GNN.py", line 489, in <module>
+    main(opt)
+  File "run_GNN.py", line 305, in main
+    min_run_time = min(run_time_ls)
+ValueError: min() arg is an empty sequence

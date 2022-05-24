@@ -9,18 +9,11 @@ from utils import MaxNFEException, squareplus
 from base_classes import ODEFunc
 
 class ExtendedODEFuncTransformerAtt(ODEFunc):
-  # Set global attributes
-  alpha_ = 1.0
-  clipping_bound = 0.05
-
   def __init__(self, in_features, out_features, opt, data, device):
     super(ExtendedODEFuncTransformerAtt, self).__init__(opt, data, device)
 
     ### Log information ###
-    print('****************** Extended Laplacian Function V.3 ******************')
-    print('Clipping Bound = ', self.clipping_bound)
-    print('Alpha = ', self.alpha_)
-    print('*********************************************************************')
+    print('****************** Adaptive GRAND transformer function ******************')
     
     if opt['self_loop_weight'] > 0:
       self.edge_index, self.edge_weight = add_remaining_self_loops(data.edge_index, data.edge_attr,
@@ -29,6 +22,8 @@ class ExtendedODEFuncTransformerAtt(ODEFunc):
       self.edge_index, self.edge_weight = data.edge_index, data.edge_attr
     self.multihead_att_layer = SpGraphTransAttentionLayer(in_features, out_features, opt,
                                                           device, edge_weights=self.edge_weight).to(device)
+
+    self.k_d = nn.Parameter(torch.ones(self.multihead_att_layer.K.weight.shape[1]))
 
   def multiply_attention(self, x, attention, v=None):
     # todo would be nice if this was more efficient
@@ -46,37 +41,29 @@ class ExtendedODEFuncTransformerAtt(ODEFunc):
   def forward(self, t, x):  # the t param is needed by the ODE solver.
     if self.nfe > self.opt["max_nfe"]:
       raise MaxNFEException
+
     self.nfe += 1
-    
-    # Shape = 2045 x 80 (2045 = Number of nodes; 80 = Feature shape)
     attention, values = self.multihead_att_layer(x, self.edge_index)
     ax = self.multiply_attention(x, attention, values)
-
-    # Eigen-decompose the attention matrix
 
     if not self.opt['no_alpha_sigmoid']:
       alpha = torch.sigmoid(self.alpha_train)
     else:
       alpha = self.alpha_train
-
-    # Shape = (2045, ) (norm along dim 1)
-    x_norm = torch.linalg.norm(x, 2, dim=1)
-
-    # Truncate x_norm the have max=1
-    x_norm = torch.clamp(x_norm, min=None, max=self.clipping_bound)
-
-    # Shape = (2045, 1)
-    x_norm = x_norm.view(-1, 1)
-
-    f = (ax - x) * (x_norm ** self.alpha_) 
-
+    f = alpha * (ax - x) * self.k_d
     if self.opt['add_source']:
       f = f + self.beta_train * self.x0
-
     return f
 
   def __repr__(self):
     return self.__class__.__name__ + ' (' + str(self.in_features) + ' -> ' + str(self.out_features) + ')'
+
+
+
+
+
+
+
 
 class ODEFuncTransformerAtt(ODEFunc):
 

@@ -1,0 +1,159 @@
+****************** Extended Laplacian Function V.3 ******************
+Clipping Bound =  0.05
+Alpha =  1.0
+*********************************************************************
+****************** Extended Laplacian Function V.3 ******************
+Clipping Bound =  0.05
+Alpha =  1.0
+*********************************************************************
+GNNEarly
+m1.module.weight
+torch.Size([80, 1433])
+m1.module.bias
+torch.Size([80])
+m2.module.weight
+torch.Size([7, 80])
+m2.module.bias
+torch.Size([7])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.multihead_att_layer.Q.weight
+torch.Size([128, 80])
+odeblock.odefunc.multihead_att_layer.Q.bias
+torch.Size([128])
+odeblock.odefunc.multihead_att_layer.V.weight
+torch.Size([128, 80])
+odeblock.odefunc.multihead_att_layer.V.bias
+torch.Size([128])
+odeblock.odefunc.multihead_att_layer.K.weight
+torch.Size([128, 80])
+odeblock.odefunc.multihead_att_layer.K.bias
+torch.Size([128])
+odeblock.odefunc.multihead_att_layer.Wout.weight
+torch.Size([80, 16])
+odeblock.odefunc.multihead_att_layer.Wout.bias
+torch.Size([80])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Q.weight
+torch.Size([128, 80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Q.bias
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.V.weight
+torch.Size([128, 80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.V.bias
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.K.weight
+torch.Size([128, 80])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.K.bias
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Wout.weight
+torch.Size([80, 16])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Wout.bias
+torch.Size([80])
+odeblock.multihead_att_layer.Q.weight
+torch.Size([128, 80])
+odeblock.multihead_att_layer.Q.bias
+torch.Size([128])
+odeblock.multihead_att_layer.V.weight
+torch.Size([128, 80])
+odeblock.multihead_att_layer.V.bias
+torch.Size([128])
+odeblock.multihead_att_layer.K.weight
+torch.Size([128, 80])
+odeblock.multihead_att_layer.K.bias
+torch.Size([128])
+odeblock.multihead_att_layer.Wout.weight
+torch.Size([80, 16])
+odeblock.multihead_att_layer.Wout.bias
+torch.Size([80])
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: EarlyStopDopri5: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+K_d =  tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1.], device='cuda:0',
+       grad_fn=<ToCopyBackward0>)
+Epoch: 001/100, Runtime 0.694306, Loss 1.946036, forward nfe 14, backward nfe 0, Train: 0.8571, Val: 0.6529, Test: 0.6558, Best time: 4.0757
+K_d =  tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1.], device='cuda:0',
+       grad_fn=<ToCopyBackward0>)
+Epoch: 002/100, Runtime 0.579875, Loss 1.722587, forward nfe 54, backward nfe 0, Train: 0.8571, Val: 0.6529, Test: 0.6558, Best time: 1.0000
+K_d =  tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1.], device='cuda:0',
+       grad_fn=<ToCopyBackward0>)
+Epoch: 003/100, Runtime 0.586465, Loss 1.399778, forward nfe 94, backward nfe 0, Train: 0.9143, Val: 0.6625, Test: 0.6640, Best time: 3.5379
+K_d =  tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1.], device='cuda:0',
+       grad_fn=<ToCopyBackward0>)
+Epoch: 004/100, Runtime 0.678524, Loss 1.058188, forward nfe 140, backward nfe 0, Train: 0.9357, Val: 0.7074, Test: 0.7157, Best time: 4.2964
+K_d =  tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1.], device='cuda:0',
+       grad_fn=<ToCopyBackward0>)
+Epoch: 005/100, Runtime 0.644037, Loss 0.775060, forward nfe 192, backward nfe 0, Train: 0.9714, Val: 0.7368, Test: 0.7513, Best time: 3.3029
+Traceback (most recent call last):
+  File "run_GNN.py", line 258, in main
+    loss = train(model, optimizer, data, pos_encoding)
+  File "run_GNN.py", line 69, in train
+    out = model(feat, pos_encoding)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/GNN_early.py", line 84, in forward
+    z = self.odeblock(x)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/block_transformer_attention.py", line 61, in forward
+    state_dt = integrator(
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/odeint.py", line 77, in odeint
+    solution = solver.integrate(t)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/solvers.py", line 30, in integrate
+    solution[i] = self._advance(t[i])
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 194, in _advance
+    self.rk_state = self._adaptive_step(self.rk_state)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 255, in _adaptive_step
+    y1, f1, y1_error, k = _runge_kutta_step(self.func, y0, f0, t0, dt, t1, tableau=self.tableau)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 76, in _runge_kutta_step
+    f = func(ti, yi, perturb=perturb)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py", line 189, in forward
+    return self.base_func(t, y)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/function_transformer_attention.py", line 62, in forward
+    alpha = torch.sigmoid(self.alpha_train)
+KeyboardInterrupt
+best val accuracy 0.736765 with test accuracy 0.751269 at epoch 5 and best time 3.302853
+Traceback (most recent call last):
+  File "run_GNN.py", line 488, in <module>
+    main(opt)
+  File "run_GNN.py", line 308, in main
+    if(not os.path.exists('tests/history.csv')):
+NameError: name 'os' is not defined

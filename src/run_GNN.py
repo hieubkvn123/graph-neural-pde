@@ -1,3 +1,4 @@
+import os
 import sys
 import wandb
 from wandb_conf import wandb_config
@@ -62,7 +63,6 @@ def train(model, optimizer, data, pos_encoding=None):
   feat = data.x
   if model.opt['use_labels']:
     train_label_idx, train_pred_idx = get_label_masks(data, model.opt['label_rate'])
-
     feat = add_labels(feat, data.y, train_label_idx, model.num_classes, model.device)
   else:
     train_pred_idx = data.train_mask
@@ -193,9 +193,6 @@ def main(cmd_opt):
     opt['function'] = cmd_opt['function']
     opt['block'] = cmd_opt['block']
     opt['time'] = cmd_opt['time']
-    opt['alpha_'] = cmd_opt['alpha_']
-    opt['clip_bound'] = cmd_opt['clip_bound']
-    opt['k'] = cmd_opt['k']
     opt['num_splits'] = cmd_opt['num_splits']
     opt['geom_gcn_splits'] = cmd_opt['geom_gcn_splits']
     opt['planetoid_split'] = cmd_opt['planetoid_split']
@@ -209,8 +206,6 @@ def main(cmd_opt):
   print('[INFO] ODE function : ', opt['function'])
   print('[INFO] Block type : ', opt['block'])
   print('[INFO] T value : ', opt['time'])
-  print('[INFO] Alpha value : ', opt['alpha_'])
-  print('[INFO] K value : ', opt['k'])
   print('[INFO] L1 regularization on : ', opt['l1_reg'])
   print('[INFO] L1 reg coefficient : ', opt['l1_weight_decay'])
 
@@ -297,7 +292,7 @@ def main(cmd_opt):
         if(best_val_acc < val_acc): best_val_acc = val_acc
         if(best_test_acc < test_acc) : best_test_acc = test_acc
 
-        # print("K_d = ", model.odeblock.odefunc.k_d)
+        print("K_d = ", model.odeblock.odefunc.k_d)
         print(log.format(epoch, opt['epoch'], time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
   except:
         traceback.print_exc(file=sys.stdout)
@@ -311,8 +306,12 @@ def main(cmd_opt):
   max_run_time = max(run_time_ls)
 
   # Store run history variables
+  if(not os.path.exists('tests/history.csv')):
+      with open('tests/history.csv', 'w') as f:
+          f.write("T,dataset,block,function,best_val_acc,best_test_acc,mean_fw_nfe,mean_run_time,min_run_time,max_runtime\n")
+
   with open("tests/history.csv", "a") as f:
-      f.write(f"{opt['time']},{opt['alpha_']},{opt['k']},{best_val_acc},{best_test_acc},{mean_fw_nfe},{mean_run_time},{min_run_time},{max_run_time}\n")
+      f.write(f"{opt['time']},{opt['dataset']},{opt['block']},{opt['function']},{best_val_acc},{best_test_acc},{mean_fw_nfe},{mean_run_time},{min_run_time},{max_run_time}\n")
 
   return fw_nfe_ls, losses, train_accs, val_accs, test_accs
 
@@ -482,10 +481,7 @@ if __name__ == '__main__':
   parser.add_argument("--run_name", required=False, default=None, help="Run ID for wandb project")
 
   # For extended laplacian functions with clipping bounds.
-  parser.add_argument("--alpha_", type=float, required=False, default=1.0, help='Alpha value')
-  parser.add_argument("--clip_bound", type=float, required=False, default=0.05, help='Norm clipping bound')
   parser.add_argument("--only_cpu", action='store_true', required=False, help="Use only CPU")
-  parser.add_argument("--k", type=float, required=False, help="Hyper-parameter k for the new DeepGRAND model")
 
   args = parser.parse_args()
 

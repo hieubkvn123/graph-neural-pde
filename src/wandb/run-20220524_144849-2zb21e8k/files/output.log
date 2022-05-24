@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "run_GNN.py", line 489, in <module>
+    main(opt)
+  File "run_GNN.py", line 230, in main
+    model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/GNN_early.py", line 25, in __init__
+    self.odeblock = block(self.f, self.regularization_fns, opt, dataset.data, device, t=time_tensor).to(device)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/block_transformer_attention.py", line 9, in __init__
+    super(AttODEblock, self).__init__(odefunc, regularization_fns, opt, data, device, t)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/base_classes.py", line 40, in __init__
+    self.odefunc = odefunc(self.aug_dim * opt['hidden_dim'], self.aug_dim * opt['hidden_dim'], opt, data, device)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/function_transformer_attention.py", line 26, in __init__
+    self.k_d = nn.Parameter(torch.ones(self.w.shape[1]))
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1185, in __getattr__
+    raise AttributeError("'{}' object has no attribute '{}'".format(
+AttributeError: 'ExtendedODEFuncTransformerAtt' object has no attribute 'w'
+****************** Adaptive GRAND transformer function ******************

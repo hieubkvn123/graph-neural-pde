@@ -1,0 +1,100 @@
+
+torch.Size([2485, 1433])
+****************** Adaptive GRAND laplacian function ******************
+****************** Adaptive GRAND laplacian function ******************
+GNNEarly
+m1.module.weight
+torch.Size([80, 1433])
+m1.module.bias
+torch.Size([80])
+m2.module.weight
+torch.Size([7, 80])
+m2.module.bias
+torch.Size([7])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.w
+torch.Size([80, 80])
+odeblock.odefunc.d
+torch.Size([80])
+odeblock.odefunc.k_d
+torch.Size([1433])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.w
+torch.Size([80, 80])
+odeblock.reg_odefunc.odefunc.d
+torch.Size([80])
+odeblock.reg_odefunc.odefunc.k_d
+torch.Size([1433])
+odeblock.multihead_att_layer.Q.weight
+torch.Size([128, 80])
+odeblock.multihead_att_layer.Q.bias
+torch.Size([128])
+odeblock.multihead_att_layer.V.weight
+torch.Size([128, 80])
+odeblock.multihead_att_layer.V.bias
+torch.Size([128])
+odeblock.multihead_att_layer.K.weight
+torch.Size([128, 80])
+odeblock.multihead_att_layer.K.bias
+torch.Size([128])
+odeblock.multihead_att_layer.Wout.weight
+torch.Size([80, 16])
+odeblock.multihead_att_layer.Wout.bias
+torch.Size([80])
+Traceback (most recent call last):
+  File "run_GNN.py", line 263, in main
+    loss = train(model, optimizer, data, pos_encoding)
+  File "run_GNN.py", line 70, in train
+    out = model(feat, pos_encoding)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/GNN_early.py", line 84, in forward
+    z = self.odeblock(x)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/block_transformer_attention.py", line 61, in forward
+    state_dt = integrator(
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/odeint.py", line 77, in odeint
+    solution = solver.integrate(t)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/solvers.py", line 28, in integrate
+    self._before_integrate(t)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 161, in _before_integrate
+    f0 = self.func(t[0], self.y0)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py", line 189, in forward
+    return self.base_func(t, y)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/function_laplacian_diffusion.py", line 104, in forward
+    f = (ax - x) * self.k_d * alpha
+RuntimeError: The size of tensor a (80) must match the size of tensor b (1433) at non-singleton dimension 1
+best val accuracy 0.000000 with test accuracy 0.000000 at epoch 0 and best time 0.000000
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+run_GNN.py:307: RuntimeWarning: Mean of empty slice.
+  mean_fw_nfe = np.array(fw_nfe_ls).mean()
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/numpy/core/_methods.py:189: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+run_GNN.py:308: RuntimeWarning: Mean of empty slice.
+  mean_run_time = np.array(run_time_ls).mean()
+Traceback (most recent call last):
+  File "run_GNN.py", line 489, in <module>
+    main(opt)
+  File "run_GNN.py", line 309, in main
+    min_run_time = min(run_time_ls)
+ValueError: min() arg is an empty sequence

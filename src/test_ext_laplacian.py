@@ -12,22 +12,40 @@ args = vars(parser.parse_args())
 
 bounds = np.arange(args['clip_low'], args['clip_high'], args['clip_step'])
 t_values = np.array(list(range(1, 21))) * 5
+datasets = ['Cora', 'Citeseer', 'Pubmed', 'Computers', 'Photo', 'CoauthorCS']
 
+# Running Linear Adaptive GRAND for all datasets
 cmd = """
-    python3 run_GNN.py --function ext_laplacian3
+    python3 run_GNN.py --function ext_laplacian
                        --block attention 
-                       --dataset Cora
+                       --dataset {}
                        --experiment 
                        --max_iters 1000 
                        --max_nfe 100000000 
                        --time {}
-                       --run_name 'adaptive_grand_T={}'
+                       --run_name 'adaptive_grand-lr_T={},seed={},dataset={}'
 """
 
 for t in t_values:
-    cmd_ = cmd.format(t, t).replace("\n", "").replace("\t", "")
-    
-    print(cmd_)
-    os.system(cmd_)
+    for seed in range(5):
+        cmd_ = cmd.format(dataset, t, t, seed+1, dataset).replace("\n", "").replace("\t", "")
+        print(cmd_)
+        os.system(cmd_)
 
-    
+# Running Non-linear Adaptive GRAND for all datasets
+cmd = """
+    python3 run_GNN.py --function ext_transformer
+                       --block constant
+                       --dataset {}
+                       --experiment 
+                       --max_iters 1000 
+                       --max_nfe 100000000 
+                       --time {}
+                       --run_name 'adaptive_grand-nlr_T={},seed={},dataset={}'
+"""
+
+for t in t_values:
+    for seed in range(5):
+        cmd_ = cmd.format(dataset, t, t, seed+1, dataset).replace("\n", "").replace("\t", "")
+        print(cmd_)
+        os.system(cmd_)

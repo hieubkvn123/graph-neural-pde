@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "run_GNN.py", line 488, in <module>
+    main(opt)
+  File "run_GNN.py", line 233, in main
+    model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/GNN_early.py", line 20, in __init__
+    self.f = set_function(opt)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/model_configurations.py", line 58, in set_function
+    ExtendedLaplacianODEFunc3.alpha_ = opt['alpha_']
+KeyError: 'alpha_'

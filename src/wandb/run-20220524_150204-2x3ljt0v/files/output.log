@@ -1,0 +1,152 @@
+
+Downloading https://github.com/shchur/gnn-benchmark/raw/master/data/npz/ms_academic_cs.npz
+Processing...
+Done!
+****************** Adaptive GRAND transformer function ******************
+****************** Adaptive GRAND transformer function ******************
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1, 'max_iters': 100}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: EarlyStopDopri5: Unexpected arguments {'step_size': 1, 'max_iters': 100}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+GNNEarly
+m1.module.weight
+torch.Size([16, 6805])
+m1.module.bias
+torch.Size([16])
+m2.module.weight
+torch.Size([15, 16])
+m2.module.bias
+torch.Size([15])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.k_d
+torch.Size([16])
+odeblock.odefunc.multihead_att_layer.Q.weight
+torch.Size([8, 16])
+odeblock.odefunc.multihead_att_layer.Q.bias
+torch.Size([8])
+odeblock.odefunc.multihead_att_layer.V.weight
+torch.Size([8, 16])
+odeblock.odefunc.multihead_att_layer.V.bias
+torch.Size([8])
+odeblock.odefunc.multihead_att_layer.K.weight
+torch.Size([8, 16])
+odeblock.odefunc.multihead_att_layer.K.bias
+torch.Size([8])
+odeblock.odefunc.multihead_att_layer.Wout.weight
+torch.Size([16, 2])
+odeblock.odefunc.multihead_att_layer.Wout.bias
+torch.Size([16])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.k_d
+torch.Size([16])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Q.weight
+torch.Size([8, 16])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Q.bias
+torch.Size([8])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.V.weight
+torch.Size([8, 16])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.V.bias
+torch.Size([8])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.K.weight
+torch.Size([8, 16])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.K.bias
+torch.Size([8])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Wout.weight
+torch.Size([16, 2])
+odeblock.reg_odefunc.odefunc.multihead_att_layer.Wout.bias
+torch.Size([16])
+K_d =  Parameter containing:
+tensor([0.9907, 0.9907, 0.9907, 0.9907, 0.9907, 0.9907, 0.9907, 0.9907, 0.9907,
+        0.9907, 0.9907, 0.9907, 0.9907, 0.9907, 0.9907, 0.9907],
+       device='cuda:0', requires_grad=True)
+Epoch: 001/100, Runtime 1.501768, Loss 2.717495, forward nfe 14, backward nfe 14, Train: 0.2800, Val: 0.3883, Test: 0.3823, Best time: 1.8584
+K_d =  Parameter containing:
+tensor([0.9838, 0.9842, 0.9837, 0.9835, 0.9837, 0.9836, 0.9838, 0.9833, 0.9846,
+        0.9833, 0.9839, 0.9841, 0.9835, 0.9838, 0.9835, 0.9845],
+       device='cuda:0', requires_grad=True)
+Epoch: 002/100, Runtime 1.285457, Loss 2.612751, forward nfe 48, backward nfe 28, Train: 0.5167, Val: 0.5306, Test: 0.5321, Best time: 0.1610
+K_d =  Parameter containing:
+tensor([0.9780, 0.9782, 0.9779, 0.9775, 0.9784, 0.9780, 0.9783, 0.9778, 0.9790,
+        0.9774, 0.9780, 0.9796, 0.9781, 0.9783, 0.9775, 0.9781],
+       device='cuda:0', requires_grad=True)
+Epoch: 003/100, Runtime 1.505069, Loss 2.501472, forward nfe 82, backward nfe 42, Train: 0.5700, Val: 0.6279, Test: 0.6206, Best time: 0.1560
+K_d =  Parameter containing:
+tensor([0.9726, 0.9731, 0.9731, 0.9732, 0.9734, 0.9729, 0.9730, 0.9722, 0.9736,
+        0.9717, 0.9720, 0.9742, 0.9733, 0.9733, 0.9716, 0.9730],
+       device='cuda:0', requires_grad=True)
+Epoch: 004/100, Runtime 1.323948, Loss 2.416775, forward nfe 116, backward nfe 56, Train: 0.5700, Val: 0.6279, Test: 0.6206, Best time: 1.0000
+K_d =  Parameter containing:
+tensor([0.9685, 0.9675, 0.9685, 0.9682, 0.9688, 0.9687, 0.9681, 0.9674, 0.9684,
+        0.9677, 0.9676, 0.9692, 0.9688, 0.9675, 0.9666, 0.9681],
+       device='cuda:0', requires_grad=True)
+Epoch: 005/100, Runtime 1.511922, Loss 2.344772, forward nfe 150, backward nfe 70, Train: 0.6700, Val: 0.6681, Test: 0.6683, Best time: 1.6659
+K_d =  Parameter containing:
+tensor([0.9647, 0.9622, 0.9639, 0.9643, 0.9654, 0.9649, 0.9637, 0.9641, 0.9637,
+        0.9634, 0.9639, 0.9656, 0.9646, 0.9633, 0.9621, 0.9633],
+       device='cuda:0', requires_grad=True)
+Epoch: 006/100, Runtime 1.386980, Loss 2.298835, forward nfe 184, backward nfe 84, Train: 0.7233, Val: 0.6943, Test: 0.6926, Best time: 1.6511
+K_d =  Parameter containing:
+tensor([0.9608, 0.9587, 0.9598, 0.9601, 0.9611, 0.9611, 0.9597, 0.9602, 0.9598,
+        0.9592, 0.9602, 0.9610, 0.9604, 0.9593, 0.9578, 0.9588],
+       device='cuda:0', requires_grad=True)
+Epoch: 007/100, Runtime 1.416875, Loss 2.224000, forward nfe 218, backward nfe 98, Train: 0.8167, Val: 0.7189, Test: 0.7157, Best time: 0.1484
+K_d =  Parameter containing:
+tensor([0.9568, 0.9556, 0.9562, 0.9561, 0.9574, 0.9572, 0.9552, 0.9576, 0.9558,
+        0.9550, 0.9561, 0.9571, 0.9568, 0.9553, 0.9542, 0.9551],
+       device='cuda:0', requires_grad=True)
+Epoch: 008/100, Runtime 1.349154, Loss 2.283516, forward nfe 252, backward nfe 112, Train: 0.8267, Val: 0.7289, Test: 0.7290, Best time: 1.3826
+K_d =  Parameter containing:
+tensor([0.9533, 0.9515, 0.9525, 0.9524, 0.9543, 0.9532, 0.9513, 0.9545, 0.9525,
+        0.9517, 0.9519, 0.9535, 0.9535, 0.9521, 0.9501, 0.9518],
+       device='cuda:0', requires_grad=True)
+Epoch: 009/100, Runtime 1.413749, Loss 2.146847, forward nfe 286, backward nfe 126, Train: 0.8633, Val: 0.7536, Test: 0.7521, Best time: 1.2586
+K_d =  Parameter containing:
+tensor([0.9497, 0.9476, 0.9493, 0.9485, 0.9504, 0.9492, 0.9482, 0.9515, 0.9497,
+        0.9488, 0.9482, 0.9502, 0.9504, 0.9484, 0.9474, 0.9490],
+       device='cuda:0', requires_grad=True)
+Epoch: 010/100, Runtime 1.513990, Loss 2.114598, forward nfe 320, backward nfe 140, Train: 0.8900, Val: 0.7738, Test: 0.7714, Best time: 1.0437
+Traceback (most recent call last):
+  File "run_GNN.py", line 260, in main
+    tmp_train_acc, tmp_val_acc, tmp_test_acc = this_test(model, data, pos_encoding, opt)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "run_GNN.py", line 140, in test
+    logits, accs = model(feat, pos_encoding), []
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/GNN_early.py", line 84, in forward
+    z = self.odeblock(x)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/block_constant.py", line 56, in forward
+    state_dt = integrator(
+  File "/media/data-share/hieunm60/graph-neural-pde/src/early_stop_solver.py", line 301, in __call__
+    t, solution = self.solver.integrate(t)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/early_stop_solver.py", line 65, in integrate
+    new_t, y = self.advance(t[i])
+  File "/media/data-share/hieunm60/graph-neural-pde/src/early_stop_solver.py", line 79, in advance
+    train_acc, val_acc, test_acc = self.evaluate(self.rk_state)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/early_stop_solver.py", line 119, in evaluate
+    train_acc, val_acc, test_acc = self.ode_test(z)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/early_stop_solver.py", line 93, in test
+    acc = pred.eq(self.data.y[mask]).sum().item() / mask.sum().item()
+KeyboardInterrupt
+best val accuracy 0.773830 with test accuracy 0.771394 at epoch 10 and best time 1.043682
