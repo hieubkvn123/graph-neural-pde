@@ -1,0 +1,669 @@
+2022-05-24 23:24:12,078 INFO    MainThread:534586 [internal.py:wandb_internal():90] W&B internal server running at pid: 534586, started at: 2022-05-24 23:24:12.077883
+2022-05-24 23:24:12,083 INFO    WriterThread:534586 [datastore.py:open_for_write():75] open: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/run-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed.wandb
+2022-05-24 23:24:12,088 DEBUG   SenderThread:534586 [sender.py:send():232] send: header
+2022-05-24 23:24:12,089 DEBUG   SenderThread:534586 [sender.py:send():232] send: run
+2022-05-24 23:24:12,435 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: check_version
+2022-05-24 23:24:12,436 INFO    SenderThread:534586 [dir_watcher.py:__init__():197] watching files in: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files
+2022-05-24 23:24:12,436 INFO    SenderThread:534586 [sender.py:_start_run_threads():811] run started: adaptive_grand-lr_T=20,seed=5,dataset=Pubmed with start time 1653409451
+2022-05-24 23:24:12,436 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:24:12,436 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:24:12,437 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: check_version
+2022-05-24 23:24:12,637 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: run_start
+2022-05-24 23:24:12,650 DEBUG   HandlerThread:534586 [meta.py:__init__():35] meta init
+2022-05-24 23:24:12,650 DEBUG   HandlerThread:534586 [meta.py:__init__():49] meta init done
+2022-05-24 23:24:12,650 DEBUG   HandlerThread:534586 [meta.py:probe():209] probe
+2022-05-24 23:24:12,657 DEBUG   HandlerThread:534586 [meta.py:_setup_git():199] setup git
+2022-05-24 23:24:12,681 DEBUG   HandlerThread:534586 [meta.py:_setup_git():206] setup git done
+2022-05-24 23:24:12,681 DEBUG   HandlerThread:534586 [meta.py:_save_pip():53] save pip
+2022-05-24 23:24:12,682 DEBUG   HandlerThread:534586 [meta.py:_save_pip():67] save pip done
+2022-05-24 23:24:12,682 DEBUG   HandlerThread:534586 [meta.py:_save_conda():74] save conda
+2022-05-24 23:24:13,439 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_created():244] file/dir created: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:24:13,440 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_created():244] file/dir created: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/conda-environment.yaml
+2022-05-24 23:24:13,440 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_created():244] file/dir created: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/requirements.txt
+2022-05-24 23:24:15,441 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/conda-environment.yaml
+2022-05-24 23:24:15,544 DEBUG   HandlerThread:534586 [meta.py:_save_conda():84] save conda done
+2022-05-24 23:24:15,544 DEBUG   HandlerThread:534586 [meta.py:probe():247] probe done
+2022-05-24 23:24:15,552 DEBUG   SenderThread:534586 [sender.py:send():232] send: files
+2022-05-24 23:24:15,552 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-metadata.json with policy now
+2022-05-24 23:24:15,560 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-24 23:24:15,562 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: stop_status
+2022-05-24 23:24:15,859 DEBUG   SenderThread:534586 [sender.py:send():232] send: telemetry
+2022-05-24 23:24:16,302 INFO    Thread-11 :534586 [upload_job.py:push():132] Uploaded file /tmp/tmp42d5wdtqwandb/l6gv5jnn-wandb-metadata.json
+2022-05-24 23:24:16,442 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_created():244] file/dir created: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:24:16,442 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_created():244] file/dir created: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-metadata.json
+2022-05-24 23:24:24,447 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:24:25,363 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:24:25,365 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:24:25,366 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:24:25,368 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:24:25,448 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:24:26,448 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:24:28,450 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:24:29,088 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:24:29,089 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:24:29,090 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:24:29,091 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:24:29,450 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:24:30,451 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:24:30,862 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-24 23:24:30,862 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: stop_status
+2022-05-24 23:24:34,175 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:24:34,177 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:24:34,178 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:24:34,182 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:24:34,454 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:24:36,455 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:24:39,182 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:24:39,184 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:24:39,185 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:24:39,186 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:24:39,457 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:24:40,973 DEBUG   SenderThread:534586 [sender.py:send():232] send: stats
+2022-05-24 23:24:42,458 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:24:43,459 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/config.yaml
+2022-05-24 23:24:44,003 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:24:44,005 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:24:44,006 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:24:44,007 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:24:44,460 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:24:46,170 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-24 23:24:46,171 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: stop_status
+2022-05-24 23:24:46,461 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:24:48,356 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:24:48,357 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:24:48,357 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:24:48,362 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:24:48,462 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:24:50,464 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:24:52,468 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:24:52,469 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:24:52,470 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:24:52,471 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:24:53,466 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:24:54,466 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:24:56,842 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:24:56,843 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:24:56,844 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:24:56,848 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:24:57,468 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:24:58,469 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:00,397 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:00,399 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:00,399 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:00,401 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:00,471 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:01,497 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-24 23:25:01,498 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: stop_status
+2022-05-24 23:25:02,472 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:03,482 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:03,484 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:03,484 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:03,485 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:04,473 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:06,475 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:06,486 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:06,487 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:06,488 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:06,488 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:07,476 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:08,476 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:08,783 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:08,784 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:08,784 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:08,785 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:09,477 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:10,478 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:10,855 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:10,857 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:10,858 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:10,859 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:11,317 DEBUG   SenderThread:534586 [sender.py:send():232] send: stats
+2022-05-24 23:25:11,478 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:12,463 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:12,464 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:12,465 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:12,466 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:12,479 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:12,479 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:13,595 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:13,596 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:13,597 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:13,598 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:14,480 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:14,481 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:14,893 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:14,894 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:14,895 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:14,895 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:15,481 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:16,283 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:16,285 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:16,285 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:16,287 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:16,482 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:16,482 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:16,809 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-24 23:25:16,810 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: stop_status
+2022-05-24 23:25:17,850 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:17,852 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:17,852 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:17,854 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:18,483 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:18,484 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:19,624 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:19,626 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:19,627 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:19,628 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:20,485 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:20,485 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:21,160 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:21,162 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:21,163 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:21,164 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:21,485 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:22,486 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:22,721 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:22,722 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:22,722 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:22,724 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:23,486 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:24,108 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:24,110 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:24,111 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:24,112 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:24,487 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:24,487 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:25,306 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:25,307 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:25,308 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:25,308 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:25,488 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:26,318 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:26,320 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:26,320 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:26,321 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:26,489 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:26,489 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:27,050 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:27,052 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:27,052 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:27,053 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:27,489 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:27,879 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:27,881 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:27,881 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:27,883 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:28,490 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:28,490 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:28,643 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:28,645 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:28,645 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:28,646 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:29,424 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:29,425 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:29,426 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:29,427 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:29,490 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:30,120 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:30,122 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:30,122 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:30,124 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:30,491 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:30,492 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:30,731 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:30,732 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:30,733 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:30,734 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:31,402 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:31,404 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:31,404 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:31,405 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:31,492 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:32,097 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:32,099 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:32,099 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:32,100 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:32,128 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-24 23:25:32,128 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: stop_status
+2022-05-24 23:25:32,493 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:32,494 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:32,825 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:32,827 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:32,828 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:32,830 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:33,493 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:33,555 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:33,556 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:33,557 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:33,558 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:34,285 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:34,287 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:34,287 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:34,288 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:34,494 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:34,495 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:34,912 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:34,914 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:34,915 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:34,916 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:35,495 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:35,593 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:35,595 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:35,596 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:35,597 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:36,343 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:36,343 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:36,344 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:36,345 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:36,496 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:36,497 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:37,128 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:37,129 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:37,130 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:37,131 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:37,497 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:37,781 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:37,783 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:37,783 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:37,784 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:38,408 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:38,410 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:38,410 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:38,411 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:38,498 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:38,498 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:39,027 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:39,029 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:39,030 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:39,031 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:39,498 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:39,565 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:39,566 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:39,567 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:39,568 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:40,105 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:40,107 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:40,107 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:40,108 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:40,499 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:40,499 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:40,592 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:40,594 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:40,594 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:40,596 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:41,092 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:41,093 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:41,094 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:41,095 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:41,500 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:41,584 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:41,585 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:41,586 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:41,587 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:41,640 DEBUG   SenderThread:534586 [sender.py:send():232] send: stats
+2022-05-24 23:25:42,071 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:42,072 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:42,073 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:42,074 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:42,501 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:42,501 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:42,546 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:42,548 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:42,548 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:42,549 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:43,011 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:43,013 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:43,014 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:43,015 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:43,487 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:43,489 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:43,490 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:43,491 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:43,501 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:43,957 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:43,958 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:43,959 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:43,960 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:44,446 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:44,447 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:44,448 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:44,450 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:44,502 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:44,502 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:44,919 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:44,921 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:44,921 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:44,923 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:45,384 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:45,386 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:45,387 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:45,388 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:45,503 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:45,814 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:45,816 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:45,816 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:45,817 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:46,254 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:46,256 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:46,256 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:46,257 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:46,503 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:46,503 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:46,683 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:46,685 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:46,685 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:46,685 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:47,081 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:47,083 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:47,083 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:47,085 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:47,449 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-24 23:25:47,450 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: stop_status
+2022-05-24 23:25:47,503 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:47,543 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:47,752 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:47,753 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:47,754 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:47,974 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:47,976 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:47,976 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:47,978 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:48,391 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:48,392 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:48,393 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:48,393 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:48,504 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:48,504 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:48,824 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:48,826 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:48,827 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:48,828 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:49,254 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:49,256 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:49,257 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:49,258 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:49,505 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:49,677 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:49,680 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:49,680 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:49,682 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:50,110 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:50,111 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:50,112 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:50,114 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:50,506 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:50,506 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:50,523 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:50,524 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:50,525 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:50,526 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:50,936 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:50,937 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:50,937 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:50,938 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:51,360 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:51,362 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:51,362 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:51,364 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:51,506 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:51,759 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:51,760 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:51,761 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:51,762 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:52,165 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:52,167 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:52,168 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:52,169 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:52,507 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:52,507 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:52,583 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:52,584 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:52,585 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:52,587 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:52,985 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:52,987 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:52,987 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:52,989 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:53,373 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:53,374 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:53,375 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:53,376 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:53,507 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:53,769 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:53,771 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:53,771 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:53,772 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:54,182 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:54,184 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:54,184 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:54,185 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:54,508 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:54,509 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:54,579 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:54,581 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:54,582 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:54,583 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:54,990 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:54,992 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:54,993 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:54,994 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:55,384 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:55,386 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:55,386 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:55,387 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:55,508 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:55,783 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:55,785 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:55,786 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:55,787 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:56,186 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:56,187 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:56,188 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:56,189 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:56,509 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:56,510 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:56,572 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:56,574 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:56,574 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:56,576 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:56,964 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:56,965 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:56,966 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:56,967 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:57,358 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:57,359 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:57,359 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:57,361 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:57,510 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:57,738 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:57,740 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:57,740 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:57,741 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:58,155 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:58,156 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:58,157 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:58,158 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:58,511 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:58,511 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:25:58,551 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:58,552 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:58,553 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:58,554 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:58,969 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:58,970 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:58,971 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:58,972 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:59,346 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:59,348 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:59,348 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:59,350 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:25:59,512 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:25:59,722 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:25:59,724 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:25:59,725 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:25:59,726 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:00,097 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:26:00,098 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:26:00,099 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:26:00,100 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:00,489 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:26:00,490 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:26:00,491 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:26:00,491 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:00,512 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:26:00,512 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:26:00,865 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:26:00,867 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:26:00,868 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:26:00,868 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:01,243 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:26:01,245 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:26:01,245 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:26:01,246 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:01,513 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:26:01,616 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:26:01,618 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:26:01,618 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:26:01,619 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:02,003 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:26:02,005 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:26:02,006 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:26:02,007 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:02,371 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:26:02,372 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:26:02,373 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:26:02,374 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:02,513 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:26:02,514 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:26:02,743 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:26:02,745 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:26:02,746 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:26:02,746 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:02,755 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: stop_status
+2022-05-24 23:26:02,755 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: stop_status
+2022-05-24 23:26:03,128 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: partial_history
+2022-05-24 23:26:03,130 DEBUG   SenderThread:534586 [sender.py:send():232] send: history
+2022-05-24 23:26:03,130 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:26:03,132 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:03,132 DEBUG   SenderThread:534586 [sender.py:send():232] send: telemetry
+2022-05-24 23:26:03,515 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:26:04,515 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:26:05,759 DEBUG   SenderThread:534586 [sender.py:send():232] send: exit
+2022-05-24 23:26:05,759 INFO    SenderThread:534586 [sender.py:send_exit():368] handling exit code: 0
+2022-05-24 23:26:05,760 INFO    SenderThread:534586 [sender.py:send_exit():370] handling runtime: 113
+2022-05-24 23:26:05,760 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:05,761 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:05,761 INFO    SenderThread:534586 [sender.py:send_exit():376] send defer
+2022-05-24 23:26:05,761 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:05,762 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:05,762 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 0
+2022-05-24 23:26:05,763 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:05,763 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 0
+2022-05-24 23:26:05,763 INFO    SenderThread:534586 [sender.py:transition_state():389] send defer: 1
+2022-05-24 23:26:05,763 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:05,764 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 1
+2022-05-24 23:26:05,778 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:05,778 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 1
+2022-05-24 23:26:05,778 INFO    SenderThread:534586 [sender.py:transition_state():389] send defer: 2
+2022-05-24 23:26:05,779 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:05,780 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 2
+2022-05-24 23:26:05,780 DEBUG   SenderThread:534586 [sender.py:send():232] send: stats
+2022-05-24 23:26:05,781 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:05,781 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 2
+2022-05-24 23:26:05,781 INFO    SenderThread:534586 [sender.py:transition_state():389] send defer: 3
+2022-05-24 23:26:05,782 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:05,782 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 3
+2022-05-24 23:26:05,782 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:05,782 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 3
+2022-05-24 23:26:05,782 INFO    SenderThread:534586 [sender.py:transition_state():389] send defer: 4
+2022-05-24 23:26:05,783 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:05,783 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 4
+2022-05-24 23:26:05,783 DEBUG   SenderThread:534586 [sender.py:send():232] send: summary
+2022-05-24 23:26:05,785 INFO    SenderThread:534586 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-05-24 23:26:05,785 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:05,785 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 4
+2022-05-24 23:26:05,785 INFO    SenderThread:534586 [sender.py:transition_state():389] send defer: 5
+2022-05-24 23:26:05,786 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:05,786 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 5
+2022-05-24 23:26:05,786 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:05,786 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 5
+2022-05-24 23:26:05,865 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:06,116 INFO    SenderThread:534586 [sender.py:transition_state():389] send defer: 6
+2022-05-24 23:26:06,116 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:06,118 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:06,118 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 6
+2022-05-24 23:26:06,119 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:06,119 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 6
+2022-05-24 23:26:06,119 INFO    SenderThread:534586 [dir_watcher.py:finish():312] shutting down directory watcher
+2022-05-24 23:26:06,220 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:06,517 INFO    Thread-7  :534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:26:06,518 INFO    SenderThread:534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:26:06,518 INFO    SenderThread:534586 [dir_watcher.py:_on_file_modified():257] file/dir modified: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/config.yaml
+2022-05-24 23:26:06,519 INFO    SenderThread:534586 [dir_watcher.py:finish():342] scan: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files
+2022-05-24 23:26:06,519 INFO    SenderThread:534586 [dir_watcher.py:finish():356] scan save: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/config.yaml config.yaml
+2022-05-24 23:26:06,520 INFO    SenderThread:534586 [dir_watcher.py:finish():356] scan save: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json wandb-summary.json
+2022-05-24 23:26:06,526 INFO    SenderThread:534586 [dir_watcher.py:finish():356] scan save: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/requirements.txt requirements.txt
+2022-05-24 23:26:06,527 INFO    SenderThread:534586 [dir_watcher.py:finish():356] scan save: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/conda-environment.yaml conda-environment.yaml
+2022-05-24 23:26:06,527 INFO    SenderThread:534586 [dir_watcher.py:finish():356] scan save: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-metadata.json wandb-metadata.json
+2022-05-24 23:26:06,527 INFO    SenderThread:534586 [dir_watcher.py:finish():356] scan save: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log output.log
+2022-05-24 23:26:06,534 INFO    SenderThread:534586 [sender.py:transition_state():389] send defer: 7
+2022-05-24 23:26:06,535 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:06,544 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:06,545 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 7
+2022-05-24 23:26:06,554 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:06,554 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 7
+2022-05-24 23:26:06,554 INFO    SenderThread:534586 [file_pusher.py:finish():145] shutting down file pusher
+2022-05-24 23:26:06,638 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:06,639 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:06,743 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:06,743 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:06,851 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:06,852 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:06,956 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:06,957 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:07,061 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:07,062 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:07,166 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:07,166 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:07,264 INFO    Thread-12 :534586 [upload_job.py:push():132] Uploaded file /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/config.yaml
+2022-05-24 23:26:07,270 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:07,271 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:07,276 INFO    Thread-13 :534586 [upload_job.py:push():132] Uploaded file /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/wandb-summary.json
+2022-05-24 23:26:07,294 INFO    Thread-14 :534586 [upload_job.py:push():132] Uploaded file /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/requirements.txt
+2022-05-24 23:26:07,297 INFO    Thread-16 :534586 [upload_job.py:push():132] Uploaded file /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/output.log
+2022-05-24 23:26:07,300 INFO    Thread-15 :534586 [upload_job.py:push():132] Uploaded file /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/files/conda-environment.yaml
+2022-05-24 23:26:07,374 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:07,375 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:07,479 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:07,479 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:07,502 INFO    Thread-6  :534586 [sender.py:transition_state():389] send defer: 8
+2022-05-24 23:26:07,503 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:07,503 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 8
+2022-05-24 23:26:07,504 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:07,504 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 8
+2022-05-24 23:26:07,583 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:08,250 INFO    SenderThread:534586 [sender.py:transition_state():389] send defer: 9
+2022-05-24 23:26:08,250 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:08,252 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:08,252 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 9
+2022-05-24 23:26:08,253 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:08,253 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 9
+2022-05-24 23:26:08,253 INFO    SenderThread:534586 [sender.py:transition_state():389] send defer: 10
+2022-05-24 23:26:08,255 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: defer
+2022-05-24 23:26:08,255 INFO    HandlerThread:534586 [handler.py:handle_request_defer():164] handle defer: 10
+2022-05-24 23:26:08,255 DEBUG   SenderThread:534586 [sender.py:send():232] send: final
+2022-05-24 23:26:08,256 DEBUG   SenderThread:534586 [sender.py:send():232] send: footer
+2022-05-24 23:26:08,256 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: defer
+2022-05-24 23:26:08,256 INFO    SenderThread:534586 [sender.py:send_request_defer():385] handle sender defer: 10
+2022-05-24 23:26:08,354 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: poll_exit
+2022-05-24 23:26:08,354 DEBUG   SenderThread:534586 [sender.py:send_request():246] send_request: poll_exit
+2022-05-24 23:26:08,355 INFO    SenderThread:534586 [file_pusher.py:join():150] waiting for file pusher
+2022-05-24 23:26:09,064 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: sampled_history
+2022-05-24 23:26:09,068 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: get_summary
+2022-05-24 23:26:09,070 DEBUG   HandlerThread:534586 [handler.py:handle_request():141] handle_request: shutdown
+2022-05-24 23:26:09,070 INFO    HandlerThread:534586 [handler.py:finish():806] shutting down handler
+2022-05-24 23:26:09,256 INFO    WriterThread:534586 [datastore.py:close():279] close: /media/data-share/hieunm60/graph-neural-pde/src/wandb/run-20220524_232411-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed/run-adaptive_grand-lr_T=20,seed=5,dataset=Pubmed.wandb
+2022-05-24 23:26:09,961 INFO    SenderThread:534586 [sender.py:finish():1110] shutting down sender
+2022-05-24 23:26:09,961 INFO    SenderThread:534586 [file_pusher.py:finish():145] shutting down file pusher
+2022-05-24 23:26:09,962 INFO    SenderThread:534586 [file_pusher.py:join():150] waiting for file pusher
+2022-05-24 23:26:09,966 INFO    MainThread:534586 [internal.py:handle_exit():80] Internal process exited

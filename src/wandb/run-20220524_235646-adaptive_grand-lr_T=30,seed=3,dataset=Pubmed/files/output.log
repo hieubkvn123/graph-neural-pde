@@ -1,0 +1,161 @@
+****************** Adaptive GRAND laplacian function ******************
+****************** Adaptive GRAND laplacian function ******************
+GNNEarly
+m1.module.weight
+torch.Size([128, 500])
+m1.module.bias
+torch.Size([128])
+m2.module.weight
+torch.Size([3, 128])
+m2.module.bias
+torch.Size([3])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.w
+torch.Size([128, 128])
+odeblock.odefunc.d
+torch.Size([128])
+odeblock.odefunc.k_d
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.w
+torch.Size([128, 128])
+odeblock.reg_odefunc.odefunc.d
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.k_d
+torch.Size([128])
+odeblock.multihead_att_layer.Q.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.Q.bias
+torch.Size([16])
+odeblock.multihead_att_layer.V.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.V.bias
+torch.Size([16])
+odeblock.multihead_att_layer.K.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.K.bias
+torch.Size([16])
+odeblock.multihead_att_layer.Wout.weight
+torch.Size([128, 16])
+odeblock.multihead_att_layer.Wout.bias
+torch.Size([128])
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: AdaptiveHeunSolver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: EarlyStopDopri5: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+Epoch: 001/100, Runtime 15.666691, Loss 1.098662, forward nfe 68, backward nfe 1515, Train: 0.4333, Val: 0.4028, Test: 0.3883, Best time: 0.2377
+Epoch: 002/100, Runtime 16.819958, Loss 1.094712, forward nfe 426, backward nfe 3143, Train: 0.8000, Val: 0.7069, Test: 0.6940, Best time: 2.6765
+Epoch: 003/100, Runtime 16.395403, Loss 1.084006, forward nfe 784, backward nfe 4725, Train: 0.8167, Val: 0.7417, Test: 0.7287, Best time: 2.6281
+Epoch: 004/100, Runtime 15.758996, Loss 1.067490, forward nfe 1136, backward nfe 6245, Train: 0.8167, Val: 0.7417, Test: 0.7287, Best time: 30.0000
+Epoch: 005/100, Runtime 16.728270, Loss 1.041587, forward nfe 1488, backward nfe 7858, Train: 0.8167, Val: 0.7417, Test: 0.7287, Best time: 30.0000
+Epoch: 006/100, Runtime 14.313557, Loss 1.008998, forward nfe 1828, backward nfe 9232, Train: 0.8167, Val: 0.7424, Test: 0.7223, Best time: 2.4239
+Epoch: 007/100, Runtime 13.833265, Loss 0.965675, forward nfe 2168, backward nfe 10571, Train: 0.8000, Val: 0.7431, Test: 0.7282, Best time: 2.3753
+Epoch: 008/100, Runtime 13.375257, Loss 0.905417, forward nfe 2502, backward nfe 11843, Train: 0.8167, Val: 0.7444, Test: 0.7323, Best time: 2.3336
+Epoch: 009/100, Runtime 14.305585, Loss 0.851056, forward nfe 2824, backward nfe 13218, Train: 0.8167, Val: 0.7486, Test: 0.7281, Best time: 0.2086
+Epoch: 010/100, Runtime 13.104618, Loss 0.789289, forward nfe 3146, backward nfe 14482, Train: 0.8333, Val: 0.7528, Test: 0.7320, Best time: 0.2053
+Epoch: 011/100, Runtime 12.310531, Loss 0.714200, forward nfe 3468, backward nfe 15666, Train: 0.8500, Val: 0.7597, Test: 0.7441, Best time: 2.2225
+Epoch: 012/100, Runtime 10.325803, Loss 0.625779, forward nfe 3784, backward nfe 16628, Train: 0.8500, Val: 0.7604, Test: 0.7373, Best time: 0.1988
+Epoch: 013/100, Runtime 8.507664, Loss 0.590911, forward nfe 4100, backward nfe 17412, Train: 0.8500, Val: 0.7681, Test: 0.7524, Best time: 2.1555
+Epoch: 014/100, Runtime 8.232910, Loss 0.522120, forward nfe 4416, backward nfe 18187, Train: 0.8500, Val: 0.7743, Test: 0.7558, Best time: 2.1274
+Epoch: 015/100, Runtime 9.297380, Loss 0.442674, forward nfe 4720, backward nfe 19063, Train: 0.8833, Val: 0.7854, Test: 0.7604, Best time: 2.1032
+Epoch: 016/100, Runtime 9.337525, Loss 0.409778, forward nfe 5024, backward nfe 19955, Train: 0.9167, Val: 0.7861, Test: 0.7633, Best time: 2.0813
+Epoch: 017/100, Runtime 8.580298, Loss 0.401021, forward nfe 5322, backward nfe 20761, Train: 0.9167, Val: 0.7896, Test: 0.7648, Best time: 2.0637
+Epoch: 018/100, Runtime 7.311049, Loss 0.361963, forward nfe 5620, backward nfe 21419, Train: 0.9333, Val: 0.7917, Test: 0.7670, Best time: 2.0488
+Epoch: 019/100, Runtime 6.628300, Loss 0.322833, forward nfe 5918, backward nfe 22015, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 2.0361
+Epoch: 020/100, Runtime 5.216551, Loss 0.302835, forward nfe 6210, backward nfe 22485, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 021/100, Runtime 5.473703, Loss 0.271877, forward nfe 6508, backward nfe 22968, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 022/100, Runtime 6.690155, Loss 0.238955, forward nfe 6800, backward nfe 23569, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 023/100, Runtime 6.476202, Loss 0.276261, forward nfe 7086, backward nfe 24161, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 024/100, Runtime 6.389867, Loss 0.279382, forward nfe 7366, backward nfe 24756, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 025/100, Runtime 5.439102, Loss 0.255294, forward nfe 7640, backward nfe 25243, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 026/100, Runtime 4.626695, Loss 0.231413, forward nfe 7914, backward nfe 25637, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 027/100, Runtime 3.643852, Loss 0.245861, forward nfe 8188, backward nfe 25937, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 028/100, Runtime 4.072087, Loss 0.258651, forward nfe 8450, backward nfe 26280, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 029/100, Runtime 4.747613, Loss 0.207565, forward nfe 8712, backward nfe 26690, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 030/100, Runtime 4.886020, Loss 0.229566, forward nfe 8968, backward nfe 27118, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 031/100, Runtime 4.815483, Loss 0.194824, forward nfe 9218, backward nfe 27538, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 032/100, Runtime 4.350042, Loss 0.209657, forward nfe 9468, backward nfe 27910, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 033/100, Runtime 3.832255, Loss 0.234463, forward nfe 9718, backward nfe 28235, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 034/100, Runtime 2.390247, Loss 0.246334, forward nfe 9962, backward nfe 28414, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 035/100, Runtime 3.423488, Loss 0.217889, forward nfe 10206, backward nfe 28698, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 036/100, Runtime 3.355759, Loss 0.169682, forward nfe 10450, backward nfe 28977, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 037/100, Runtime 3.848593, Loss 0.155088, forward nfe 10682, backward nfe 29305, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 038/100, Runtime 3.688318, Loss 0.193884, forward nfe 10914, backward nfe 29619, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 039/100, Runtime 3.195241, Loss 0.206843, forward nfe 11146, backward nfe 29883, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 040/100, Runtime 2.426163, Loss 0.133507, forward nfe 11378, backward nfe 30073, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 041/100, Runtime 2.695942, Loss 0.118238, forward nfe 11604, backward nfe 30290, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 042/100, Runtime 2.095579, Loss 0.161808, forward nfe 11830, backward nfe 30446, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 043/100, Runtime 2.084076, Loss 0.136088, forward nfe 12056, backward nfe 30602, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 044/100, Runtime 1.988302, Loss 0.137741, forward nfe 12282, backward nfe 30748, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 045/100, Runtime 2.376154, Loss 0.141237, forward nfe 12508, backward nfe 30932, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 046/100, Runtime 2.318579, Loss 0.131910, forward nfe 12734, backward nfe 31109, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 047/100, Runtime 2.206371, Loss 0.118846, forward nfe 12960, backward nfe 31279, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 048/100, Runtime 2.050457, Loss 0.144775, forward nfe 13174, backward nfe 31434, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 049/100, Runtime 1.771354, Loss 0.142198, forward nfe 13388, backward nfe 31560, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 050/100, Runtime 1.597218, Loss 0.118059, forward nfe 13602, backward nfe 31669, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 051/100, Runtime 1.850617, Loss 0.083655, forward nfe 13816, backward nfe 31804, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 052/100, Runtime 2.161530, Loss 0.116818, forward nfe 14030, backward nfe 31971, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 053/100, Runtime 2.433041, Loss 0.140264, forward nfe 14238, backward nfe 32165, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 054/100, Runtime 2.030465, Loss 0.118963, forward nfe 14446, backward nfe 32319, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 055/100, Runtime 2.434500, Loss 0.095707, forward nfe 14642, backward nfe 32516, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 056/100, Runtime 1.945405, Loss 0.119079, forward nfe 14844, backward nfe 32664, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 057/100, Runtime 1.874287, Loss 0.081255, forward nfe 15046, backward nfe 32804, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 058/100, Runtime 1.834914, Loss 0.119653, forward nfe 15248, backward nfe 32940, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 059/100, Runtime 1.690646, Loss 0.104653, forward nfe 15444, backward nfe 33063, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 060/100, Runtime 1.511204, Loss 0.118824, forward nfe 15640, backward nfe 33167, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 061/100, Runtime 1.520567, Loss 0.131412, forward nfe 15836, backward nfe 33272, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 062/100, Runtime 1.165879, Loss 0.093989, forward nfe 16032, backward nfe 33340, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 063/100, Runtime 0.952906, Loss 0.127896, forward nfe 16228, backward nfe 33387, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 064/100, Runtime 0.961207, Loss 0.054601, forward nfe 16424, backward nfe 33439, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 065/100, Runtime 1.062446, Loss 0.075135, forward nfe 16608, backward nfe 33500, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 066/100, Runtime 1.198696, Loss 0.155352, forward nfe 16798, backward nfe 33575, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 067/100, Runtime 1.238735, Loss 0.065930, forward nfe 16988, backward nfe 33653, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 068/100, Runtime 1.237129, Loss 0.089812, forward nfe 17178, backward nfe 33731, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 069/100, Runtime 1.222612, Loss 0.077606, forward nfe 17368, backward nfe 33807, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 070/100, Runtime 1.284965, Loss 0.124141, forward nfe 17558, backward nfe 33890, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 071/100, Runtime 1.270472, Loss 0.077771, forward nfe 17748, backward nfe 33971, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 072/100, Runtime 1.356365, Loss 0.105524, forward nfe 17932, backward nfe 34065, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 073/100, Runtime 1.415435, Loss 0.056010, forward nfe 18104, backward nfe 34168, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 074/100, Runtime 1.335559, Loss 0.046065, forward nfe 18270, backward nfe 34260, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 075/100, Runtime 1.145443, Loss 0.060239, forward nfe 18442, backward nfe 34333, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 076/100, Runtime 1.121188, Loss 0.100518, forward nfe 18614, backward nfe 34404, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 077/100, Runtime 1.069789, Loss 0.073655, forward nfe 18786, backward nfe 34469, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 078/100, Runtime 1.105120, Loss 0.069976, forward nfe 18958, backward nfe 34537, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 079/100, Runtime 1.079528, Loss 0.091610, forward nfe 19130, backward nfe 34606, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 080/100, Runtime 1.062394, Loss 0.129924, forward nfe 19296, backward nfe 34674, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 081/100, Runtime 1.035497, Loss 0.050963, forward nfe 19456, backward nfe 34740, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 082/100, Runtime 1.101565, Loss 0.110172, forward nfe 19616, backward nfe 34812, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 083/100, Runtime 1.037733, Loss 0.121511, forward nfe 19776, backward nfe 34878, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 084/100, Runtime 1.074670, Loss 0.161781, forward nfe 19936, backward nfe 34947, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 085/100, Runtime 1.035477, Loss 0.090640, forward nfe 20096, backward nfe 35012, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 086/100, Runtime 1.066974, Loss 0.058830, forward nfe 20256, backward nfe 35080, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 087/100, Runtime 1.068644, Loss 0.106547, forward nfe 20416, backward nfe 35148, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 088/100, Runtime 1.078936, Loss 0.061724, forward nfe 20576, backward nfe 35217, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 089/100, Runtime 0.929718, Loss 0.046665, forward nfe 20736, backward nfe 35270, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 090/100, Runtime 0.954167, Loss 0.035611, forward nfe 20896, backward nfe 35326, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 091/100, Runtime 0.980940, Loss 0.067184, forward nfe 21056, backward nfe 35386, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 092/100, Runtime 1.065441, Loss 0.120336, forward nfe 21216, backward nfe 35455, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 093/100, Runtime 0.931954, Loss 0.029414, forward nfe 21370, backward nfe 35511, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 094/100, Runtime 0.810199, Loss 0.050650, forward nfe 21530, backward nfe 35553, Train: 0.9500, Val: 0.7931, Test: 0.7668, Best time: 30.0000
+Epoch: 095/100, Runtime 0.951622, Loss 0.065303, forward nfe 21684, backward nfe 35611, Train: 1.0000, Val: 0.7965, Test: 0.7776, Best time: 122.1637
+Epoch: 096/100, Runtime 0.869937, Loss 0.047530, forward nfe 21838, backward nfe 35660, Train: 1.0000, Val: 0.7986, Test: 0.7732, Best time: 58.9560
+Epoch: 097/100, Runtime 0.858014, Loss 0.059719, forward nfe 21992, backward nfe 35710, Train: 1.0000, Val: 0.7986, Test: 0.7732, Best time: 30.0000
+Epoch: 098/100, Runtime 0.828086, Loss 0.052553, forward nfe 22140, backward nfe 35757, Train: 1.0000, Val: 0.8035, Test: 0.7760, Best time: 38.6514
+Epoch: 099/100, Runtime 0.785270, Loss 0.042420, forward nfe 22288, backward nfe 35799, Train: 1.0000, Val: 0.8035, Test: 0.7760, Best time: 30.0000
+best val accuracy 0.803472 with test accuracy 0.776033 at epoch 98 and best time 30.000000

@@ -1,0 +1,124 @@
+****************** Adaptive GRAND laplacian function ******************
+****************** Adaptive GRAND laplacian function ******************
+GNNEarly
+m1.module.weight
+torch.Size([128, 500])
+m1.module.bias
+torch.Size([128])
+m2.module.weight
+torch.Size([3, 128])
+m2.module.bias
+torch.Size([3])
+odeblock.odefunc.alpha_train
+torch.Size([])
+odeblock.odefunc.beta_train
+torch.Size([])
+odeblock.odefunc.alpha_sc
+torch.Size([1])
+odeblock.odefunc.beta_sc
+torch.Size([1])
+odeblock.odefunc.w
+torch.Size([128, 128])
+odeblock.odefunc.d
+torch.Size([128])
+odeblock.odefunc.k_d
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.alpha_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.beta_train
+torch.Size([])
+odeblock.reg_odefunc.odefunc.alpha_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.beta_sc
+torch.Size([1])
+odeblock.reg_odefunc.odefunc.w
+torch.Size([128, 128])
+odeblock.reg_odefunc.odefunc.d
+torch.Size([128])
+odeblock.reg_odefunc.odefunc.k_d
+torch.Size([128])
+odeblock.multihead_att_layer.Q.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.Q.bias
+torch.Size([16])
+odeblock.multihead_att_layer.V.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.V.bias
+torch.Size([16])
+odeblock.multihead_att_layer.K.weight
+torch.Size([16, 128])
+odeblock.multihead_att_layer.K.bias
+torch.Size([16])
+odeblock.multihead_att_layer.Wout.weight
+torch.Size([128, 16])
+odeblock.multihead_att_layer.Wout.bias
+torch.Size([128])
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: Dopri5Solver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: AdaptiveHeunSolver: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py:11: UserWarning: EarlyStopDopri5: Unexpected arguments {'step_size': 1}
+  warnings.warn('{}: Unexpected arguments {}'.format(solver.__class__.__name__, unused_kwargs))
+Epoch: 001/100, Runtime 1475.932933, Loss 1.100460, forward nfe 116, backward nfe 172971, Train: 0.5667, Val: 0.5792, Test: 0.5816, Best time: 5.9410
+Epoch: 002/100, Runtime 1500.522732, Loss 1.099246, forward nfe 762, backward nfe 352359, Train: 0.5667, Val: 0.5792, Test: 0.5816, Best time: 55.0000
+Epoch: 003/100, Runtime 988.996453, Loss 1.095797, forward nfe 1402, backward nfe 468305, Train: 0.4500, Val: 0.5868, Test: 0.5880, Best time: 75.6834
+Epoch: 004/100, Runtime 1267.078018, Loss 1.087771, forward nfe 2042, backward nfe 618165, Train: 0.6000, Val: 0.6701, Test: 0.6592, Best time: 2.6471
+Epoch: 005/100, Runtime 2997.510663, Loss 1.074584, forward nfe 2694, backward nfe 981542, Train: 0.6833, Val: 0.7521, Test: 0.7441, Best time: 2.5819
+Epoch: 006/100, Runtime 1702.989900, Loss 1.055547, forward nfe 3358, backward nfe 1181772, Train: 0.6833, Val: 0.7521, Test: 0.7441, Best time: 55.0000
+Epoch: 007/100, Runtime 1723.814929, Loss 1.030443, forward nfe 4022, backward nfe 1385166, Train: 0.6833, Val: 0.7521, Test: 0.7441, Best time: 55.0000
+Epoch: 008/100, Runtime 1363.740308, Loss 0.997013, forward nfe 4692, backward nfe 1547439, Train: 0.6833, Val: 0.7521, Test: 0.7441, Best time: 55.0000
+Epoch: 009/100, Runtime 2046.849910, Loss 0.966527, forward nfe 5362, backward nfe 1794290, Train: 0.6833, Val: 0.7521, Test: 0.7441, Best time: 55.0000
+Epoch: 010/100, Runtime 1664.888427, Loss 0.921205, forward nfe 6032, backward nfe 1991503, Train: 0.6833, Val: 0.7521, Test: 0.7441, Best time: 55.0000
+Epoch: 011/100, Runtime 2482.522559, Loss 0.875588, forward nfe 6708, backward nfe 2288097, Train: 0.6833, Val: 0.7521, Test: 0.7441, Best time: 55.0000
+Epoch: 012/100, Runtime 1680.068650, Loss 0.819510, forward nfe 7384, backward nfe 2486802, Train: 0.6833, Val: 0.7521, Test: 0.7441, Best time: 55.0000
+Epoch: 013/100, Runtime 2079.514543, Loss 0.786770, forward nfe 8060, backward nfe 2736511, Train: 0.6833, Val: 0.7521, Test: 0.7441, Best time: 55.0000
+Epoch: 014/100, Runtime 1724.781881, Loss 0.727112, forward nfe 8742, backward nfe 2940411, Train: 0.6833, Val: 0.7521, Test: 0.7441, Best time: 55.0000
+Epoch: 015/100, Runtime 1301.906729, Loss 0.666990, forward nfe 9424, backward nfe 3093299, Train: 0.7667, Val: 0.7583, Test: 0.7500, Best time: 18.9771
+Epoch: 016/100, Runtime 1656.939830, Loss 0.630999, forward nfe 10094, backward nfe 3292425, Train: 0.8000, Val: 0.7701, Test: 0.7670, Best time: 14.6889
+Epoch: 017/100, Runtime 1686.426491, Loss 0.597220, forward nfe 10764, backward nfe 3493030, Train: 0.8333, Val: 0.7847, Test: 0.7862, Best time: 14.7460
+Epoch: 018/100, Runtime 1298.970034, Loss 0.562832, forward nfe 11434, backward nfe 3644506, Train: 0.8333, Val: 0.7979, Test: 0.7937, Best time: 23.5378
+Epoch: 019/100, Runtime 1364.109510, Loss 0.538650, forward nfe 12104, backward nfe 3805516, Train: 0.8167, Val: 0.8014, Test: 0.7991, Best time: 65.7684
+Epoch: 020/100, Runtime 1248.846615, Loss 0.530294, forward nfe 12774, backward nfe 3954573, Train: 0.8167, Val: 0.8035, Test: 0.7990, Best time: 50.3390
+Epoch: 021/100, Runtime 1388.537624, Loss 0.499722, forward nfe 13444, backward nfe 4120575, Train: 0.8667, Val: 0.8069, Test: 0.8035, Best time: 35.0102
+Epoch: 022/100, Runtime 1061.630675, Loss 0.479303, forward nfe 14114, backward nfe 4245360, Train: 0.8667, Val: 0.8069, Test: 0.8035, Best time: 55.0000
+Traceback (most recent call last):
+  File "run_GNN.py", line 259, in main
+    loss = train(model, optimizer, data, pos_encoding)
+  File "run_GNN.py", line 89, in train
+    loss.backward()
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/_tensor.py", line 363, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/autograd/__init__.py", line 173, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/autograd/function.py", line 253, in apply
+    return user_fn(self, *args)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/adjoint.py", line 126, in backward
+    aug_state = odeint(
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/odeint.py", line 77, in odeint
+    solution = solver.integrate(t)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/solvers.py", line 30, in integrate
+    solution[i] = self._advance(t[i])
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 194, in _advance
+    self.rk_state = self._adaptive_step(self.rk_state)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 255, in _adaptive_step
+    y1, f1, y1_error, k = _runge_kutta_step(self.func, y0, f0, t0, dt, t1, tableau=self.tableau)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/rk_common.py", line 76, in _runge_kutta_step
+    f = func(ti, yi, perturb=perturb)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py", line 189, in forward
+    return self.base_func(t, y)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py", line 159, in forward
+    return self.mul * self.base_func(-t, y)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/misc.py", line 138, in forward
+    f = self.base_func(t, _flat_to_shape(y, (), self.shapes))
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torchdiffeq/_impl/adjoint.py", line 95, in augmented_dynamics
+    vjp_t, vjp_y, *vjp_params = torch.autograd.grad(
+  File "/home/hieunm60/anaconda3/envs/deepgrand/lib/python3.8/site-packages/torch/autograd/__init__.py", line 275, in grad
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: CUDA out of memory. Tried to allocate 54.00 MiB (GPU 0; 22.20 GiB total capacity; 1.41 GiB already allocated; 45.06 MiB free; 1.83 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+best val accuracy 0.806944 with test accuracy 0.803480 at epoch 21 and best time 55.000000

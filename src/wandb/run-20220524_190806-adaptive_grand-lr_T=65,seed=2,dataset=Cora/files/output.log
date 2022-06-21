@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "run_GNN.py", line 489, in <module>
+    main(opt)
+  File "run_GNN.py", line 230, in main
+    model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
+  File "/media/data-share/hieunm60/graph-neural-pde/src/GNN_early.py", line 23, in __init__
+    time_tensor = torch.tensor([0, self.T]).to(device)
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
