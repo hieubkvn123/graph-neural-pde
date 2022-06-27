@@ -1,3 +1,4 @@
+import gc
 import sys
 import traceback
 import argparse
@@ -88,6 +89,8 @@ def train(model, optimizer, data, pos_encoding=None):
   optimizer.step()
   model.bm.update(model.getNFE())
   model.resetNFE()
+
+  torch.cuda.empty_cache()
   return loss.item()
 
 
@@ -104,6 +107,7 @@ def train_OGB(model, mp, optimizer, data, pos_encoding=None):
 
   pos_encoding = mp(pos_encoding).to(model.device)
   out = model(feat, pos_encoding)
+  torch.cuda.empty_cache()
 
   if model.opt['dataset'] == 'ogbn-arxiv':
     lf = torch.nn.functional.nll_loss
@@ -126,6 +130,8 @@ def train_OGB(model, mp, optimizer, data, pos_encoding=None):
   optimizer.step()
   model.bm.update(model.getNFE())
   model.resetNFE()
+  torch.cuda.empty_cache()
+
   return loss.item()
 
 
@@ -281,6 +287,10 @@ def main(cmd_opt):
         if(best_test_acc < test_acc) : best_test_acc = test_acc
 
         print(log.format(epoch, opt['epoch'], time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
+
+        # Garbage collection and empty cache memory
+        gc.collect()
+        torch.cuda.empty_cache()
   except:
         traceback.print_exc(file=sys.stdout)
 
