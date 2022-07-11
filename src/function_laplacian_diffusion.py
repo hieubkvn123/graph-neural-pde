@@ -175,6 +175,7 @@ class ExtendedLaplacianODEFunc2(ODEFunc):
 class ExtendedLaplacianODEFunc3(ODEFunc):
   # Set global attributes
   alpha_ = 1.0
+  epsilon_ = 1e-6
   clipping_bound = 0.05
 
   # currently requires in_features = out_features
@@ -183,8 +184,8 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     ### Log information ###
     print('****************** Extended Laplacian Function V.3 ******************')
-    print('Clipping Bound = ', self.clipping_bound)
     print('Alpha = ', self.alpha_)
+    print('Epsilon = ', self.epsilon_)
     print('*********************************************************************')
 
     self.in_features = in_features
