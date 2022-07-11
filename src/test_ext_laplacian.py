@@ -12,7 +12,8 @@ parser.add_argument("--dataset", required=False, default='Cora', help="The datas
 parser.add_argument("--time", required=False, default=128.0, help="T value")
 args = vars(parser.parse_args())
 
-alphas = [1.0, 2.0, 3.0, 4.0]
+times = [16.0, 32.0, 64.0]
+alphas = [0.1, 1.0, 2.0, 3.0, 4.0]
 bounds = np.arange(args['clip_low'], args['clip_high'], args['clip_step'])
 
 cmd = """
@@ -20,7 +21,6 @@ cmd = """
                        --dataset {} 
                        --time {}
                        --alpha_ {} 
-                       --clip_bound {}
                        --block attention 
                        --epoch 100
                        --experiment 
@@ -28,10 +28,10 @@ cmd = """
                        --max_nfe 100000000 
 """
 
-for alpha in alphas:
-    for bound in bounds:
-        cmd_ = cmd.format(args['function'], args["dataset"], args["time"], 
-                alpha, bound).replace("\n", "").replace("\t", "")
+for t in times:
+    for alpha in alphas:
+        cmd_ = cmd.format(args['function'], args["dataset"], t, 
+                alpha).replace("\n", "").replace("\t", "")
         
         print(cmd_)
         os.system(cmd_)
