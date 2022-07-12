@@ -1,9 +1,63 @@
-from run_GNN import main
+from run_GNN import main as run_gnn
 from argparse import ArgumentParser
 
+from ray import tune
+from ray.tune import CLIReporter
+from ray.tune.schedulers import ASHAScheduler
 
-def deepgrand_raytune(config, checkpoint_dir=None):
+
+def deepgrand_raytune(config, cmd_opt, checkpoint_dir=None):
+    '''
+        Takes in the config as in main(opt) and run the DeepGRAND experiments with the
+        specified alpha, T and epsilon values.
+
+        config : Only the alpha, T and epsilon values.
+        cmd_opt : Other command options to feed into the run_GNN.py main function.
+    '''
+
+    def train_fn(config, checkpoint_dir=checkpoint_dir):
+        run_gnn({**config, **cmd_opt})
     
+
+    return train_fn
+
+def main(opt):
+    # Get some command options
+    dataset = opt.dataset
+    max_num_epochs = opt.max_num_epochs
+    num_samples = opt.num_samples
+
+    # Create a hyper-parameters grid
+    config = {
+        'alpha_' : tune.grid_search([0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]),
+        'time' : tune.grid_search([16.0, 32.0, 64.0, 128.0]),
+        'epsilon' : tune.choice([1e-3, 1e-6, 1e-12])
+    }
+
+    # Separate config and other command options
+    cmd_opt = opt
+    config = None
+    train_fn = deepgrand_raytune(config, cmd_opt)
+
+    scheduler = ASHAScheduler(
+        max_t=max_num_epochs,
+        grace_period=1,
+        reduction_factor=2)
+
+    result = tune.run(
+        tune.with_parameters(train_fn),
+        resources_per_trial={"cpu": 2, "gpu": gpus_per_trial},
+        config=config,
+        metric="loss",
+        mode="min",
+        num_samples=num_samples,
+        scheduler=scheduler
+    )
+
+    best_trial = result.get_best_trial("loss", "min", "last")
+    print("Best trial config: {}".format(best_trial.config))
+    print("Best trial final validation loss: {}".format(best_trial.last_result["loss"]))
+    print("Best trial final validation accuracy: {}".format(best_trial.last_result["accuracy"]))
 
 
 if __name__ == '__main__':
@@ -169,7 +223,7 @@ if __name__ == '__main__':
   parser.add_argument("--experiment", action="store_true", help="Turn on or off experiment mode.")
   parser.add_argument("--run_notes", required=False, default=None, help="Additional description of the run")
 
-  # For extended laplacian functions with clipping bounds.
+  # For DeepGRAND 
   parser.add_argument("--alpha_", type=float, required=False, default=1.0, help='Alpha value - DeepGRAND')
   parser.add_argument("--epsilon_", type=float, required=False, default=1e-6, help='Epsilon value - DeepGRAND')
   parser.add_argument("--clip_bound", type=float, required=False, default=0.05, help='Norm clipping bound - DeepGRAND (old)')
