@@ -21,6 +21,8 @@ def main(opt):
                                --experiment 
                                --max_iters 1000 
                                --max_nfe 100000000 
+                               --l1_weight_decay 0.0
+                               --decay 0.0001
         """
     else:
         cmd = """
@@ -36,6 +38,8 @@ def main(opt):
                                --experiment 
                                --max_iters 1000 
                                --max_nfe 100000000 
+                               --l1_weight_decay 0.0
+                               --decay 0.0001
         """
 
 
