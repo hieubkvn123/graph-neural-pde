@@ -11,13 +11,14 @@ from base_classes import ODEFunc
 class ExtendedODEFuncTransformerAtt(ODEFunc):
   # Set global attributes
   alpha_ = 1.0
+  epsilon_ = 1e-6
   clipping_bound = 0.05
 
   def __init__(self, in_features, out_features, opt, data, device):
     super(ExtendedODEFuncTransformerAtt, self).__init__(opt, data, device)
 
     ### Log information ###
-    print('****************** Extended Laplacian Function V.3 ******************')
+    print('****************** Extended Transformer Function V.3 ******************')
     print('Clipping Bound = ', self.clipping_bound)
     print('Alpha = ', self.alpha_)
     print('*********************************************************************')
@@ -48,25 +49,23 @@ class ExtendedODEFuncTransformerAtt(ODEFunc):
       raise MaxNFEException
     self.nfe += 1
     
-    # Shape = 2045 x 80 (2045 = Number of nodes; 80 = Feature shape)
-    attention, values = self.multihead_att_layer(x, self.edge_index)
-    ax = self.multiply_attention(x, attention, values)
-
     if not self.opt['no_alpha_sigmoid']:
       alpha = torch.sigmoid(self.alpha_train)
     else:
       alpha = self.alpha_train
 
+    # Shape = 2045 x 80 (2045 = Number of nodes; 80 = Feature shape)
+    attention, values = self.multihead_att_layer(x, self.edge_index)
+    ax = self.multiply_attention(x, attention, values)
+
     # Shape = (2045, ) (norm along dim 1)
     x_norm = torch.linalg.norm(x, 2, dim=1)
-
-    # Truncate x_norm the have max=1
-    x_norm = torch.clamp(x_norm, min=None, max=self.clipping_bound)
 
     # Shape = (2045, 1)
     x_norm = x_norm.view(-1, 1)
 
-    f = (ax - x) * (x_norm ** self.alpha_) 
+    f = (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
+    # print("f value in ext_laplacian3 " , f)
 
     if self.opt['add_source']:
       f = f + self.beta_train * self.x0

@@ -59,7 +59,7 @@ def set_function(opt):
     f = ExtendedLaplacianODEFunc3
   elif ode_str == 'ext_transformer':
     ExtendedODEFuncTransformerAtt.alpha_ = opt['alpha_']
-    ExtendedODEFuncTransformerAtt.clipping_bound = opt['clip_bound']
+    ExtendedODEFuncTransformerAtt.epsilon_ = opt['epsilon_']
     f = ExtendedODEFuncTransformerAtt
   elif ode_str == 'coupled': # Coupled ODE 
     f = CoupledODEFunc

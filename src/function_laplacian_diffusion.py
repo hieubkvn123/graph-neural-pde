@@ -215,22 +215,16 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     else:
       alpha = self.alpha_train
 
-    # Arbitrary small value epsilon
-    epsilon_ = 1e-3
-
     # Shape = 2045 x 80 (2045 = Number of nodes; 80 = Feature shape)
     ax = self.sparse_multiply(x)
 
     # Shape = (2045, ) (norm along dim 1)
     x_norm = torch.linalg.norm(x, 2, dim=1)
 
-    # Truncate x_norm the have max=1
-    # x_norm = torch.clamp(x_norm, min=None, max=self.clipping_bound)
-
     # Shape = (2045, 1)
     x_norm = x_norm.view(-1, 1)
 
-    f = (ax - (1 + epsilon_) * x) * (x_norm ** self.alpha_) 
+    f = (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
     # print("f value in ext_laplacian3 " , f)
 
     if self.opt['add_source']:

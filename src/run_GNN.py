@@ -233,7 +233,7 @@ def main(cmd_opt):
     model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
 
   if not opt['planetoid_split'] and opt['dataset'] in ['Cora','Citeseer','Pubmed']:
-    dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_random_seeds'])
+    dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500)
 
   data = dataset.data.to(device)
 
@@ -304,7 +304,7 @@ def main(cmd_opt):
   max_run_time = max(run_time_ls)
 
   # Store run history variables
-  with open("tests/history.csv", "a") as f:
+  with open(opt['log_file'], "a") as f:
       f.write(f"{opt['time']},{opt['alpha_']},{opt['clip_bound']},{best_val_acc},{best_test_acc},{mean_fw_nfe},{mean_run_time},{min_run_time},{max_run_time}\n")
 
   return fw_nfe_ls, losses, train_accs, val_accs, test_accs
@@ -470,7 +470,8 @@ if __name__ == '__main__':
   parser.add_argument('--pos_dist_quantile', type=float, default=0.001, help="percentage of N**2 edges to keep")
 
   # Experiment mode - do not overwrite command options with best params
-  parser.add_argument("--experiment", action="store_true", help="Turn on or off experiment mode.")
+  parser.add_argument("--experiment", action="store_true", help="Turn on or off experiment mode")
+  parser.add_argument("--log_file", type=str, required=False, default="tests/history.csv", help="Path to csv log file")
   parser.add_argument("--run_notes", required=False, default=None, help="Additional description of the run")
 
   # For extended laplacian functions with clipping bounds.

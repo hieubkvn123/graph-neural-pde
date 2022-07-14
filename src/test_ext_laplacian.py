@@ -21,6 +21,7 @@ cmd = """
                        --dataset {} 
                        --time {}
                        --alpha_ {} 
+                       --planetoid_split
                        --block attention 
                        --epoch 100
                        --experiment 
