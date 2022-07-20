@@ -219,13 +219,9 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     ax = self.sparse_multiply(x)
 
     # Shape = (2045, ) (norm along dim 1)
-    x_norm = torch.linalg.norm(x, 2, dim=1)
-
-    # Shape = (2045, 1)
-    x_norm = x_norm.view(-1, 1)
-
+    # x_norm = torch.linalg.norm(x, 2, dim=1).view(-1, 1)
+    x_norm = torch.linalg.norm(x, 2, dim=0)
     f = (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
-    # print("f value in ext_laplacian3 " , f)
 
     if self.opt['add_source']:
       f = f + self.beta_train * self.x0

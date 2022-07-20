@@ -42,12 +42,21 @@ for d in dataset:
             'non_linear' : False
         }
     
-        start = time_.time()
-        mean_acc, std_acc = run(opt)
-        end = time_.time()
+        try:
+            start = time_.time()
+            mean_acc, std_acc = run(opt)
+            end = time_.time()
+        except:
+            print(f'--> Run for setting {params} failed ...')
+            continue
 
         # Insert row
         df.loc[i] = [t, a, e, mean_acc, std_acc, '{:.2f}'.format((end - start)/60)]
 
         print(f'--> Done! Storing results in {result_file}... ')
-        df.to_csv(result_file)
+
+        try:
+            df.to_csv(result_file)
+        except:
+            print(f'--> Saving to {result_file} failed...')
+            continue
