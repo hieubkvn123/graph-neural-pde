@@ -1,0 +1,11 @@
+python3 run_GNN.py --function ext_laplacian3 \
+	       --block attention \
+	       --dataset Cora \ # Change dataset here
+	       --time 32.0 \ # Change T value here
+	       --alpha_ 0.1 \ # Change alpha here
+	       --epsilon_ 0.01 \ # Change epsilon here
+	       --log_file tests/log_deepgrand_draft.csv \
+	       --planetoid_split \
+	       --epoch 150 \
+	       --experiment \
+	       --max_nfe 100000000 
