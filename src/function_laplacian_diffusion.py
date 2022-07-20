@@ -215,12 +215,11 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     else:
       alpha = self.alpha_train
 
-    # Shape = 2045 x 80 (2045 = Number of nodes; 80 = Feature shape)
     ax = self.sparse_multiply(x)
-
-    # Shape = (2045, ) (norm along dim 1)
-    # x_norm = torch.linalg.norm(x, 2, dim=1).view(-1, 1)
     x_norm = torch.linalg.norm(x, 2, dim=0)
+    # x_norm = torch.linalg.norm(x, 2, dim=1).view(-1, 1)
+    # *Note : dim=0 is column-wise norm; dim=1 is row-wise norm.
+    
     f = (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
 
     if self.opt['add_source']:
