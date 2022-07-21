@@ -58,14 +58,12 @@ class ExtendedODEFuncTransformerAtt(ODEFunc):
     attention, values = self.multihead_att_layer(x, self.edge_index)
     ax = self.multiply_attention(x, attention, values)
 
-    # Shape = (2045, ) (norm along dim 1)
-    x_norm = torch.linalg.norm(x, 2, dim=1)
-
-    # Shape = (2045, 1)
-    x_norm = x_norm.view(-1, 1)
-
+    x_norm = torch.linalg.norm(x, 2, dim=0)
+    # x_norm = torch.linalg.norm(x, 2, dim=1).view(-1, 1)
+    # *Note : dim=0 is column-wise norm; dim=1 is row-wise norm.
+    
+    # f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) # -> With trainable alpha 
     f = (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
-    # print("f value in ext_laplacian3 " , f)
 
     if self.opt['add_source']:
       f = f + self.beta_train * self.x0

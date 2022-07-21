@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 COLORS = ['red', 'green', 'blue']
 result_files = {
     'Cora' : 'tests/geom_split_results_Cora.csv',
-    # 'Citeseer' : 'tests/geom_split_results_Citeseer.csv'
+    'Citeseer' : 'tests/geom_split_results_Citeseer.csv'
 }
 grand_file = 'tests/grand_ablation_study.csv'
 df_grand = pd.read_csv(grand_file)
