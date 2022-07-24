@@ -103,7 +103,7 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) # -> With trainable alpha 
     # f = (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
 
-    if self.opt['add_source']:
-      f = f + self.beta_train * self.x0
+    # if self.opt['add_source']:
+    #   f = f + self.beta_train * self.x0
 
     return f
