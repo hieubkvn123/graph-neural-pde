@@ -53,7 +53,7 @@ def grand_ablation_study_T_value(opt):
 def main():
     num_seeds = 5
     result_file = 'tests/grand_ablation_study.csv'
-    datasets = ['Cora', 'Citeseer', 'Pubmed']
+    datasets = ['Cora', 'Citeseer']
     times = [4.0, 16.0, 32.0, 64.0, 128.0]
     columns = ['dataset', 'time', 'mean_acc', 'std_acc']
 

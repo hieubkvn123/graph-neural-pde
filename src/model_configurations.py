@@ -1,8 +1,6 @@
 from function_transformer_attention import ODEFuncTransformerAtt, ExtendedODEFuncTransformerAtt
 from function_GAT_attention import ODEFuncAtt
 from function_laplacian_diffusion import LaplacianODEFunc
-from function_laplacian_diffusion import ExtendedLaplacianODEFunc
-from function_laplacian_diffusion import ExtendedLaplacianODEFunc2
 from function_laplacian_diffusion import ExtendedLaplacianODEFunc3
 from function_coupled_ode import CoupledODEFunc 
 from block_transformer_attention import AttODEblock

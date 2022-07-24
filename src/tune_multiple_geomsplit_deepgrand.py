@@ -4,7 +4,8 @@ import itertools
 import pandas as pd
 from run_multiple_geomsplit_deepgrand import main as run
 
-dataset = ['Cora', 'Citeseer', 'Pubmed']
+# dataset = ['Cora', 'Citeseer', 'Pubmed']
+dataset = ['Pubmed']
 time = [16.0, 32.0, 64.0, 4.0, 128.0]
 alpha = [1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-8]
 epsilon = [1e-3, 1e-8]

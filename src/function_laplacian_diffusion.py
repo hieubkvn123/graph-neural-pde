@@ -47,8 +47,9 @@ class LaplacianODEFunc(ODEFunc):
 
     # f = alpha * (ax-x) # -> With trainable alpha
     f = ax - x
-    if self.opt['add_source']:
-      f = f + self.beta_train * self.x0
+    
+    # if self.opt['add_source']:
+    #   f = f + self.beta_train * self.x0
     return f
 
 class ExtendedLaplacianODEFunc3(ODEFunc):
@@ -99,8 +100,8 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     # x_norm = torch.linalg.norm(x, 2, dim=1).view(-1, 1)
     # *Note : dim=0 is column-wise norm; dim=1 is row-wise norm.
     
-    # f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) # -> With trainable alpha 
-    f = (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
+    f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) # -> With trainable alpha 
+    # f = (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
 
     if self.opt['add_source']:
       f = f + self.beta_train * self.x0
