@@ -5,41 +5,75 @@ import numpy as np
 import pandas as pd
 from argparse import ArgumentParser
 
-def main(opt):
+def main(opt, planetoid_split=True):
     if(not opt['non_linear']):
-        cmd = """
-            python3 run_GNN.py --function ext_laplacian3
-                               --dataset {} 
-                               --time {}
-                               --alpha_ {} 
-                               --epsilon_ {}
-                               --log_file {}
-                               --planetoid_split
-                               --block attention 
-                               --epoch 150
-                               --experiment 
-                               --max_iters 1000 
-                               --max_nfe 100000000 
-                               --l1_weight_decay 0.0
-                               --decay 0.0001
-        """
+        if(planetoid_split):
+            cmd = """
+                python3 run_GNN.py --function ext_laplacian3
+                                   --dataset {} 
+                                   --time {}
+                                   --alpha_ {} 
+                                   --epsilon_ {}
+                                   --log_file {}
+                                   --planetoid_split
+                                   --block attention 
+                                   --epoch 150
+                                   --experiment 
+                                   --max_iters 1000 
+                                   --max_nfe 100000000 
+                                   --l1_weight_decay 0.0
+                                   --decay 0.0001
+            """
+        else:
+            cmd = """
+                python3 run_GNN.py --function ext_laplacian3
+                                   --dataset {} 
+                                   --time {}
+                                   --alpha_ {} 
+                                   --epsilon_ {}
+                                   --log_file {}
+                                   --block attention 
+                                   --epoch 150
+                                   --experiment 
+                                   --max_iters 1000 
+                                   --max_nfe 100000000 
+                                   --l1_weight_decay 0.0
+                                   --decay 0.0001
+            """
     else:
-        cmd = """
-            python3 run_GNN.py --function ext_transformer
-                               --dataset {} 
-                               --time {}
-                               --alpha_ {} 
-                               --epsilon_ {}
-                               --log_file {}
-                               --planetoid_split
-                               --block constant
-                               --epoch 150
-                               --experiment 
-                               --max_iters 1000 
-                               --max_nfe 100000000 
-                               --l1_weight_decay 0.0
-                               --decay 0.0001
-        """
+        if(planetoid_split):
+            cmd = """
+                python3 run_GNN.py --function ext_transformer
+                                   --dataset {} 
+                                   --time {}
+                                   --alpha_ {} 
+                                   --epsilon_ {}
+                                   --log_file {}
+                                   --planetoid_split
+                                   --block constant
+                                   --epoch 150
+                                   --experiment 
+                                   --max_iters 1000 
+                                   --max_nfe 100000000 
+                                   --l1_weight_decay 0.0
+                                   --decay 0.0001
+            """
+        else:
+            cmd = """
+                python3 run_GNN.py --function ext_transformer
+                                   --dataset {} 
+                                   --time {}
+                                   --alpha_ {} 
+                                   --epsilon_ {}
+                                   --log_file {}
+                                   --block constant
+                                   --epoch 150
+                                   --experiment 
+                                   --max_iters 1000 
+                                   --max_nfe 100000000 
+                                   --l1_weight_decay 0.0
+                                   --decay 0.0001
+            """
 
 
     for i in range(opt["num_seeds"]):

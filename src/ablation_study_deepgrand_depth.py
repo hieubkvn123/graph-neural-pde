@@ -51,9 +51,9 @@ for d in dataset:
         try:
             start = time_.time()
             if(d in ['Cora', 'Citeseer', 'Pubmed']):
-                mean_acc, std_acc = run1(opt)
+                mean_acc, std_acc = run1(opt, planetoid_split=True)
             elif(d in ['Computers', 'Photo', 'CoauthorCS']):
-                mean_acc, std_acc = run2(opt)
+                mean_acc, std_acc = run2(opt, planetoid_split=False)
             end = time_.time()
         except:
             print(f'--> Run for setting {params} failed ...')
