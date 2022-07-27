@@ -9,7 +9,7 @@ from run_multiple_randomsplit_deepgrand import main as run2
 
 # dataset = ['Cora', 'Citeseer', 'Pubmed']
 dataset = ['Computers', 'Photo', 'CoauthorCS']
-time = [16.0, 32.0, 64.0, 4.0, 128.0]
+time = [4.0, 16.0, 32.0, 64.0, 128.0]
 alpha = [1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-8]
 epsilon = [1e-3, 1e-8]
 num_seeds = 5 # 20
