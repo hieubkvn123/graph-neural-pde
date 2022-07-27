@@ -254,6 +254,8 @@ def main(cmd_opt):
   fw_nfe_ls = []
   train_accs, val_accs, test_accs, losses = [], [], [], []
 
+  gc.collect()
+  torch.cuda.empty_cache()
   try:
       for epoch in range(1, opt['epoch']):
         start_time = time.time()
