@@ -213,6 +213,7 @@ def main(cmd_opt):
   print('[INFO] ODE function : ', opt['function'])
   print('[INFO] Block type : ', opt['block'])
   print('[INFO] T value : ', opt['time'])
+  print('[INFO] Number of labeled nodes/classes : ', opt['num_per_class'])
   print('[INFO] L1 regularization on : ', opt['l1_reg'])
   print('[INFO] L1 reg coefficient : ', opt['l1_weight_decay'])
 
