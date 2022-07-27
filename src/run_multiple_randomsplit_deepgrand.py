@@ -14,7 +14,6 @@ def main(opt):
                                --alpha_ {} 
                                --epsilon_ {}
                                --log_file {}
-                               --planetoid_split
                                --block attention 
                                --epoch 150
                                --experiment 
@@ -31,7 +30,6 @@ def main(opt):
                                --alpha_ {} 
                                --epsilon_ {}
                                --log_file {}
-                               --planetoid_split
                                --block constant
                                --epoch 150
                                --experiment 

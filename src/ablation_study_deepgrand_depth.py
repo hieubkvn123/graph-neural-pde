@@ -2,10 +2,11 @@ import os
 import time as time_
 import itertools
 import pandas as pd
-from run_multiple_geomsplit_deepgrand import main as run
+from run_multiple_geomsplit_deepgrand import main as run1
+from run_multiple_randomsplit_deepgrand import main as run2
 
 # dataset = ['Cora', 'Citeseer', 'Pubmed']
-dataset = ['Pubmed']
+dataset = ['Computers', 'Photo', 'CoauthorCS']
 time = [16.0, 32.0, 64.0, 4.0, 128.0]
 alpha = [1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-8]
 epsilon = [1e-3, 1e-8]
@@ -16,7 +17,11 @@ all_perm = list(itertools.product(time, alpha, epsilon))
 
 for d in dataset:
     print(f'[INFO] Running tune for {d}...')
-    result_file = os.path.join(log_folder, f'geom_split_results_{d}.csv')
+    if(d in ['Cora', 'Citeseer', 'Pubmed']):
+        result_file = os.path.join(log_folder, f'geom_split_results_{d}.csv')
+    else:
+        result_file = os.path.join(log_folder, f'rand_split_results_{d}.csv')
+
     df = pd.DataFrame(columns=columns)
 
     # load result file if existed
@@ -45,7 +50,10 @@ for d in dataset:
     
         try:
             start = time_.time()
-            mean_acc, std_acc = run(opt)
+            if(d in ['Cora', 'Citeseer', 'Pubmed']):
+                mean_acc, std_acc = run1(opt)
+            elif(d in ['Computers', 'Photo', 'CoauthorCS']):
+                mean_acc, std_acc = run2(opt)
             end = time_.time()
         except:
             print(f'--> Run for setting {params} failed ...')

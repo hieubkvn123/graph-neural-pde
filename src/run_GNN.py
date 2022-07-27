@@ -208,6 +208,7 @@ def main(cmd_opt):
     opt['l1_weight_decay'] = cmd_opt['l1_weight_decay']
     opt['epoch'] = cmd_opt['epoch']
     opt['adjoint'] = cmd_opt['adjoint']
+    opt['num_per_class'] = cmd['num_per_class']
 
   print('[INFO] ODE function : ', opt['function'])
   print('[INFO] Block type : ', opt['block'])
@@ -234,7 +235,7 @@ def main(cmd_opt):
     model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
 
   if not opt['planetoid_split'] and opt['dataset'] in ['Cora','Citeseer','Pubmed']:
-    dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500)
+    dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_per_class'])
 
   data = dataset.data.to(device)
 
@@ -480,6 +481,9 @@ if __name__ == '__main__':
   parser.add_argument("--epsilon_", type=float, required=False, default=1e-6, help='Epsilon value - DeepGRAND')
   parser.add_argument("--clip_bound", type=float, required=False, default=0.05, help='Norm clipping bound - DeepGRAND (old)')
   parser.add_argument("--only_cpu", action='store_true', required=False, help="Use only CPU")
+
+  # New arguments for ablation study
+  parser.add_argument('--num_per_class', type=int, required=False, default=20, help='Number of labelled nodes per class')
 
   args = parser.parse_args()
 

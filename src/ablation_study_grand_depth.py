@@ -6,16 +6,27 @@ import numpy as np
 import pandas as pd
 
 def grand_ablation_study_T_value(opt):
-    cmd = """
-        python3 run_GNN.py --function laplacian 
-                           --dataset {} 
-                           --time {}
-                           --log_file {}
-                           --planetoid_split
-                           --block attention 
-                           --epoch 100
-                           --experiment 
-    """
+    if(opt['dataset'] in ['Cora', 'Citeseer', 'Pubmed']):
+        cmd = """
+            python3 run_GNN.py --function laplacian 
+                               --dataset {} 
+                               --time {}
+                               --log_file {}
+                               --planetoid_split
+                               --block attention 
+                               --epoch 100
+                               --experiment 
+        """
+    else:
+        cmd = """
+            python3 run_GNN.py --function laplacian 
+                               --dataset {} 
+                               --time {}
+                               --log_file {}
+                               --block attention 
+                               --epoch 100
+                               --experiment 
+        """
 
     for i in range(opt["num_seeds"]):
         try:
@@ -53,16 +64,26 @@ def grand_ablation_study_T_value(opt):
 def main():
     num_seeds = 5
     result_file = 'tests/grand_ablation_study.csv'
-    datasets = ['Cora', 'Citeseer', 'Pubmed']
+    # datasets = ['Cora', 'Citeseer', 'Pubmed']
+    datasets = ['Computers', 'Photo', 'CoauthorCS']
     times = [4.0, 16.0, 32.0, 64.0, 128.0]
     columns = ['dataset', 'time', 'mean_acc', 'std_acc']
 
     all_perm = list(itertools.product(datasets, times))
     df = pd.DataFrame(columns=columns)
 
+    if(os.path.exists(result_file)):
+        df = pd.read_csv(result_file)
+        for col in df.columns:
+            if(col not in columns): df = df.drop(col, axis=1)
 
     for i, params in enumerate(all_perm):
         ds, t = params
+
+        if(((df['time'] == t)&(df['dataset']==ds)).any()):
+            print('--> Experiment result exists, skipping...')
+            continue
+
         opt = {
             'dataset' : ds,
             'time' : t,
@@ -74,7 +95,11 @@ def main():
         df.loc[i] = [ds, t, mean_acc, std_acc]
 
         print(f'--> Done! Storing results in {result_file}... ')
-        df.to_csv(result_file)
+        try:
+            df.to_csv(result_file)
+        except:
+            print(f'--> Saving to {result_file} failed...')
+            continue
 
 
 if __name__ == '__main__':
