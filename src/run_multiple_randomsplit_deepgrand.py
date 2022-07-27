@@ -9,12 +9,12 @@ def main(opt, planetoid_split=False):
     if(not opt['non_linear']):
         cmd = """
             python3 run_GNN.py --function ext_laplacian3
+                               --block {} 
                                --dataset {} 
                                --time {}
                                --alpha_ {} 
                                --epsilon_ {}
                                --log_file {}
-                               --block attention 
                                --epoch 150
                                --experiment 
                                --max_iters 1000 
@@ -25,12 +25,12 @@ def main(opt, planetoid_split=False):
     else:
         cmd = """
             python3 run_GNN.py --function ext_transformer
+                               --block {}
                                --dataset {} 
                                --time {}
                                --alpha_ {} 
                                --epsilon_ {}
                                --log_file {}
-                               --block constant
                                --epoch 150
                                --experiment 
                                --max_iters 1000 
@@ -42,7 +42,13 @@ def main(opt, planetoid_split=False):
 
     for i in range(opt["num_seeds"]):
         try:
-            cmd = cmd.format(opt["dataset"], opt["time"], 
+            if("block" not in opt.keys()):
+                if(not opt['non_linear']):
+                    opt['block'] = 'attention'
+                else:
+                    opt['block'] = 'constant'
+
+            cmd = cmd.format(opt['block'], opt["dataset"], opt["time"], 
                     opt["alpha"], opt['epsilon'], opt["log_file"])
             cmd_ = cmd.replace("\n", "").replace("\t", "")
             cmd_ = re.sub(' +', ' ', cmd_).strip()

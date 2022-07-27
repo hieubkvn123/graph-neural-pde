@@ -53,8 +53,10 @@ for d in dataset:
         try:
             start = time_.time()
             if(d in ['Cora', 'Citeseer', 'Pubmed']):
+                opt['block'] = 'attention'
                 mean_acc, std_acc = run1(opt, planetoid_split=True)
             elif(d in ['Computers', 'Photo', 'CoauthorCS']):
+                opt['block'] = 'hard_attention'
                 mean_acc, std_acc = run2(opt, planetoid_split=False)
             end = time_.time()
         except:
