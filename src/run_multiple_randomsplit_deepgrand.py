@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from argparse import ArgumentParser
 
-def main(opt):
+def main(opt, planetoid_split=False):
     if(not opt['non_linear']):
         cmd = """
             python3 run_GNN.py --function ext_laplacian3

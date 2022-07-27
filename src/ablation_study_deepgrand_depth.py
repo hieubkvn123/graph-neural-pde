@@ -1,4 +1,6 @@
 import os
+import sys
+import traceback
 import time as time_
 import itertools
 import pandas as pd
@@ -57,6 +59,7 @@ for d in dataset:
             end = time_.time()
         except:
             print(f'--> Run for setting {params} failed ...')
+            traceback.print_exc(file=sys.stdout)
             continue
 
         # Insert row
