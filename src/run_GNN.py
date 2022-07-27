@@ -208,7 +208,7 @@ def main(cmd_opt):
     opt['l1_weight_decay'] = cmd_opt['l1_weight_decay']
     opt['epoch'] = cmd_opt['epoch']
     opt['adjoint'] = cmd_opt['adjoint']
-    opt['num_per_class'] = cmd['num_per_class']
+    opt['num_per_class'] = cmd_opt['num_per_class']
 
   print('[INFO] ODE function : ', opt['function'])
   print('[INFO] Block type : ', opt['block'])
