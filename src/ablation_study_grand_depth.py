@@ -23,7 +23,7 @@ def grand_ablation_study_T_value(opt):
                                --dataset {} 
                                --time {}
                                --log_file {}
-                               --block attention 
+                               --block hard_attention 
                                --epoch 100
                                --experiment 
         """
