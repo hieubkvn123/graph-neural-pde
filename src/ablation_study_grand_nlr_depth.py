@@ -10,22 +10,22 @@ import pandas as pd
 def grand_ablation_study_T_value(opt):
     if(opt['dataset'] in ['Cora', 'Citeseer', 'Pubmed']):
         cmd = """
-            python3 run_GNN.py --function laplacian 
+            python3 run_GNN.py --function transformer 
                                --dataset {} 
                                --time {}
                                --log_file {}
                                --planetoid_split
-                               --block attention 
+                               --block constant 
                                --epoch 100
                                --experiment 
         """
     else:
         cmd = """
-            python3 run_GNN.py --function laplacian 
+            python3 run_GNN.py --function transformer
                                --dataset {} 
                                --time {}
                                --log_file {}
-                               --block hard_attention 
+                               --block constant 
                                --epoch 100
                                --experiment 
         """
@@ -65,12 +65,12 @@ def grand_ablation_study_T_value(opt):
 
 def main():
     num_seeds = 5
-    # datasets = ['Cora', 'Citeseer', 'Pubmed']
+    datasets = ['Cora', 'Citeseer', 'Pubmed']
     times = [4.0, 16.0, 32.0, 64.0, 128.0]
-    datasets = ['Computers', 'Photo', 'CoauthorCS']
-    times = [1.0, 2.0, 4.0, 8.0, 16.0, 32.0]
+    # datasets = ['Computers', 'Photo', 'CoauthorCS']
+    # times = [1.0, 2.0, 4.0, 8.0, 16.0, 32.0]
     columns = ['dataset', 'time', 'mean_acc', 'std_acc']
-    result_file = f'tests/grand_ablation_study_{"_".join(datasets)}.csv'
+    result_file = f'tests/grand_nlr_ablation_study_{"_".join(datasets)}.csv'
     all_perm = list(itertools.product(datasets, times))
     df = pd.DataFrame(columns=columns)
 

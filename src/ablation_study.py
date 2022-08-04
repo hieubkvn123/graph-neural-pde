@@ -4,11 +4,15 @@ import matplotlib.pyplot as plt
 
 COLORS = ['red', 'green', 'blue']
 result_files = {
-    'Cora' : 'tests/geom_split_results_Cora.csv',
-    'Citeseer' : 'tests/geom_split_results_Citeseer.csv',
-    'Pubmed' : 'tests/geom_split_results_Pubmed.csv'
+    #'Cora' : 'tests/geom_split_results_Cora.csv',
+    #'Citeseer' : 'tests/geom_split_results_Citeseer.csv',
+    #'Pubmed' : 'tests/geom_split_results_Pubmed.csv'
+    'Computers' : 'tests/rand_split_results_Computers.csv',
+    'Photo' : 'tests/rand_split_results_Photo.csv',
+    'CoauthorCS' : 'tests/rand_split_results_CoauthorCS.csv'
 }
-grand_file = 'tests/grand_ablation_study.csv'
+# grand_file = 'tests/grand_ablation_study.csv'
+grand_file = 'tests/grand_ablation_study_Computers_Photo_CoauthorCS.csv'
 df_grand = pd.read_csv(grand_file)
 
 # Study the effect of depth on DeepGRAND
@@ -22,8 +26,10 @@ for i, ds in enumerate(result_files.keys()):
         ax_ = ax
 
     df = pd.read_csv(result_files[ds])
-    df = df.groupby('time').max('mean_acc')
+    print('DeepGRAND results for ', ds, ': ')
+    print(df.sort_values('mean_acc', ascending=False).drop_duplicates(['time']))
 
+    df = df.groupby('time').max('mean_acc')
     df_ = df_grand[df_grand['dataset']==ds].groupby('time').max('mean_acc')
 
     times = list(df.index)
