@@ -111,9 +111,13 @@ class ODEFuncTransformerAtt(ODEFunc):
       alpha = torch.sigmoid(self.alpha_train)
     else:
       alpha = self.alpha_train
-    f = alpha * (ax - x)
-    if self.opt['add_source']:
-      f = f + self.beta_train * self.x0
+
+    # f = alpha * (ax - x)
+    
+    f = ax - x
+
+    # if self.opt['add_source']:
+    #   f = f + self.beta_train * self.x0
     return f
 
   def __repr__(self):
