@@ -1,19 +1,21 @@
 import os
 import re
+import sys
+import traceback
 import itertools
 import subprocess
 import numpy as np
 import pandas as pd
+from best_params import best_params_dict
 
-def grand_ablation_study_T_value(opt):
+def grand_ablation_study_labelrate_value(opt):
     if(opt['dataset'] in ['Cora', 'Citeseer', 'Pubmed']):
         cmd = """
             python3 run_GNN.py --function laplacian 
                                --dataset {} 
                                --time {}
-                               --log_file {}
                                --num_per_class {}
-                               --planetoid_split
+                               --log_file {}
                                --block attention 
                                --epoch 100
                                --experiment 
@@ -23,16 +25,16 @@ def grand_ablation_study_T_value(opt):
             python3 run_GNN.py --function laplacian 
                                --dataset {} 
                                --time {}
-                               --log_file {}
                                --num_per_class {}
-                               --block attention 
+                               --log_file {}
+                               --block hard_attention 
                                --epoch 100
                                --experiment 
         """
 
     for i in range(opt["num_seeds"]):
         try:
-            cmd = cmd.format(opt["dataset"], opt["time"], opt["log_file"], opt["label_rate"])
+            cmd = cmd.format(opt["dataset"], opt["time"], opt["label_rate"],opt["log_file"])
             cmd_ = cmd.replace("\n", "").replace("\t", "")
             cmd_ = re.sub(' +', ' ', cmd_).strip()
             process = subprocess.Popen(cmd_.split(' ')) # os.system(cmd_)
@@ -65,15 +67,16 @@ def grand_ablation_study_T_value(opt):
 
 def main():
     num_seeds = 5
-    result_file = 'tests/grand_ablation_study_labelrate.csv'
     # datasets = ['Cora', 'Citeseer', 'Pubmed']
     datasets = ['Computers', 'Photo', 'CoauthorCS']
-    times = [4.0, 16.0, 32.0, 64.0, 128.0]
-    columns = ['dataset', 'time', 'label_rate', 'mean_acc', 'std_acc']
-    label_rates = [1, 2, 5, 10, 20]
+    label_rates = [20, 10, 5, 2, 1]
 
-    all_perm = list(itertools.product(datasets, times, label_rates))
+    columns = ['dataset', 'label_rate', 'mean_acc', 'std_acc']
+    result_file = f'tests/grand_ablation_study_{"_".join(datasets)}_labelrate.csv'
+    all_perm = list(itertools.product(datasets, label_rates))
     df = pd.DataFrame(columns=columns)
+
+    print('Result file : ', result_file)
 
     if(os.path.exists(result_file)):
         df = pd.read_csv(result_file)
@@ -81,22 +84,28 @@ def main():
             if(col not in columns): df = df.drop(col, axis=1)
 
     for i, params in enumerate(all_perm):
-        ds, t, lr = params
+        ds, lbr = params
 
-        if(((df['time'] == t)&(df['dataset']==ds)&(df['label_rate'])).any()):
+        if(((df['label_rate'] == lbr)&(df['dataset']==ds)).any()):
             print('--> Experiment result exists, skipping...')
             continue
 
         opt = {
             'dataset' : ds,
-            'time' : t,
-            'label_rate' : lr,
-            'log_file' : f'tests/log_grand_T={t}_{ds}.csv',
+            'time' : best_params_dict[ds]['time'],
+            'label_rate' : lbr,
+            'log_file' : f'tests/log_grand_lbr={lbr}_{ds}.csv',
             'num_seeds' : num_seeds
         }
 
-        mean_acc, std_acc = grand_ablation_study_T_value(opt)
-        df.loc[i] = [ds, t, lr, mean_acc, std_acc]
+        try:
+            mean_acc, std_acc = grand_ablation_study_labelrate_value(opt)
+        except:
+            print(f'--> Run for setting {params} failed ...')
+            traceback.print_exc(file=sys.stdout)
+            continue
+
+        df.loc[i] = [ds, lbr, mean_acc, std_acc]
 
         print(f'--> Done! Storing results in {result_file}... ')
         try:
