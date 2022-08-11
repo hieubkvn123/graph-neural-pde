@@ -11,23 +11,23 @@ from best_params import best_params_dict
 def grand_ablation_study_labelrate_value(opt):
     if(opt['dataset'] in ['Cora', 'Citeseer', 'Pubmed']):
         cmd = """
-            python3 run_GNN.py --function laplacian 
+            python3 run_GNN.py --function transformer
                                --dataset {} 
                                --time {}
                                --num_per_class {}
                                --log_file {}
-                               --block attention 
+                               --block constant 
                                --epoch 100
                                --experiment 
         """
     else:
         cmd = """
-            python3 run_GNN.py --function laplacian 
+            python3 run_GNN.py --function transformer
                                --dataset {} 
                                --time {}
                                --num_per_class {}
                                --log_file {}
-                               --block hard_attention 
+                               --block constant 
                                --epoch 100
                                --experiment 
         """
@@ -67,12 +67,12 @@ def grand_ablation_study_labelrate_value(opt):
 
 def main():
     num_seeds = 5
-    # datasets = ['Cora', 'Citeseer', 'Pubmed']
-    datasets = ['Computers', 'Photo', 'CoauthorCS']
+    datasets = ['Cora', 'Citeseer', 'Pubmed']
+    # datasets = ['Computers', 'Photo', 'CoauthorCS']
     label_rates = [20, 10, 5, 2, 1][::-1]
 
     columns = ['dataset', 'label_rate', 'mean_acc', 'std_acc']
-    result_file = f'tests/grand_ablation_study_{"_".join(datasets)}_labelrate.csv'
+    result_file = f'tests/grand_nlr_ablation_study_{"_".join(datasets)}_labelrate.csv'
     all_perm = list(itertools.product(datasets, label_rates))
     df = pd.DataFrame(columns=columns)
 

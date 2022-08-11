@@ -2,20 +2,20 @@ import os
 import time as time_
 import itertools
 import pandas as pd
+from best_params import best_params_dict
 from run_multiple_geomsplit_deepgrand import main as run1
 from run_multiple_randomsplit_deepgrand import main as run2
 
 dataset = ['Cora', 'Citeseer', 'Pubmed']
 # dataset = ['Computers', 'Photo', 'CoauthorCS']
-time = [16.0, 32.0, 64.0, 4.0, 128.0]
-alpha = [1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-8]
+labelrates = [1, 2, 5, 10, 20]
+alpha = [1e-6, 1e-8]
 epsilon = [1e-3, 1e-8]
 num_seeds = 5 # 20
 log_folder = './tests'
-columns = ['time', 'alpha', 'epsilon', 'mean_acc', 'std_acc', 'exec_time']
-all_perm = list(itertools.product(time, alpha, epsilon))
+columns = ['lbr', 'alpha', 'epsilon', 'mean_acc', 'std_acc', 'exec_time']
+all_perm = list(itertools.product(labelrates, alpha, epsilon))
 
-## TODO : Incorporate label rate in run1 and run2
 for d in dataset:
     print(f'[INFO] Running tune for {d}...')
     if(d in ['Cora', 'Citeseer', 'Pubmed']):
@@ -23,6 +23,7 @@ for d in dataset:
     else:
         result_file = os.path.join(log_folder, f'rand_split_results_{d}_lowlabel.csv')
 
+    t = best_params_dict[d]['time']
     df = pd.DataFrame(columns=columns)
 
     # load result file if existed
@@ -32,10 +33,10 @@ for d in dataset:
             if(col not in columns): df = df.drop(col, axis=1)
 
     for i, params in enumerate(all_perm):
-        t, a, e = params
+        lbr, a, e = params
         print(f'--> Current setting : time = {t}, alpha = {a}, epsilon = {e}')
 
-        if(((df['time'] == t)&(df['alpha']==a)&(df['epsilon']==e)).any()):
+        if(((df['lbr'] == lbr)&(df['alpha']==a)&(df['epsilon']==e)).any()):
             print('--> Experiment result exists, skipping...')
             continue
 
@@ -44,6 +45,7 @@ for d in dataset:
             'time' : t,
             'alpha' : a,
             'epsilon' : e,
+            'num_per_class' : lbr,
             'log_file' : f'{log_folder}/log_{d}_alp-{a}_eps-{e}_T-{t}.csv',
             'num_seeds' : num_seeds,
             'non_linear' : False
@@ -61,7 +63,7 @@ for d in dataset:
             continue
 
         # Insert row
-        df.loc[i] = [t, a, e, mean_acc, std_acc, '{:.2f}'.format((end - start)/60)]
+        df.loc[i] = [lbr, a, e, mean_acc, std_acc, '{:.2f}'.format((end - start)/60)]
 
         print(f'--> Done! Storing results in {result_file}... ')
 

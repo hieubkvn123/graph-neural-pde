@@ -16,6 +16,7 @@ def main(opt, planetoid_split=True):
                                    --alpha_ {} 
                                    --epsilon_ {}
                                    --log_file {}
+                                   --num_per_class {}
                                    --planetoid_split
                                    --epoch 150
                                    --experiment 
@@ -33,6 +34,7 @@ def main(opt, planetoid_split=True):
                                    --alpha_ {} 
                                    --epsilon_ {}
                                    --log_file {}
+                                   --num_per_class {}
                                    --epoch 150
                                    --experiment 
                                    --max_iters 1000 
@@ -50,6 +52,7 @@ def main(opt, planetoid_split=True):
                                    --alpha_ {} 
                                    --epsilon_ {}
                                    --log_file {}
+                                   --num_per_class {}
                                    --planetoid_split
                                    --epoch 150
                                    --experiment 
@@ -67,6 +70,7 @@ def main(opt, planetoid_split=True):
                                    --alpha_ {} 
                                    --epsilon_ {}
                                    --log_file {}
+                                   --num_per_class {}
                                    --epoch 150
                                    --experiment 
                                    --max_iters 1000 
@@ -85,7 +89,7 @@ def main(opt, planetoid_split=True):
                     opt['block'] = 'constant'
 
             cmd = cmd.format(opt['block'], opt["dataset"], opt["time"], 
-                    opt["alpha"], opt['epsilon'], opt["log_file"])
+                    opt["alpha"], opt['epsilon'], opt["log_file"], opt["num_per_class"])
             cmd_ = cmd.replace("\n", "").replace("\t", "")
             cmd_ = re.sub(' +', ' ', cmd_).strip()
             process = subprocess.Popen(cmd_.split(' ')) # os.system(cmd_)
@@ -124,6 +128,7 @@ if __name__ == '__main__':
     parser.add_argument("--log_file", required=True, type=str, help="The path to the CSV result file")
     parser.add_argument("--num_seeds", required=False, type=int, default=20, help="Number of random seeds to test")
     parser.add_argument("--non_linear", required=False, action="store_true", help="Linear or non-linear DeepGRAND")
+    parser.add_argument("--num_per_class", required=False, type=int, default=20, help="Number of labelled nodes per class")
     args = vars(parser.parse_args())
     
     main(args)
