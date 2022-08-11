@@ -6,6 +6,7 @@ import pandas as pd
 from argparse import ArgumentParser
 
 def main(opt, planetoid_split=True):
+    if('num_per_class' not in opt): opt['num_per_clas'] = 20
     if(not opt['non_linear']):
         if(planetoid_split):
             cmd = """

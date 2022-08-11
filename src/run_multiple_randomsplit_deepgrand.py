@@ -6,6 +6,7 @@ import pandas as pd
 from argparse import ArgumentParser
 
 def main(opt, planetoid_split=False):
+    if('num_per_class' not in opt): opt['num_per_class'] = 20
     if(not opt['non_linear']):
         cmd = """
             python3 run_GNN.py --function ext_laplacian3
