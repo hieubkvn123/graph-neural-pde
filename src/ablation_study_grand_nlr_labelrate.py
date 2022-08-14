@@ -67,8 +67,8 @@ def grand_ablation_study_labelrate_value(opt):
 
 def main():
     num_seeds = 5
-    datasets = ['Cora', 'Citeseer', 'Pubmed']
-    # datasets = ['Computers', 'Photo', 'CoauthorCS']
+    # datasets = ['Cora', 'Citeseer', 'Pubmed']
+    datasets = ['Computers', 'Photo', 'CoauthorCS']
     label_rates = [20, 10, 5, 2, 1][::-1]
 
     columns = ['dataset', 'label_rate', 'mean_acc', 'std_acc']

@@ -7,11 +7,11 @@ import pandas as pd
 from run_multiple_geomsplit_deepgrand import main as run1
 from run_multiple_randomsplit_deepgrand import main as run2
 
-# dataset = ['Cora', 'Citeseer', 'Pubmed']
-# time = [4.0, 16.0, 32.0, 64.0, 128.0]
-dataset = ['Computers', 'Photo', 'CoauthorCS']
-time = [1.0, 2.0, 4.0, 8.0, 16.0, 32.0]
-alpha = [1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-8]
+dataset = ['Cora', 'Citeseer', 'Pubmed']
+time = [4.0, 16.0, 32.0, 64.0, 128.0]
+# dataset = ['Computers', 'Photo', 'CoauthorCS']
+# time = [1.0, 2.0, 4.0, 8.0, 16.0, 32.0]
+alpha = [1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-8, 0.5]
 epsilon = [1e-3, 1e-8]
 num_seeds = 5 # 20
 log_folder = './tests'

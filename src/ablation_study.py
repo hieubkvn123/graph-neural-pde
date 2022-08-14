@@ -1,18 +1,26 @@
+import matplotlib
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Change the settings of matplotlib fonts
+font = {'family' : 'normal',
+        'weight' : 'bold',
+        'size'   : 22}
+
+matplotlib.rc('font', **font)
+
 COLORS = ['red', 'green', 'blue']
 result_files = {
-    #'Cora' : 'tests/geom_split_results_Cora.csv',
-    #'Citeseer' : 'tests/geom_split_results_Citeseer.csv',
-    #'Pubmed' : 'tests/geom_split_results_Pubmed.csv'
-    'Computers' : 'tests/rand_split_results_Computers.csv',
-    'Photo' : 'tests/rand_split_results_Photo.csv',
-    'CoauthorCS' : 'tests/rand_split_results_CoauthorCS.csv'
+    'Cora' : 'tests/geom_split_results_Cora.csv',
+    'Citeseer' : 'tests/geom_split_results_Citeseer.csv',
+    'Pubmed' : 'tests/geom_split_results_Pubmed.csv'
+    #'Computers' : 'tests/rand_split_results_Computers.csv',
+    #'Photo' : 'tests/rand_split_results_Photo.csv',
+    #'CoauthorCS' : 'tests/rand_split_results_CoauthorCS.csv'
 }
-# grand_file = 'tests/grand_ablation_study.csv'
-grand_file = 'tests/grand_ablation_study_Computers_Photo_CoauthorCS.csv'
+grand_file = 'tests/grand_ablation_study.csv'
+#grand_file = 'tests/grand_ablation_study_Computers_Photo_CoauthorCS.csv'
 df_grand = pd.read_csv(grand_file)
 
 # Study the effect of depth on DeepGRAND
