@@ -6,8 +6,8 @@ from best_params import best_params_dict
 from run_multiple_geomsplit_deepgrand import main as run1
 from run_multiple_randomsplit_deepgrand import main as run2
 
-dataset = ['Cora', 'Citeseer', 'Pubmed']
-# dataset = ['Computers', 'Photo', 'CoauthorCS']
+# dataset = ['Cora', 'Citeseer', 'Pubmed']
+dataset = ['Computers', 'Photo', 'CoauthorCS']
 labelrates = [1, 2, 5, 10, 20]
 alpha = [1e-6, 1e-8]
 epsilon = [1e-3, 1e-8]
