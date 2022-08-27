@@ -237,7 +237,13 @@ def main(cmd_opt):
 
   # if not opt['planetoid_split'] and opt['dataset'] in ['Cora','Citeseer','Pubmed']:
   if not opt['planetoid_split']:
-    dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_per_class'])
+    split_success = False
+    while(not split_success):
+      try:
+        dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_per_class'])
+        split_success = True
+      except:
+        pass
 
   data = dataset.data.to(device)
 

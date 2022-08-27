@@ -66,8 +66,10 @@ def grand_ablation_study_T_value(opt):
 def main():
     num_seeds = 5
     # datasets = ['Cora', 'Citeseer', 'Pubmed']
-    times = [4.0, 16.0, 32.0, 64.0, 128.0]
-    datasets = ['Computers', 'Photo', 'CoauthorCS']
+    # times = [4.0, 16.0, 32.0, 64.0, 128.0]
+    
+    # datasets = ['Computers', 'Photo', 'CoauthorCS']
+    datasets = ['ogbn-arxiv']
     times = [1.0, 2.0, 4.0, 8.0, 16.0, 32.0]
     columns = ['dataset', 'time', 'mean_acc', 'std_acc']
     result_file = f'tests/grand_ablation_study_{"_".join(datasets)}.csv'

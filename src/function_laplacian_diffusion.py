@@ -45,8 +45,8 @@ class LaplacianODEFunc(ODEFunc):
     else:
       alpha = self.alpha_train
 
-    # f = alpha * (ax-x) # -> With trainable alpha
-    f = ax - x
+    f = alpha * (ax-x) # -> With trainable alpha
+    # f = ax - x
     
     # if self.opt['add_source']:
     #   f = f + self.beta_train * self.x0
