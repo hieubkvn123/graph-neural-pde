@@ -30,7 +30,7 @@ def grand_ablation_study_T_value(opt):
                                --experiment 
         """
 
-        if(dataset == "ogbn-arxiv"):
+        if(opt['dataset'] == "ogbn-arxiv"):
             cmd = """
                 python3 run_GNN.py --function laplacian 
                                    --dataset {} 
