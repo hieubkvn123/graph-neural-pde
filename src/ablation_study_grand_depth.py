@@ -30,6 +30,18 @@ def grand_ablation_study_T_value(opt):
                                --experiment 
         """
 
+        if(dataset == "ogbn-arxiv"):
+            cmd = """
+                python3 run_GNN.py --function laplacian 
+                                   --dataset {} 
+                                   --time {}
+                                   --log_file {}
+                                   --block hard_attention 
+                                   --epoch 100
+                                   --use_labels
+                                   --experiment 
+            """
+
     for i in range(opt["num_seeds"]):
         try:
             cmd = cmd.format(opt["dataset"], opt["time"], opt["log_file"])

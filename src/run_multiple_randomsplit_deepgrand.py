@@ -24,6 +24,24 @@ def main(opt, planetoid_split=False):
                                --l1_weight_decay 0.0
                                --decay 0.0001
         """
+        if(opt['dataset'] == 'ogbn-arxiv'):
+            cmd = """
+                python3 run_GNN.py --function ext_laplacian3
+                                   --block {} 
+                                   --dataset {} 
+                                   --time {}
+                                   --alpha_ {} 
+                                   --epsilon_ {}
+                                   --log_file {}
+                                   --num_per_class {}
+                                   --use_labels
+                                   --epoch 150
+                                   --experiment 
+                                   --max_iters 1000 
+                                   --max_nfe 100000000 
+                                   --l1_weight_decay 0.0
+                                   --decay 0.0001
+            """
     else:
         cmd = """
             python3 run_GNN.py --function ext_transformer
@@ -41,6 +59,24 @@ def main(opt, planetoid_split=False):
                                --l1_weight_decay 0.0
                                --decay 0.0001
         """
+        if(opt['dataset'] == 'ogbn-arxiv'):
+            cmd = """
+                python3 run_GNN.py --function ext_transformer
+                                   --block {}
+                                   --dataset {} 
+                                   --time {}
+                                   --alpha_ {} 
+                                   --epsilon_ {}
+                                   --log_file {}
+                                   --num_per_class {}
+                                   --epoch 150
+                                   --use_labels
+                                   --experiment 
+                                   --max_iters 1000 
+                                   --max_nfe 100000000 
+                                   --l1_weight_decay 0.0
+                                   --decay 0.0001
+            """
 
 
     for i in range(opt["num_seeds"]):
