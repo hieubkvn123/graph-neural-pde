@@ -68,6 +68,7 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     self.d = nn.Parameter(torch.zeros(opt['hidden_dim']) + 1)
     self.alpha_sc = nn.Parameter(torch.ones(1))
     self.beta_sc = nn.Parameter(torch.ones(1))
+    self.norm_scaler = nn.Parameter(0.1 * torch.ones(opt['hidden_dim']))
 
   def sparse_multiply(self, x):
     if self.opt['block'] in ['attention']:  # adj is a multihead attention
