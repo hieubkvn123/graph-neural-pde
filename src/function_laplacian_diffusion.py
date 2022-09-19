@@ -13,11 +13,9 @@ from utils import MaxNFEException
 # Output:
 # --- dx/dt: A tensor with shape [#batches, dims], meaning the derivative of x at t.
 class LaplacianODEFunc(ODEFunc):
-
   # currently requires in_features = out_features
   def __init__(self, in_features, out_features, opt, data, device):
     super(LaplacianODEFunc, self).__init__(opt, data, device)
-
     self.in_features = in_features
     self.out_features = out_features
     self.w = nn.Parameter(torch.eye(opt['hidden_dim']))
@@ -45,11 +43,7 @@ class LaplacianODEFunc(ODEFunc):
     else:
       alpha = self.alpha_train
 
-    f = alpha * (ax-x) # -> With trainable alpha
-    # f = ax - x
-    
-    # if self.opt['add_source']:
-    #   f = f + self.beta_train * self.x0
+    f = alpha * (ax-x) 
     return f
 
 class ExtendedLaplacianODEFunc3(ODEFunc):
@@ -97,13 +91,6 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     ax = self.sparse_multiply(x)
     x_norm = torch.linalg.norm(x, 2, dim=0)
-    # x_norm = torch.linalg.norm(x, 2, dim=1).view(-1, 1)
-    # *Note : dim=0 is column-wise norm; dim=1 is row-wise norm.
-    
-    f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) # -> With trainable alpha 
-    # f = (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
-
-    # if self.opt['add_source']:
-    #   f = f + self.beta_train * self.x0
+    f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
 
     return f

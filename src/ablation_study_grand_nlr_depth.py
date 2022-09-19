@@ -30,6 +30,19 @@ def grand_ablation_study_T_value(opt):
                                --experiment 
         """
 
+        if(opt['dataset'] == 'ogbn-arxiv'):
+            cmd = """
+                python3 run_GNN.py --function transformer
+                                   --dataset {} 
+                                   --time {}
+                                   --log_file {}
+                                   --block constant 
+                                   --epoch 500
+                                   --use_labels
+                                   --experiment 
+            """
+
+
     for i in range(opt["num_seeds"]):
         try:
             cmd = cmd.format(opt["dataset"], opt["time"], opt["log_file"])
@@ -66,6 +79,7 @@ def grand_ablation_study_T_value(opt):
 def main():
     num_seeds = 5
     experiments = {
+        '''
         '1' : {
             'times' : [4.0, 16.0, 32.0, 64.0, 128.0],
             'datasets' : ['Cora', 'Citeseer', 'Pubmed']
@@ -73,6 +87,11 @@ def main():
         '2' : {
             'times' : [1.0, 2.0, 4.0, 8.0, 16.0, 32.0],
             'datasets' : ['Computers', 'Photo', 'CoauthorCS']
+        },
+        '''
+        '3' : {
+            'times' : [1.0, 2.0, 4.0, 8.0, 16.0, 32.0],
+            'datasets' : ['ogbn-arxiv']
         }
     }
 

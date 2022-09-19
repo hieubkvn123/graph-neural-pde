@@ -98,6 +98,9 @@ def train_OGB(model, mp, optimizer, data, pos_encoding=None):
   model.train()
   optimizer.zero_grad()
   feat = data.x
+
+  gc.collect()
+  torch.cuda.empty_cache()
   if model.opt['use_labels']:
     train_label_idx, train_pred_idx = get_label_masks(data, model.opt['label_rate'])
 
@@ -107,7 +110,6 @@ def train_OGB(model, mp, optimizer, data, pos_encoding=None):
 
   pos_encoding = mp(pos_encoding).to(model.device)
   out = model(feat, pos_encoding)
-  torch.cuda.empty_cache()
 
   if model.opt['dataset'] == 'ogbn-arxiv':
     lf = torch.nn.functional.nll_loss
@@ -130,6 +132,7 @@ def train_OGB(model, mp, optimizer, data, pos_encoding=None):
   optimizer.step()
   model.bm.update(model.getNFE())
   model.resetNFE()
+  gc.collect()
   torch.cuda.empty_cache()
 
   return loss.item()

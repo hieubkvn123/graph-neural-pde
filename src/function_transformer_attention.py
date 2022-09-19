@@ -113,11 +113,7 @@ class ODEFuncTransformerAtt(ODEFunc):
       alpha = self.alpha_train
 
     # f = alpha * (ax - x)
-    
     f = ax - x
-
-    # if self.opt['add_source']:
-    #   f = f + self.beta_train * self.x0
     return f
 
   def __repr__(self):

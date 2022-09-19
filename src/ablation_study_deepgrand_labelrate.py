@@ -7,7 +7,8 @@ from run_multiple_geomsplit_deepgrand import main as run1
 from run_multiple_randomsplit_deepgrand import main as run2
 
 # dataset = ['Cora', 'Citeseer', 'Pubmed']
-dataset = ['Computers', 'Photo', 'CoauthorCS']
+# dataset = ['Computers', 'Photo', 'CoauthorCS']
+dataset = ['ogbn-arxiv']
 labelrates = [1, 2, 5, 10, 20]
 alpha = [1e-6, 1e-8]
 epsilon = [1e-3, 1e-8]
@@ -55,7 +56,7 @@ for d in dataset:
             start = time_.time()
             if(d in ['Cora', 'Citeseer', 'Pubmed']):
                 mean_acc, std_acc = run1(opt, planetoid_split=False)
-            elif(d in ['Computers', 'Photo', 'CoauthorCS']):
+            elif(d in ['Computers', 'Photo', 'CoauthorCS', 'ogbn-arxiv']):
                 mean_acc, std_acc = run2(opt, planetoid_split=False)
             end = time_.time()
         except:

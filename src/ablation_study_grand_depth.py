@@ -37,7 +37,7 @@ def grand_ablation_study_T_value(opt):
                                    --time {}
                                    --log_file {}
                                    --block hard_attention 
-                                   --epoch 100
+                                   --epoch 150
                                    --use_labels
                                    --experiment 
             """

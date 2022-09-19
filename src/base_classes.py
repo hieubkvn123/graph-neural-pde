@@ -76,7 +76,6 @@ class ODEblock(nn.Module):
 
 
 class ODEFunc(MessagePassing):
-
   # currently requires in_features = out_features
   def __init__(self, opt, data, device):
     super(ODEFunc, self).__init__()
@@ -85,8 +84,9 @@ class ODEFunc(MessagePassing):
     self.edge_index = None
     self.edge_weight = None
     self.attention_weights = None
-    self.alpha_train = nn.Parameter(torch.tensor(0.0))
-    self.beta_train = nn.Parameter(torch.tensor(0.0))
+    self.requires_grad = False if opt['function'] != 'ext_laplacian3' else True
+    self.alpha_train = nn.Parameter(torch.tensor(1.0), requires_grad=self.requires_grad)
+    self.beta_train = nn.Parameter(torch.tensor(0.0), requires_grad=self.requires_grad)
     self.x0 = None
     self.nfe = 0
     self.alpha_sc = nn.Parameter(torch.ones(1))
