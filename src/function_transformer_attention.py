@@ -67,9 +67,9 @@ class ExtendedODEFuncTransformerAtt(ODEFunc):
     return self.__class__.__name__ + ' (' + str(self.in_features) + ' -> ' + str(self.out_features) + ')'
 
 class ODEFuncTransformerAtt(ODEFunc):
-
   def __init__(self, in_features, out_features, opt, data, device):
     super(ODEFuncTransformerAtt, self).__init__(opt, data, device)
+    self.alpha_train = nn.Parameter(torch.ones(1), requires_grad=False)
 
     if opt['self_loop_weight'] > 0:
       self.edge_index, self.edge_weight = add_remaining_self_loops(data.edge_index, data.edge_attr,
