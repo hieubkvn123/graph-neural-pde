@@ -1,4 +1,3 @@
-# Used for testing the model for different splitting methods
 import os
 import sys
 import copy

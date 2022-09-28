@@ -1,7 +1,3 @@
-"""
-matrix factorisation of the positional encoding required for arxiv-ogbn
-"""
-
 import numpy as np
 import argparse
 import os

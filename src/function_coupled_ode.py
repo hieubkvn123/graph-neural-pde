@@ -6,19 +6,8 @@ from base_classes import ODEFunc
 from utils import MaxNFEException
 
 
-# Define the ODE function.
-# Input:
-# --- t: A tensor with shape [], meaning the current time.
-# --- x: A tensor with shape [#batches, dims], meaning the value of x at t.
-# Output:
-# --- dx/dt: A tensor with shape [#batches, dims], meaning the derivative of x at t.
 class CoupledODEFunc(ODEFunc):
-
-  # currently requires in_features = out_features
   def __init__(self, in_features, out_features, opt, data, device, alpha_=0.9):
-    ## 1. Try with alpha = [0.5, 0.9] ##
-    ## 2. Log the value of ||v|| to see if it explodes ##
-    ## 3. Clip ||v|| ##
     super(CoupledODEFunc, self).__init__(opt, data, device)
 
     self.in_features = in_features
@@ -60,7 +49,5 @@ class CoupledODEFunc(ODEFunc):
     x_p = -nabla_f * (v ** 0.5)
 
     f = torch.cat((x_p, v_p), dim=1)
-    #if self.opt['add_source']:
-    #  f = f + self.beta_train * self.x0
 
     return f

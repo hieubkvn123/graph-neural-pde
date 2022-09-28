@@ -6,12 +6,6 @@ from base_classes import ODEFunc
 from utils import MaxNFEException
 
 
-# Define the ODE function.
-# Input:
-# --- t: A tensor with shape [], meaning the current time.
-# --- x: A tensor with shape [#batches, dims], meaning the value of x at t.
-# Output:
-# --- dx/dt: A tensor with shape [#batches, dims], meaning the derivative of x at t.
 class LaplacianODEFunc(ODEFunc):
   # currently requires in_features = out_features
   def __init__(self, in_features, out_features, opt, data, device):

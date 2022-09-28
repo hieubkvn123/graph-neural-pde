@@ -1,17 +1,3 @@
-"""
-A reimplementation of Continous Graph Neural Networks https://github.com/DeepGraphLearning/ContinuousGNN
-@misc{xhonneux2019continuous,
-    title={Continuous Graph Neural Networks},
-    author={Louis-Pascal A. C. Xhonneux and Meng Qu and Jian Tang},
-    year={2019},
-    eprint={1912.00967},
-    archivePrefix={arXiv},
-    primaryClass={cs.LG}
-}
-to use pytorch geometric data pipelines
-"""
-
-
 import time
 import os
 import torch
@@ -20,7 +6,6 @@ from torch import nn
 import torch.nn.functional as F
 from data import get_dataset
 from run_GNN import get_optimizer, test
-# Whether use adjoint method or not.
 from torch_geometric.utils.convert import to_scipy_sparse_matrix
 import numpy as np
 from utils import Meter
@@ -38,15 +23,7 @@ else:
   from torchdiffeq import odeint
 
 
-# Define the ODE function.
-# Input:
-# --- t: A tensor with shape [], meaning the current time.
-# --- x: A tensor with shape [#batches, dims], meaning the value of x at t.
-# Output:
-# --- dx/dt: A tensor with shape [#batches, dims], meaning the derivative of x at t.
 class ODEFunc(nn.Module):
-
-  # currently requires in_features = out_features
   def __init__(self, in_features, out_features, opt, adj):
     super(ODEFunc, self).__init__()
     self.opt = opt
@@ -145,7 +122,6 @@ class CGNN(nn.Module):
 
 def get_cora_opt(opt):
   opt['dataset'] = 'Cora'
-  #opt['data'] = 'Planetoid'
   opt['hidden_dim'] = 16
   opt['input_dropout'] = 0.5
   opt['dropout'] = 0
@@ -176,7 +152,6 @@ def get_cora_opt(opt):
 
 def get_citeseer_opt(opt):
   opt['dataset'] = 'Citeseer'
-  #opt['data'] = 'Planetoid'
   opt['hidden_dim'] = 16
   opt['input_dropout'] = 0.5
   opt['dropout'] = 0
@@ -210,8 +185,6 @@ def get_citeseer_opt(opt):
 
 def get_pubmed_opt(opt):
   opt['dataset'] = 'Pubmed'
-  #opt['data'] = 'Planetoid'
-  
   opt['hidden_dim'] = 16
   opt['input_dropout'] = 0.5
   opt['dropout'] = 0
@@ -317,8 +290,6 @@ def train_ray(opt, checkpoint_dir=None, data_dir='../data', opt_val=False):
   model, data = model.to(device), dataset.data.to(device)
   parameters = [p for p in model.parameters() if p.requires_grad]
   optimizer = get_optimizer(opt['optimizer'], parameters, lr=opt['lr'], weight_decay=opt['decay'])
-  # The `checkpoint_dir` parameter gets passed by Ray Tune when a checkpoint
-  # should be restored.
   if checkpoint_dir:
     checkpoint = os.path.join(checkpoint_dir, "checkpoint")
     model_state, optimizer_state = torch.load(checkpoint)
@@ -364,7 +335,6 @@ def train_ray_icml(opt, checkpoint_dir=None, data_dir="../data", opt_val=False):
 
   for epoch in range(1, opt["epoch"]):
     loss = train(model, optimizer, data)
-    # need next line as it sets the attributes in the solver
     _, val_acc_int, tmp_test_acc_int = test(model, data)
     
     with tune.checkpoint_dir(step=epoch) as checkpoint_dir:

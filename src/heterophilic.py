@@ -1,7 +1,3 @@
-"""
-Code taken from https://github.com/jianhao2016/GPRGNN/blob/master/src/dataset_utils.py
-"""
-
 import torch
 import numpy as np
 import os.path as osp

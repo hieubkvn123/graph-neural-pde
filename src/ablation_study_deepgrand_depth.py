@@ -4,17 +4,28 @@ import traceback
 import time as time_
 import itertools
 import pandas as pd
+from argparse import ArgumentParser
 from run_multiple_geomsplit_deepgrand import main as run1
 from run_multiple_randomsplit_deepgrand import main as run2
 
-# dataset = ['Cora', 'Citeseer', 'Pubmed']
-# time = [4.0, 16.0, 32.0, 64.0, 128.0]
-# dataset = ['Computers', 'Photo', 'CoauthorCS']
-dataset = ['ogbn-arxiv']
-time = [1.0, 2.0, 4.0, 8.0, 16.0, 32.0]
+parser = ArgumentParser()
+parser.add_argument('--experiment_set', type=int, default=0, 
+        help='''Specifies the experiment sets. 0 for Cora, Citeseer, Pubmed. 1 for Computers, Photo and CoauthorCS. 2 for ogbn-arxiv''')
+args = vars(parser.parse_args())
+
+if(args['experiment_set'] == 0):
+    dataset = ['Cora', 'Citeseer', 'Pubmed']
+    time = [4.0, 16.0, 32.0, 64.0, 128.0]
+elif(args['experiment_set'] == 1):
+    dataset = ['Computers', 'Photo', 'CoauthorCS']
+    time = [1.0, 2.0, 4.0, 8.0, 16.0, 32.0]
+elif(args['experiment_set'] == 2):
+    dataset = ['ogbn-arxiv']
+    time = [1.0, 2.0, 4.0, 8.0, 16.0, 32.0]
+
 alpha = [1e-1, 1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-8, 0.5]
 epsilon = [1e-3, 1e-8]
-num_seeds = 5 # 20
+num_seeds = 10 
 log_folder = './tests'
 columns = ['time', 'alpha', 'epsilon', 'mean_acc', 'std_acc', 'exec_time']
 all_perm = list(itertools.product(time, alpha, epsilon))

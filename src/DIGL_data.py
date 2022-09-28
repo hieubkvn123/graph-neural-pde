@@ -1,6 +1,3 @@
-__author__ = "Stefan Weißenberger and Johannes Klicpera"
-__license__ = "MIT"
-
 import os
 
 import numpy as np
@@ -33,8 +30,6 @@ def evaluate(model: torch.nn.Module, data: Data, test: bool):
     keys = ['val', 'test'] if test else ['val']
     for key in keys:
         mask = data[f'{key}_mask']
-        # loss = F.nll_loss(logits[mask], data.y[mask]).item()
-        # eval_dict[f'{key}_loss'] = loss
         pred = logits[mask].max(1)[1]
         acc = pred.eq(data.y[mask]).sum().item() / mask.sum().item()
         eval_dict[f'{key}_acc'] = acc

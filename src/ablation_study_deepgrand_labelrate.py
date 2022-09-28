@@ -2,17 +2,27 @@ import os
 import time as time_
 import itertools
 import pandas as pd
+from argparse import ArgumentParser
 from best_params import best_params_dict
 from run_multiple_geomsplit_deepgrand import main as run1
 from run_multiple_randomsplit_deepgrand import main as run2
 
-# dataset = ['Cora', 'Citeseer', 'Pubmed']
-# dataset = ['Computers', 'Photo', 'CoauthorCS']
-dataset = ['ogbn-arxiv']
+parser = ArgumentParser()
+parser.add_argument('--experiment_set', type=int, default=0, 
+        help='''Specifies the experiment sets. 0 for Cora, Citeseer, Pubmed. 1 for Computers, Photo and CoauthorCS. 2 for ogbn-arxiv''')
+args = vars(parser.parse_args())
+
+if(args['experiment_set'] == 0):
+    dataset = ['Cora', 'Citeseer', 'Pubmed']
+elif(args['experiment_set'] == 1):
+    dataset = ['Computers', 'Photo', 'CoauthorCS']
+elif(args['experiment_set'] == 2):
+    dataset = ['ogbn-arxiv']
+
 labelrates = [1, 2, 5, 10, 20]
 alpha = [1e-6, 1e-8]
 epsilon = [1e-3, 1e-8]
-num_seeds = 5 # 20
+num_seeds = 10
 log_folder = './tests'
 columns = ['lbr', 'alpha', 'epsilon', 'mean_acc', 'std_acc', 'exec_time']
 all_perm = list(itertools.product(labelrates, alpha, epsilon))

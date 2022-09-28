@@ -129,18 +129,6 @@ def edge_index_calc(im_height, im_width, im_chan, diags = False):
     edge_list = oneD()
     ret_edge_tensor = torch.tensor(edge_list).T
 
-    #this is wrong need to put colour channels as featurs not extra nodes, saving code in case come back to
-    # if im_chan == 1:
-    #     edge_list = oneD()
-    #     ret_edge_tensor = torch.tensor(edge_list).T
-    # else:
-    #     edge_list = oneD()
-    #     edge_tensor = torch.tensor(edge_list).T
-    #     edge_list_3D = []
-    #     for i in range(im_chan):
-    #         chan_edge_tensor = edge_tensor + i * im_height * im_width
-    #         edge_list_3D.append(chan_edge_tensor)
-    #     ret_edge_tensor = torch.cat(edge_list_3D,dim=1)
     if diags:
         assert ret_edge_tensor.shape[1] == (8*(im_width-2)*(im_height-2)\
                                     + 2*5*(im_width-2) + 2*5*(im_height-2)\
@@ -166,12 +154,6 @@ def create_in_memory_dataset(opt, type, data_loader, edge_index, im_height, im_w
             return [processed_file_name]
         def download(self):
             pass #download_url(self.url, self.raw_dir)
-
-        # @property
-        # def num_classes(self):
-        #     r"""The number of classes in the dataset."""
-        #     y = self.data.y
-        #     return y.max().item() + 1 if y.dim() == 1 else y.size(1)
         def process(self):
             graph_list = []
             for batch_idx, (data, target) in enumerate(data_loader):
@@ -321,22 +303,8 @@ def create_Superpix75(opt, type, root, processed_file_name=None):
 
 
 
-def load_Superpix75Mat(opt): #, path='../data/SuperMNIST/MNIST/datasets/mnist_superpixels_data_75/'):
-
-    # 'path_train_vals' : os.path.join(path_main, 'datasets/mnist_superpixels_data_%d/train_vals.mat' % n_supPix),
-    # 'path_coords_train' : os.path.join(path_main, 'datasets/mnist_superpixels_data_%d/train_patch_coords.mat' % n_supPix),
-    # 'path_train_labels' : os.path.join(path_main, 'datasets/MNIST_preproc_train_labels/MNIST_labels.mat'),
-    # 'path_train_centroids' : os.path.join(path_main, 'datasets/mnist_superpixels_data_%d/train_centroids.mat' % n_supPix)},
-    # 'test':{
-    # 'path_test_vals' : os.path.join(path_main, 'datasets/mnist_superpixels_data_%d/test_vals.mat' % n_supPix),
-    # 'path_coords_test' : os.path.join(path_main, 'datasets/mnist_superpixels_data_%d/test_patch_coords.mat' % n_supPix),
-    # 'path_test_labels' : os.path.join(path_main, 'datasets/MNIST_preproc_test_labels/MNIST_labels.mat'),
-    # 'path_test_centroids' : os.path.join(path_main, 'datasets/mnist_superpixels_data_%d/test_centroids.mat' % n_supPix)}}
-
+def load_Superpix75Mat(opt): 
     print("creating in_memory_datasets")
-    # type = "GNN"
-    # Graph_GNN = create_Superpix75(opt, type,
-    #             root='../data/SuperPix75'+'_'+type+'/', processed_file_name='GraphSuperPix75'+type+'.pt')
     type = "Train"
     Graph_train = create_Superpix75(opt, type,
                 root='../data/SuperPix75'+ str(opt['train_size']) +type+'/', processed_file_name='GraphSuperPix75'+ str(opt['train_size'])+type+'.pt')
@@ -357,10 +325,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--use_image_defaults', default='MNIST',
                         help='#Image version# Whether to run with best params for cora. Overrides the choice of dataset')
-    # parser.add_argument('--use_image_defaults', action='store_true',
-    #                     help='Whether to run with best params for cora. Overrides the choice of dataset')
-    # parser.add_argument('--dataset', type=str, default='Cora',
-    #                     help='Cora, Citeseer, Pubmed, Computers, Photo, CoauthorCS')
     parser.add_argument('--hidden_dim', type=int, default=16, help='Hidden dimension.')  ######## NEED
     parser.add_argument('--input_dropout', type=float, default=0.5, help='Input dropout rate.')
     parser.add_argument('--dropout', type=float, default=0.0, help='Dropout rate.')
@@ -418,62 +382,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
     opt = vars(args)
     opt = get_image_opt(opt)
-
-    # load_Superpix75Mat(opt)
-
-
-    # Cora = get_dataset('Cora', '../data', False)
-    # gnn = GNN(self.opt, dataset, device=self.device)
-    # odeblock = gnn.odeblock
-    # func = odeblock.odefunc
-
-    # img_size = 32#28
-    # im_width = img_size
-    # im_height = img_size
-    # im_chan = 3 #1
-    # exdataset = 'CIFAR' #'MNIST'
-
-    # train_loader = torch.utils.data.DataLoader(
-    #   torchvision.datasets.MNIST('data/' + exdataset + '/', train=True, download=True,
-    #                              transform=torchvision.transforms.Compose([
-    #                                torchvision.transforms.ToTensor(),
-    #                                torchvision.transforms.Normalize(
-    #                                  (0.1307,), (0.3081,))
-    #                              ])),
-    #                                 batch_size=1, shuffle=True)
-
-    # transform = transforms.Compose(
-    #     [transforms.ToTensor(),
-    #      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-    #
-    # train_loader = torch.utils.data.DataLoader(
-    #   torchvision.datasets.CIFAR10('data/' + exdataset + '/', train=True, download=True,
-    #                              transform=transform),
-    #                                 batch_size=1, shuffle=True)
-    #
-    #
-    # edge_index = edge_index_calc(im_height, im_width)
-    #
-    # opt = get_image_opt({})
-    # Graph = create_in_memory_dataset(opt, "Train", train_loader, edge_index, im_height, im_width, im_chan,
-    #                                                                         root='./data/Graph' + exdataset + 'GNN/',
-    #                                                                         processed_file_name='Graph' + exdataset + 'GNN2.pt')
-    #
-    # fig = plt.figure(figsize=(32,62))
-    # # for i in range(6):
-    # #     plt.subplot(2, 3, i + 1)
-    #
-    # for i in range(20):
-    #     plt.subplot(5, 4, i + 1)
-    #     plt.tight_layout()
-    #     digit = Graph[i]
-    #     plt.title("Ground Truth: {}".format(digit.y.item()))
-    #     plt.xticks([])
-    #     plt.yticks([])
-    #     A = digit.x#.view(im_height, im_width, im_chan)
-    #     A = A.numpy()
-    #     A = np.reshape(A, (im_height, im_width, im_chan), order='F')
-    #     A = A / 2 + 0.5  # unnormalize
-    #     plt.imshow(np.transpose(A, (1, 0, 2)))
-    # # plt.show()
-    # plt.savefig("GraphImages.png", format="PNG")

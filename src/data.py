@@ -1,7 +1,3 @@
-"""
-Code partially copied from 'Diffusion Improves Graph Learning' repo https://github.com/klicperajo/gdc/blob/master/data.py
-"""
-
 import os
 
 import numpy as np

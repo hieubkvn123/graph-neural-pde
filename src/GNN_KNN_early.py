@@ -1,7 +1,3 @@
-"""
-A GNN used at test time that supports early stopping during the integrator
-"""
-
 import torch
 import torch.nn.functional as F
 import argparse

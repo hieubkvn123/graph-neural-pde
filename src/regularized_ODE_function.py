@@ -1,6 +1,3 @@
-## This code has been adapted from https://github.com/cfinlay/ffjord-rnode/ 
-## MIT License
-
 import torch
 import torch.nn as nn
 

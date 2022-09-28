@@ -59,14 +59,7 @@ class ExtendedODEFuncTransformerAtt(ODEFunc):
     ax = self.multiply_attention(x, attention, values)
 
     x_norm = torch.linalg.norm(x, 2, dim=0)
-    # x_norm = torch.linalg.norm(x, 2, dim=1).view(-1, 1)
-    # *Note : dim=0 is column-wise norm; dim=1 is row-wise norm.
-    
-    # f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) # -> With trainable alpha 
-    f = (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
-
-    if self.opt['add_source']:
-      f = f + self.beta_train * self.x0
+    f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
 
     return f
 
@@ -112,8 +105,7 @@ class ODEFuncTransformerAtt(ODEFunc):
     else:
       alpha = self.alpha_train
 
-    # f = alpha * (ax - x)
-    f = ax - x
+    f = alpha * (ax - x)
     return f
 
   def __repr__(self):

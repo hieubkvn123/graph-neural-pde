@@ -170,69 +170,11 @@ def main(opt):
 
     loss = train(epoch, model, optimizer, Graph_train)
     tmp_test_acc = test(model, Graph_test)
-    # train_acc, val_acc, tmp_test_acc = test(model, Graph_test)
-
-  # Greyed this out as extra complication with batchsize linked adj
-  #   if val_acc > best_val_acc:
-  #     best_val_acc = val_acc
-  #     test_acc = tmp_test_acc
-  #     best_epoch = epoch
-  #   log = 'Epoch: {:03d}, Runtime {:03f}, Loss {:03f}, forward nfe {:d}, backward nfe {:d}, Train: {:.4f}, Val: {:.4f}, Test: {:.4f}'
-  #   print(
-  #     log.format(epoch, time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, best_val_acc, test_acc))
-  #   # print('gamma: {}'.format(model.odeblock.gamma))
-  # print('best val accuracy {:03f} with test accuracy {:03f} at epoch {:d}'.format(best_val_acc, test_acc, best_epoch))
 
     log = 'Epoch: {:03d}, Runtime {:03f}, Loss {:03f}, forward nfe {:d}, backward nfe {:d}, Test: {:.4f}'
     print(log.format(epoch, time.time() - start_time, loss, model.fm.sum, model.bm.sum, tmp_test_acc))
 
   timestr = time.strftime("%Y%m%d-%H%M%S")
-
-  #save model - params only - no point repeatedly saving data
-  # savefolder = f"../models/model_{timestr}"
-  # try:
-  #   os.mkdir(savefolder)
-  # except OSError:
-  #   print("Creation of the directory %s failed" % savefolder)
-  # else:
-  #   print("Successfully created the directory %s " % savefolder)
-  #
-  # savepath = f"../models/model_{timestr}/model_{timestr}"
-  # torch.save(model.state_dict(), savepath)
-
-  #save params of: [opt dict, alpha, beta] to XL dataframe
-  # opt['model_key'] = f"model_{timestr}"
-  # opt['Test Acc'] = tmp_test_acc
-
-  # df = pd.DataFrame({k:[v] for k,v in opt.items()})
-  # cols = list(df)
-  # top_cols = ['model_key','im_dataset','ode','linear_attention','batched',
-  #  'simple','diags','batch_size','train_size','test_size','Test Acc' ,'alpha']#,'beta']
-  # for head in reversed(top_cols):
-  #   cols.insert(0, cols.pop(cols.index(head)))
-  # df = df.loc[:, cols]
-  # print("Saving Excel")
-  # # df.to_excel("models.xlsx")
-  # from excel_helper import append_df_to_excel
-  # append_df_to_excel(f'../models/models.xlsx', df, sheet_name='Sheet1', startrow=None,
-  #                    truncate_sheet=False,header=False) #True)#False)#,**to_excel_kwargs)
-  #
-  # print("creating GNN model")
-  # loader = DataLoader(Graph_train, batch_size=opt['batch_size'], shuffle=True)
-  # for batch_idx, batch in enumerate(loader):
-  #     break
-  # print("creating GNN model")
-  # model = GNN_image(opt, batch, opt['num_class'], device).to(device)
-  #
-  # model.load_state_dict(torch.load(savepath))
-  # out = model(batch.x)
-  # model.eval()
-  # print_image_T(model, Graph_test, opt, height=2, width=3,)
-  # animation = print_image_path(model, Graph_test, height=2, width=3, frames=10)
-  # animation.save(f'../images/Graph{exdataset}_ani_{timestr}.gif', writer='imagemagick', savefig_kwargs={'facecolor': 'white'}, fps=0.5)
-  # plot_att_heat(model)
-  # return tmp_test_acc
-
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()

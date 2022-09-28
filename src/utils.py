@@ -1,6 +1,3 @@
-"""
-utility functions
-"""
 import os
 
 import scipy
@@ -174,8 +171,6 @@ from torch import Tensor
 from torch_scatter import scatter, segment_csr, gather_csr
 
 
-# https://twitter.com/jon_barron/status/1387167648669048833?s=12
-# @torch.jit.script
 def squareplus(src: Tensor, index: Optional[Tensor], ptr: Optional[Tensor] = None,
                num_nodes: Optional[int] = None) -> Tensor:
   r"""Computes a sparsely evaluated softmax.
