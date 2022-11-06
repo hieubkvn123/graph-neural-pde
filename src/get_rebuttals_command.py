@@ -6,7 +6,7 @@ pathlib.Path(rebuttal_dir).mkdir(exist_ok=True, parents=True)
 
 template = '''
 python3 run_GNN.py --function ext_laplacian3 \
---block hard_attention \
+--block {} \
 --time {} \
 --alpha_ {} \
 --epsilon_ {} \
@@ -71,8 +71,9 @@ for dataset in datasets:
         time = opt['time']
         alpha_ = opt['alpha_'][i]
         epsilon_ = opt['epsilon_'][i]
+        block = 'attention' if dataset in ['Cora', 'Citeseer', 'Pubmed'] else 'hard_attention'
 
-        cmd = template.format(time, alpha_, epsilon_, dataset, lbr)
+        cmd = template.format(block, time, alpha_, epsilon_, dataset, lbr)
         for i in range(num_runs):
             print(cmd)
 
