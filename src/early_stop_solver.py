@@ -9,6 +9,7 @@ import copy
 from torchdiffeq._impl.interp import _interp_evaluate
 from torchdiffeq._impl.rk_common import RKAdaptiveStepsizeODESolver, rk4_alt_step_func
 from ogb.nodeproppred import Evaluator
+from poi import PoissonIntegration
 
 
 def run_evaluator(evaluator, data, y_pred):
