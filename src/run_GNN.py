@@ -484,12 +484,16 @@ if __name__ == '__main__':
   parser.add_argument("--log_file", type=str, required=False, default="tests/history.csv", help="Path to csv log file")
   parser.add_argument("--run_notes", required=False, default=None, help="Additional description of the run")
 
-  # For extended laplacian functions with clipping bounds.
+  # For DeepGRAND 
   parser.add_argument("--alpha_", type=float, required=False, default=1.0, help='Alpha value - DeepGRAND')
   parser.add_argument("--epsilon_", type=float, required=False, default=1e-6, help='Epsilon value - DeepGRAND')
   parser.add_argument("--alpha_learnable", action='store_true', required=False, help='Make alpha and epsilon learnable parameters - DeepGRAND')
   parser.add_argument("--clip_bound", type=float, required=False, default=0.05, help='Norm clipping bound - DeepGRAND (old)')
   parser.add_argument("--only_cpu", action='store_true', required=False, help="Use only CPU (old)")
+
+  # For GRAND++
+  parser.add_argument('--trusted_mask', action='store_true')
+  parser.add_argument('--icxb', type=float, default=1.0)
 
   # New arguments for ablation study
   parser.add_argument('--num_per_class', type=int, required=False, default=20, help='Number of labelled nodes per class')
