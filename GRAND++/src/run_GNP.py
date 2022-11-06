@@ -1,5 +1,3 @@
-import sys, traceback
-
 import argparse
 import numpy as np
 import torch
@@ -248,9 +246,6 @@ if __name__ == '__main__':
     parser.add_argument('--use_cora_defaults', action='store_true',
                         help='Whether to run with best params for cora. Overrides the choice of dataset')
     # data args
-    parser.add_argument('--geom_gcn_splits', dest='geom_gcn_splits', action='store_true',
-                      help='use the 10 fixed splits from '
-                           'https://arxiv.org/abs/2002.05287')
     parser.add_argument('--dataset', type=str, default='Cora',
                         help='Cora, Citeseer, Pubmed, Computers, Photo, CoauthorCS, ogbn-arxiv')
     parser.add_argument('--data_norm', type=str, default='rw',
@@ -327,8 +322,7 @@ if __name__ == '__main__':
     # regularisation args
     parser.add_argument('--jacobian_norm2', type=float, default=None, help="int_t ||df/dx||_F^2")
     parser.add_argument('--total_deriv', type=float, default=None, help="int_t ||df/dt||^2")
-    parser.add_argument('--l1_reg', action='store_true', help='Whether to use l1 weight decay or not')
-    parser.add_argument('--l1_weight_decay', type=float, default=0.001, help='l1 weight decay coefficient')
+
     parser.add_argument('--kinetic_energy', type=float, default=None, help="int_t ||f||_2^2")
     parser.add_argument('--directional_penalty', type=float, default=None, help="int_t ||(df/dx)^T f||^2")
 
@@ -403,7 +397,6 @@ if __name__ == '__main__':
                         rec[t_rep] = test_acc_val
                         mean_rec[t_rep] = test_acc_val
                     except Exception:
-                        traceback.print_exc(file=sys.stdout)
                         print("Exception occur, probably MAX NFE is achieved")
                 rec['#time_elapsed'] = (time.time() - run_start_time) / 3600.0
                 rec['#x0'] = int(x0)

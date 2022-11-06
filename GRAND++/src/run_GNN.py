@@ -1,12 +1,10 @@
-import sys, traceback
-
 import argparse
 import numpy as np
 import torch
 from torch_geometric.nn import GCNConv, ChebConv  # noqa
 import torch.nn.functional as F
-from GNP import GNP as GNN
-from GNP_early import GNPEarly as GNNEarly
+from GNN import GNN
+from GNN_early import GNNEarly
 import time
 from data import get_dataset, set_train_val_test_split
 from ogb.nodeproppred import Evaluator
@@ -46,6 +44,7 @@ def get_label_masks(data, mask_rate=0.5):
     """
     when using labels as features need to split training nodes into training and prediction
     """
+
     if data.train_mask.dtype == torch.bool:
         idx = torch.where(data.train_mask)[0]
     else:
@@ -145,27 +144,14 @@ def test_OGB(model, data, opt):
 
     return train_acc, valid_acc, test_acc
 
-def shrink_parameters(model, ratio):
-    """
-    Shrink all parameters of a model to a certain ratio
-    :param model: type nn.Module
-    :param ratio: type float
-    :return:
-    """
-    model_dict = model.state_dict()
-    for i in model_dict:
-        model_dict[i] *= ratio
-    model.load_state_dict(model_dict)
-    return model
 
 def main(cmd_opt):
     best_opt = best_params_dict[cmd_opt['dataset']]
     opt = {**cmd_opt, **best_opt}
     opt['block'] = cmd_opt['block']
     opt['function'] = cmd_opt['function']
+    opt['add_source'] = cmd_opt['add_source']
     opt['time'] = cmd_opt['time']
-    opt['max_nfe'] = cmd_opt['max_nfe']
-    opt['epoch'] = cmd_opt['epoch']
 
     np.random.seed(opt['seed'])
     torch.manual_seed(opt['seed'])
@@ -178,19 +164,13 @@ def main(cmd_opt):
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # import pdb; pdb.set_trace()
-    if opt['trusted_mask']:
-        mask = dataset.data.train_mask.to(device)
-    else:
-        mask = None
-    model = GNN(opt, dataset, device, trusted_mask=mask).to(device) if opt["no_early"] \
-        else GNNEarly(opt, dataset, device, trusted_mask=mask).to(device)
+    model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
     print(opt)
     if not opt['planetoid_split'] and opt['dataset'] in ['Cora', 'Citeseer', 'Pubmed']:
         dataset.data = set_train_val_test_split(opt['seed'], dataset.data,
                                                 num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500,
-                                                num_per_class=opt['num_train_per_class'])
+                                                num_per_class=opt['num_train_per_class'])  # Tan TODO
     # todo for some reason the submodule parameters inside the attention module don't show up when running on GPU.
-
     data = dataset.data.to(device)
     noise = torch.randn_like(data.x) * opt['noise']
     if opt['noise_pos'] == 'test':
@@ -229,28 +209,26 @@ def main(cmd_opt):
                                                                                                          test_acc,
                                                                                                          best_epoch,
                                                                                                          best_time))
+
+    #   with open("/tanData/graph_poisson_network/results/all_results_new.txt", "a") as f:
+    #       fcntl.flock(f, fcntl.LOCK_EX)
+    #       f.write("\n\n%s\n"%opt["exp_name"])
+    #       f.write('best val accuracy {:03f} with test accuracy {:03f} at epoch {:d} and best time {:03f}'.format(val_acc, test_acc, best_epoch, best_time))
+    #       fcntl.flock(f, fcntl.LOCK_UN)
+
     return train_acc, val_acc, test_acc
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--trusted_mask', action='store_true')
     parser.add_argument('--noise', type=float, default=0.0)
     parser.add_argument('--noise_pos', type=str, help='all, test')
-    parser.add_argument('--prediffuse', action='store_true')
-    parser.add_argument('--x0', action='store_true')
-    parser.add_argument('--nox0', action='store_true')
-    parser.add_argument('--icxb', type=float, default=1.0)
-    parser.add_argument('--source_scale', type=float, default=1.0)
     parser.add_argument('--alltime', action='store_true')
     parser.add_argument('--allnumtrain', action='store_true')
-
+    
     parser.add_argument('--use_cora_defaults', action='store_true',
                         help='Whether to run with best params for cora. Overrides the choice of dataset')
     # data args
-    parser.add_argument('--geom_gcn_splits', dest='geom_gcn_splits', action='store_true',
-                      help='use the 10 fixed splits from '
-                           'https://arxiv.org/abs/2002.05287')
     parser.add_argument('--dataset', type=str, default='Cora',
                         help='Cora, Citeseer, Pubmed, Computers, Photo, CoauthorCS, ogbn-arxiv')
     parser.add_argument('--data_norm', type=str, default='rw',
@@ -303,7 +281,7 @@ if __name__ == '__main__':
     parser.add_argument("--tol_scale_adjoint", type=float, default=1.0,
                         help="multiplier for adjoint_atol and adjoint_rtol")
     parser.add_argument('--ode_blocks', type=int, default=1, help='number of ode blocks to run')
-    parser.add_argument("--max_nfe", type=int, default=100000,
+    parser.add_argument("--max_nfe", type=int, default=1000,
                         help="Maximum number of function evaluations in an epoch. Stiff ODEs will hang if not set.")
     parser.add_argument("--no_early", action="store_true",
                         help="Whether or not to use early stopping of the ODE integrator when testing.")
@@ -327,8 +305,7 @@ if __name__ == '__main__':
     # regularisation args
     parser.add_argument('--jacobian_norm2', type=float, default=None, help="int_t ||df/dx||_F^2")
     parser.add_argument('--total_deriv', type=float, default=None, help="int_t ||df/dt||^2")
-    parser.add_argument('--l1_reg', action='store_true', help='Whether to use l1 weight decay or not')
-    parser.add_argument('--l1_weight_decay', type=float, default=0.001, help='l1 weight decay coefficient')
+
     parser.add_argument('--kinetic_energy', type=float, default=None, help="int_t ||f||_2^2")
     parser.add_argument('--directional_penalty', type=float, default=None, help="int_t ||(df/dx)^T f||^2")
 
@@ -350,7 +327,6 @@ if __name__ == '__main__':
                         help='incorporate the feature grad in attention based edge dropout')
     parser.add_argument("--exact", action="store_true",
                         help="for small datasets can do exact diffusion. If dataset is too big for matrix inversion then you can't")
-
     parser.add_argument("--num_train_per_class", type=int, default=20)
     parser.add_argument('--exp_name', type=str, default='../ray_tune', help="where to save results")
     parser.add_argument('--seed', type=int, default=0, help='random seed')
@@ -365,23 +341,18 @@ if __name__ == '__main__':
     mean_rec = Recorder()
     dirname = os.path.dirname(__file__)
     if opt['alltime']:
-        time_list = [1.0, 4.0, 16.0, 32.0]#, 64.0, 128.0, 256.0]  # [1.0, 2.0, 4.0, 8.0, 16.0, 18.3, 32.0, 64.0, 128.0, 256.0]
-        name = 'GNP_{}_{}.csv'.format(opt['block'][0], opt['dataset'])
+        time_list = [1.0, 4.0, 16.0, 64.0, 128.0, 256.0]  # [1.0, 2.0, 4.0, 8.0, 16.0, 18.3, 32.0, 64.0, 128.0, 256.0]
     else:
         time_list = [opt['time']]
-        name = 'GNP_{}_{}_{}.csv'.format(opt['block'][0], opt['dataset'], opt['time'])
 
     if opt['allnumtrain']:
         ntpc_list = [20, 10, 5, 2, 1]
     else:
         ntpc_list = [opt['num_train_per_class']]
 
-
     for ntpc in ntpc_list:
         opt['num_train_per_class'] = ntpc
         for x0 in [True, False]:
-            if opt['nox0'] and x0 is True:
-                continue
             opt['x0'] = x0
             for i in range(opt['num_runs']):
                 run_start_time = time.time()
@@ -403,7 +374,6 @@ if __name__ == '__main__':
                         rec[t_rep] = test_acc_val
                         mean_rec[t_rep] = test_acc_val
                     except Exception:
-                        traceback.print_exc(file=sys.stdout)
                         print("Exception occur, probably MAX NFE is achieved")
                 rec['#time_elapsed'] = (time.time() - run_start_time) / 3600.0
                 rec['#x0'] = int(x0)
@@ -412,27 +382,56 @@ if __name__ == '__main__':
                 rec['#runnum'] = i
                 rec.capture(verbose=True)
                 rec.writecsv(
-                    os.path.join(dirname, '../output/' + name))
+                    os.path.join(dirname, '../output/GNN_{}_{}.csv'.format(opt['block'][0], opt['dataset'])))
 
             mean_rec['#x0'] = int(x0)
             mean_rec['#ntpc'] = ntpc
             mean_rec['#numruns'] = opt['num_runs']
             mean_rec.capture(verbose=True)
             mean_rec.writecsv(
-                os.path.join(dirname, '../output/mean_'+name))
+                os.path.join(dirname, '../output/mean_GNN_{}_{}.csv'.format(opt['block'][0], opt['dataset'])))
 
     time_elapsed = (time.time() - start_time) / 3600.0
     print('time elapsed', time_elapsed, 'hours')
 
-    """
-    with open("/tanData/graph_poisson_network/results/all_results_gnp_new.txt", "a") as f:
-        fcntl.flock(f, fcntl.LOCK_EX)
-        f.write("\n\n%s\n" % opt["exp_name"])
-        f.write('all train acc {}\n'.format(train_acc_list))
-        f.write('all val acc {}\n'.format(val_acc_list))
-        f.write('all test acc {}\n'.format(test_acc_list))
-        f.write(
-            'mean results: mean best val accuracy {:03f} with mean test accuracy {:03f} and mean train accuracy {:03f} after {} runs'.format(
-                val_acc, test_acc, train_acc, opt['num_runs']))
-        fcntl.flock(f, fcntl.LOCK_UN)
-    """
+
+#     train_acc = 0.0;
+#     val_acc = 0.0;
+#     test_acc = 0.0
+#     train_acc_list = [];
+#     val_acc_list = [];
+#     test_acc_list = []
+
+#     for i in range(opt['num_runs']):
+#         opt['seed'] = i
+#         np.random.seed(opt['seed'])
+#         torch.manual_seed(opt['seed'])
+#         random.seed(opt['seed'])
+#         np.random.RandomState(opt['seed'])
+#         if torch.cuda.is_available():
+#             torch.cuda.manual_seed_all(opt['seed'])
+
+#         train_acc_val, val_acc_val, test_acc_val = main(opt)
+
+#         train_acc_list.append(train_acc_val)
+#         val_acc_list.append(val_acc_val)
+#         test_acc_list.append(test_acc_val)
+
+#         train_acc = train_acc + train_acc_val
+#         val_acc = val_acc + val_acc_val
+#         test_acc = test_acc + test_acc_val
+
+#     train_acc = train_acc / opt['num_runs']
+#     val_acc = val_acc / opt['num_runs']
+#     test_acc = test_acc / opt['num_runs']
+
+#     with open("/tanData/graph_poisson_network/results/all_results_new.txt", "a") as f:
+#         fcntl.flock(f, fcntl.LOCK_EX)
+#         f.write("\n\n%s\n" % opt["exp_name"])
+#         f.write('all train acc {}\n'.format(train_acc_list))
+#         f.write('all val acc {}\n'.format(val_acc_list))
+#         f.write('all test acc {}\n'.format(test_acc_list))
+#         f.write(
+#             'mean results: mean best val accuracy {:03f} with mean test accuracy {:03f} and mean train accuracy {:03f} after {} runs'.format(
+#                 val_acc, test_acc, train_acc, opt['num_runs']))
+#         fcntl.flock(f, fcntl.LOCK_UN)
