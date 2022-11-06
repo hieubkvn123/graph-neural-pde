@@ -302,3 +302,10 @@ class EarlyStopInt(torch.nn.Module):
     if shapes is not None:
       solution = _flat_to_shape(solution, (len(t),), shapes)
     return solution
+
+class EarlyStopIntPoi(EarlyStopInt):
+    def __init__(self, *args, **kwargs):
+        super(EarlyStopIntPoi, self).__init__(*args, **kwargs)
+
+    def forward(self, *args, **kwargs):
+        return PoissonIntegration(super(EarlyStopIntPoi, self).forward, *args, wrap_dim=1, **kwargs)
