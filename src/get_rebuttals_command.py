@@ -22,7 +22,6 @@ python3 run_GNN.py --function ext_laplacian3 \
 --trusted_mask \
 --dataset Photo \
 --alpha_learnable \
---planetoid_split
 '''
 
 datasets = [
