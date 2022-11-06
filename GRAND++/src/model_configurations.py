@@ -2,6 +2,7 @@ from function_transformer_attention import ODEFuncTransformerAtt
 from function_GAT_attention import ODEFuncAtt
 from function_dorsey_attention import ODEFuncDorseyAtt
 from function_laplacian_diffusion import LaplacianODEFunc
+from function_deepgrand_diffusion import ExtendedLaplacianODEFunc3
 from sde import SDEFunc, SDEblock
 from block_transformer_attention import AttODEblock
 from block_constant import ConstantODEblock
@@ -47,6 +48,10 @@ def set_function(opt):
     f = ODEFuncDorseyAtt
   elif ode_str == 'transformer':
     f = ODEFuncTransformerAtt
+  elif ode_str == 'ext_laplacian3':
+    ExtendedLaplacianODEFunc3.alpha_ = opt['alpha_']
+    ExtendedLaplacianODEFunc3.epsilon_ = opt['epsilon_']
+    f = ExtendedLaplacianODEFunc3 
   else:
     raise FunctionNotDefined
   return f

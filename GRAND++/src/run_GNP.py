@@ -1,3 +1,4 @@
+import sys, traceback
 import argparse
 import numpy as np
 import torch
@@ -279,6 +280,10 @@ if __name__ == '__main__':
     parser.add_argument('--add_source', dest='add_source', action='store_true',
                         help='If try get rid of alpha param and the beta*x0 source term')
 
+    # DeepGRAND args
+    parser.add_argument("--alpha_", type=float, required=False, default=1.0, help='Alpha value - DeepGRAND')
+    parser.add_argument("--epsilon_", type=float, required=False, default=1e-6, help='Epsilon value - DeepGRAND')
+
     # ODE args
     parser.add_argument('--time', type=float, default=1.0, help='End time of ODE integrator.')
     parser.add_argument('--augment', action='store_true',
@@ -397,6 +402,7 @@ if __name__ == '__main__':
                         rec[t_rep] = test_acc_val
                         mean_rec[t_rep] = test_acc_val
                     except Exception:
+                        traceback.print_exc(file=sys.stdout)
                         print("Exception occur, probably MAX NFE is achieved")
                 rec['#time_elapsed'] = (time.time() - run_start_time) / 3600.0
                 rec['#x0'] = int(x0)
