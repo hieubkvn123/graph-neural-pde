@@ -1,4 +1,5 @@
 import gc
+import time
 import sys
 import traceback
 import argparse
@@ -6,11 +7,10 @@ import numpy as np
 import torch
 from torch_geometric.nn import GCNConv, ChebConv  # noqa
 import torch.nn.functional as F
-from GNN import GNN
-from GNN_early import GNNEarly
+from GNN import GNN, GNP
+from GNN_early import GNNEarly, GNPEarly
 from GNN_KNN import GNN_KNN
 from GNN_KNN_early import GNNKNNEarly
-import time
 from data import get_dataset, set_train_val_test_split
 from ogb.nodeproppred import Evaluator
 from graph_rewiring import apply_KNN, apply_beltrami, apply_edge_sampling
@@ -214,6 +214,7 @@ def main(cmd_opt):
   print('[INFO] Number of labeled nodes/classes : ', opt['num_per_class'])
   print('[INFO] Diffusing labels : ', opt['use_labels'])
   print('[INFO] Alpha and epsilon learnable : ', opt['alpha_learnable'])
+  print('[INFO] Using GNP : ', opt['gnp'])
 
   if cmd_opt['beltrami']:
     opt['beltrami'] = True
@@ -231,7 +232,11 @@ def main(cmd_opt):
   if opt['rewire_KNN'] or opt['fa_layer']:
     model = GNN_KNN(opt, dataset, device).to(device) if opt["no_early"] else GNNKNNEarly(opt, dataset, device).to(device)
   else:
-    model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
+    if(not opt['gnp']):
+        model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
+    else:
+        mask = dataset.data.train_mask.to(device)
+        model = GNP(opt, dataset, device, trusted_mask=mask).to(device) if opt["no_early"] else GNPEarly(opt, dataset, device, trusted_mask=mask).to(device)
 
   # if not opt['planetoid_split'] and opt['dataset'] in ['Cora','Citeseer','Pubmed']:
   if not opt['planetoid_split']:
@@ -315,7 +320,7 @@ def main(cmd_opt):
 
   # Store run history variables
   with open(opt['log_file'], "a") as f:
-      f.write(f"{opt['time']},{opt['alpha_']},{opt['clip_bound']},{best_val_acc},{best_test_acc},{mean_fw_nfe},{mean_run_time},{min_run_time},{max_run_time}\n")
+      f.write(f"{opt['time']},{opt['alpha_']},{opt['num_per_class']},{best_val_acc},{best_test_acc},{mean_fw_nfe},{mean_run_time},{min_run_time},{max_run_time}\n")
 
   return fw_nfe_ls, losses, train_accs, val_accs, test_accs
 
@@ -492,7 +497,9 @@ if __name__ == '__main__':
   parser.add_argument("--only_cpu", action='store_true', required=False, help="Use only CPU (old)")
 
   # For GRAND++
+  parser.add_argument('--gnp', action='store_true')
   parser.add_argument('--trusted_mask', action='store_true')
+  parser.add_argument('--source_scale', type=float, default=1.0)
   parser.add_argument('--icxb', type=float, default=1.0)
 
   # New arguments for ablation study

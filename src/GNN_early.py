@@ -5,7 +5,7 @@ from torch_geometric.nn import GCNConv, ChebConv  # noqa
 import time
 from data import get_dataset
 # from run_GNN import get_optimizer, train, test
-from early_stop_solver import EarlyStopInt
+from early_stop_solver import EarlyStopInt,EarlyStopIntPoi
 from base_classes import BaseGNN
 from model_configurations import set_block, set_function
 
@@ -141,6 +141,146 @@ class GNNEarly(BaseGNN):
 
     return z
 
+class GNPEarly(BaseGNN):
+  def __init__(self, opt, dataset, device=torch.device('cpu'), trusted_mask=None):
+    super(GNPEarly, self).__init__(opt, dataset, device)
+    self.f = set_function(opt)
+    block = set_block(opt)
+    self.device = device
+    time_tensor = torch.tensor([0, self.T]).to(device)
+    # self.regularization_fns = ()
+    self.odeblock = block(self.f, self.regularization_fns, opt, dataset.data, device, t=time_tensor).to(device)
+    # overwrite the test integrator with this custom one
+    with torch.no_grad():
+      self.odeblock.test_integrator = EarlyStopIntPoi(self.T, self.opt, self.device)
+      self.set_solver_data(dataset.data)
+    self.trusted_mask = trusted_mask
+
+  def set_solver_m2(self):
+    self.odeblock.test_integrator.m2_weight = self.m2.module.weight.data.detach().clone().to(self.device)
+    self.odeblock.test_integrator.m2_bias = self.m2.module.bias.data.detach().clone().to(self.device)
+
+  def set_solver_data(self, data):
+    self.odeblock.test_integrator.data = data
+
+
+  def cleanup(self):
+    del self.odeblock.test_integrator.m2
+    torch.cuda.empty_cache()
+
+
+  def forward(self, x, pos_encoding=None):
+    # Encode each node based on its feature.
+    if self.opt['use_labels']:
+      y = x[:, -self.num_classes:]
+      x = x[:, :-self.num_classes]
+
+    if self.opt['beltrami']:
+      x = F.dropout(x, self.opt['input_dropout'], training=self.training)
+      x = self.mx(x)
+      p = F.dropout(pos_encoding, self.opt['input_dropout'], training=self.training)
+      p = self.mp(p)
+      x = torch.cat([x, p], dim=1)
+    else:
+      x = F.dropout(x, self.opt['input_dropout'], training=self.training)
+      x = self.m1(x)
+
+    if self.opt['use_mlp']:
+      x = F.dropout(x, self.opt['dropout'], training=self.training)
+      x = F.dropout(x + self.m11(F.relu(x)), self.opt['dropout'], training=self.training)
+      x = F.dropout(x + self.m12(F.relu(x)), self.opt['dropout'], training=self.training)
+
+    if self.opt['use_labels']:
+      x = torch.cat([x, y], dim=-1)
+
+    if self.opt['batch_norm']:
+      x = self.bn_in(x)
+
+    # Solve the initial value problem of the ODE.
+    if self.opt['augment']:
+      c_aux = torch.zeros(x.shape).to(self.device)
+      x = torch.cat([x, c_aux], dim=1)
+
+    self.odeblock.set_x0(x)
+    if self.trusted_mask is not None:
+        xp = x * self.trusted_mask[:, None]
+        ave = xp.sum(dim=0) / self.trusted_mask.sum(dim=0)
+        xp -= ave[None, :]
+        xp *= self.trusted_mask[:, None]
+        xb = xp
+    else:
+        xb = x
+    xb = xb * self.opt['source_scale']
+
+    with torch.no_grad():
+      self.set_solver_m2()
+
+    if self.training  and self.odeblock.nreg > 0:
+      z, self.reg_states  = self.odeblock(x + xb * self.opt['icxb'])
+    else:
+      z = self.odeblock(x + xb * self.opt['icxb'])
+      
+    if self.opt['augment']:
+      z = torch.split(z, x.shape[1] // 2, dim=1)[0]
+
+    # Activation.
+    z = F.relu(z)
+
+    if self.opt['fc_out']:
+      z = self.fc(z)
+      z = F.relu(z)
+
+    # Dropout.
+    z = F.dropout(z, self.opt['dropout'], training=self.training)
+
+    # Decode each node embedding to get node label.
+    z = self.m2(z)
+    return z
+
+  def forward_encoder(self, x, pos_encoding):
+    if self.opt['use_labels']:
+      y = x[:, -self.num_classes:]
+      x = x[:, :-self.num_classes]
+
+    if self.opt['beltrami']:
+      x = self.mx(x)
+      p = self.mp(pos_encoding)
+      x = torch.cat([x, p], dim=1)
+    else:
+      x = self.m1(x)
+
+    if self.opt['use_mlp']:
+      x = F.dropout(x, self.opt['dropout'], training=self.training)
+      x = x + self.m11(F.relu(x))
+      x = x + self.m12(F.relu(x))
+
+    if self.opt['use_labels']:
+      x = torch.cat([x, y], dim=-1)
+
+    if self.opt['batch_norm']:
+      x = self.bn_in(x)
+
+    # Solve the initial value problem of the ODE.
+    if self.opt['augment']:
+      c_aux = torch.zeros(x.shape).to(self.device)
+      x = torch.cat([x, c_aux], dim=1)
+
+    return x
+
+  def forward_ODE(self, x, pos_encoding):
+    x = self.forward_encoder(x, pos_encoding)
+
+    self.odeblock.set_x0(x)
+
+    if self.training and self.odeblock.nreg > 0:
+      z, self.reg_states = self.odeblock(x)
+    else:
+      z = self.odeblock(x)
+
+    if self.opt['augment']:
+      z = torch.split(z, x.shape[1] // 2, dim=1)[0]
+
+    return z
 
 def main(opt):
   dataset = get_dataset(opt, '../data', False)
