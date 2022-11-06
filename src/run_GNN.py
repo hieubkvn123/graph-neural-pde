@@ -213,6 +213,7 @@ def main(cmd_opt):
   print('[INFO] T value : ', opt['time'])
   print('[INFO] Number of labeled nodes/classes : ', opt['num_per_class'])
   print('[INFO] Diffusing labels : ', opt['use_labels'])
+  print('[INFO] Alpha and epsilon learnable : ', opt['alpha_learnable'])
 
   if cmd_opt['beltrami']:
     opt['beltrami'] = True
@@ -486,8 +487,9 @@ if __name__ == '__main__':
   # For extended laplacian functions with clipping bounds.
   parser.add_argument("--alpha_", type=float, required=False, default=1.0, help='Alpha value - DeepGRAND')
   parser.add_argument("--epsilon_", type=float, required=False, default=1e-6, help='Epsilon value - DeepGRAND')
+  parser.add_argument("--alpha_learnable", action='store_true', required=False, help='Make alpha and epsilon learnable parameters - DeepGRAND')
   parser.add_argument("--clip_bound", type=float, required=False, default=0.05, help='Norm clipping bound - DeepGRAND (old)')
-  parser.add_argument("--only_cpu", action='store_true', required=False, help="Use only CPU")
+  parser.add_argument("--only_cpu", action='store_true', required=False, help="Use only CPU (old)")
 
   # New arguments for ablation study
   parser.add_argument('--num_per_class', type=int, required=False, default=20, help='Number of labelled nodes per class')

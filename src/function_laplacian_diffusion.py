@@ -64,6 +64,8 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
     self.alpha_sc = nn.Parameter(torch.ones(1))
     self.beta_sc = nn.Parameter(torch.ones(1))
     self.norm_scaler = nn.Parameter(0.1 * torch.ones(opt['hidden_dim']))
+    self.epsilon_params = nn.Parameter(torch.Tensor([self.epsilon_]))
+    self.alpha_params = nn.Parameter(torch.Tensor([self.alpha_]))
 
   def sparse_multiply(self, x):
     if self.opt['block'] in ['attention']:  # adj is a multihead attention
@@ -87,6 +89,10 @@ class ExtendedLaplacianODEFunc3(ODEFunc):
 
     ax = self.sparse_multiply(x)
     x_norm = torch.linalg.norm(x, 2, dim=0)
-    f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
+
+    if(self.opt['alpha_learnable']):
+        f = alpha * (ax - (1 + self.epsilon_params) * x) * (x_norm ** self.alpha_params) # With learnable alpha-epsilon 
+    else:
+        f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
 
     return f
