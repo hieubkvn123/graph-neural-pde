@@ -4,7 +4,7 @@ import pathlib
 rebuttal_dir = 'tests/rebuttals'
 pathlib.Path(rebuttal_dir).mkdir(exist_ok=True, parents=True)
 
-template = '''
+template1 = '''
 python3 run_GNN.py --function ext_laplacian3 \
 --block {} \
 --time {} \
@@ -21,7 +21,26 @@ python3 run_GNN.py --function ext_laplacian3 \
 --gnp \
 --trusted_mask \
 --dataset {} \
---alpha_learnable \
+--planetoid_split
+'''
+
+template2 = '''
+python3 run_GNN.py --function ext_laplacian3 \
+--block {} \
+--time {} \
+--alpha_ {} \
+--epsilon_ {} \
+--log_file 'tests/rebuttals/iclr_{}_lowlabel.csv' \
+--num_per_class {} \
+--epoch 150 \
+--experiment \
+--max_iters 1000 \
+--max_nfe 100000000 \
+--l1_weight_decay 0.0 \
+--decay 0.0001 \
+--gnp \
+--trusted_mask \
+--dataset {}
 '''
 
 datasets = [
@@ -72,7 +91,11 @@ for dataset in datasets:
         epsilon_ = opt['epsilon_'][i]
         block = 'attention' if dataset in ['Cora', 'Citeseer', 'Pubmed'] else 'hard_attention'
 
-        cmd = template.format(block, time, alpha_, epsilon_, dataset, lbr, dataset)
+        if(dataset in ['Cora', 'Citeseer', 'Pubmed']):
+            cmd = template1.format(block, time, alpha_, epsilon_, dataset, lbr, dataset)
+        else:
+            cmd = template2.format(block, time, alpha_, epsilon_, dataset, lbr, dataset)
+
         for i in range(num_runs):
             print(cmd)
 
