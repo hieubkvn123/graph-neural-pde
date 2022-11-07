@@ -237,6 +237,7 @@ def main(cmd_opt):
         model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
     else:
         mask = dataset.data.train_mask.to(device)
+        opt['train_mask'] = mask
         model = GNP(opt, dataset, device, trusted_mask=mask).to(device) if opt["no_early"] else GNPEarly(opt, dataset, device, trusted_mask=mask).to(device)
 
   # if not opt['planetoid_split'] and opt['dataset'] in ['Cora','Citeseer','Pubmed']:
@@ -250,7 +251,6 @@ def main(cmd_opt):
         pass
 
   data = dataset.data.to(device)
-
   parameters = [p for p in model.parameters() if p.requires_grad]
   print_model_params(model)
   optimizer = get_optimizer(opt['optimizer'], parameters, lr=opt['lr'], weight_decay=opt['decay'])
@@ -267,49 +267,51 @@ def main(cmd_opt):
 
   gc.collect()
   torch.cuda.empty_cache()
-  try:
-      for epoch in range(1, opt['epoch']):
-        start_time = time.time()
+  while(best_test_acc <= opt['threshold']):
+      print('Accuracy threshold = ', opt['threshold'])
+      try:
+          for epoch in range(1, opt['epoch']):
+            start_time = time.time()
 
-        if opt['rewire_KNN'] and epoch % opt['rewire_KNN_epoch'] == 0 and epoch != 0:
-          ei = apply_KNN(data, pos_encoding, model, opt)
-          model.odeblock.odefunc.edge_index = ei
+            if opt['rewire_KNN'] and epoch % opt['rewire_KNN_epoch'] == 0 and epoch != 0:
+              ei = apply_KNN(data, pos_encoding, model, opt)
+              model.odeblock.odefunc.edge_index = ei
 
-        loss = train(model, optimizer, data, pos_encoding)
-        tmp_train_acc, tmp_val_acc, tmp_test_acc = this_test(model, data, pos_encoding, opt)
+            loss = train(model, optimizer, data, pos_encoding)
+            tmp_train_acc, tmp_val_acc, tmp_test_acc = this_test(model, data, pos_encoding, opt)
 
-        best_time = opt['time']
-        if tmp_val_acc > val_acc:
-          best_epoch = epoch
-          train_acc = tmp_train_acc
-          val_acc = tmp_val_acc
-          test_acc = tmp_test_acc
-          best_time = opt['time']
-        if not opt['no_early'] and model.odeblock.test_integrator.solver.best_val > val_acc:
-          best_epoch = epoch
-          val_acc = model.odeblock.test_integrator.solver.best_val
-          test_acc = model.odeblock.test_integrator.solver.best_test
-          train_acc = model.odeblock.test_integrator.solver.best_train
-          best_time = model.odeblock.test_integrator.solver.best_time
+            best_time = opt['time']
+            if tmp_val_acc > val_acc:
+              best_epoch = epoch
+              train_acc = tmp_train_acc
+              val_acc = tmp_val_acc
+              test_acc = tmp_test_acc
+              best_time = opt['time']
+            if not opt['no_early'] and model.odeblock.test_integrator.solver.best_val > val_acc:
+              best_epoch = epoch
+              val_acc = model.odeblock.test_integrator.solver.best_val
+              test_acc = model.odeblock.test_integrator.solver.best_test
+              train_acc = model.odeblock.test_integrator.solver.best_train
+              best_time = model.odeblock.test_integrator.solver.best_time
 
-        log = 'Epoch: {:03d}/{:03d}, Runtime {:03f}, Loss {:03f}, forward nfe {:d}, backward nfe {:d}, Train: {:.4f}, Val: {:.4f}, Test: {:.4f}, Best time: {:.4f}'
-        
-        fw_nfe_ls.append(model.fm.sum)
-        run_time_ls.append(time.time() - start_time)
-        train_accs.append(train_acc)
-        val_accs.append(val_acc)
-        test_accs.append(test_acc)
+            log = 'Epoch: {:03d}/{:03d}, Runtime {:03f}, Loss {:03f}, forward nfe {:d}, backward nfe {:d}, Train: {:.4f}, Val: {:.4f}, Test: {:.4f}, Best time: {:.4f}'
+            
+            fw_nfe_ls.append(model.fm.sum)
+            run_time_ls.append(time.time() - start_time)
+            train_accs.append(train_acc)
+            val_accs.append(val_acc)
+            test_accs.append(test_acc)
 
-        if(best_val_acc < val_acc): best_val_acc = val_acc
-        if(best_test_acc < test_acc) : best_test_acc = test_acc
+            if(best_val_acc < val_acc): best_val_acc = val_acc
+            if(best_test_acc < test_acc) : best_test_acc = test_acc
 
-        print(log.format(epoch, opt['epoch'], time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
+            print(log.format(epoch, opt['epoch'], time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
 
-        # Garbage collection and empty cache memory
-        gc.collect()
-        torch.cuda.empty_cache()
-  except:
-        traceback.print_exc(file=sys.stdout)
+            # Garbage collection and empty cache memory
+            gc.collect()
+            torch.cuda.empty_cache()
+      except:
+            traceback.print_exc(file=sys.stdout)
 
   print('best val accuracy {:03f} with test accuracy {:03f} at epoch {:d} and best time {:03f}'.format(val_acc, test_acc,
                                                                                                      best_epoch,
@@ -502,6 +504,7 @@ if __name__ == '__main__':
   parser.add_argument('--trusted_mask', action='store_true')
   parser.add_argument('--source_scale', type=float, default=1.0)
   parser.add_argument('--icxb', type=float, default=1.0)
+  parser.add_argument('--threshold', type=float, default=0.0)
 
   # New arguments for ablation study
   parser.add_argument('--num_per_class', type=int, required=False, default=20, help='Number of labelled nodes per class')

@@ -4,7 +4,7 @@ import pathlib
 rebuttal_dir = 'tests/rebuttals'
 pathlib.Path(rebuttal_dir).mkdir(exist_ok=True, parents=True)
 
-template1 = '''
+template = '''
 python3 run_GNN.py --function ext_laplacian3 \
 --block {} \
 --time {} \
@@ -18,50 +18,29 @@ python3 run_GNN.py --function ext_laplacian3 \
 --max_nfe 100000000 \
 --l1_weight_decay 0.0 \
 --decay 0.0001 \
---gnp \
---trusted_mask \
 --dataset {} \
---planetoid_split
-'''
-
-template2 = '''
-python3 run_GNN.py --function ext_laplacian3 \
---block {} \
---time {} \
---alpha_ {} \
---epsilon_ {} \
---log_file 'tests/rebuttals/iclr_{}_lowlabel.csv' \
---num_per_class {} \
---epoch 150 \
---experiment \
---max_iters 1000 \
---max_nfe 100000000 \
---l1_weight_decay 0.0 \
---decay 0.0001 \
---gnp \
---trusted_mask \
---dataset {}
+--threshold {}
 '''
 
 datasets = [
-    'Computers', 'Photo', 'CoauthorCS', 'Cora', 'Citeseer', 'Pubmed'
+    'Photo', 'CoauthorCS', 'Computers' # , 'Cora', 'Citeseer', 'Pubmed'
 ]
 
 label_rates = [1, 2, 5, 10, 20]
 
 hyperparams = {
     'Computers': {
-        'time' : 3.249016177876166,
+        'time' : 6.2566016177876166, 
         'alpha_' : [1e-8, 1e-8, 1e-8, 1e-8, 1e-8],
         'epsilon_' : [1e-8, 0.001, 0.001, 1e-8, 1e-8]
     },
     'Photo' : {
-        'time' : 3.5824027975386623,
+        'time' : 9.586016177876166,
         'alpha_' : [1e-8, 1e-6, 1e-6, 1e-8, 1e-8],
         'epsilon_' : [1e-8, 0.001, 0.001, 0.001, 1e-8]
     },
     'CoauthorCS' : {
-        'time' : 3.126400580172773,
+        'time' : 6.586016177876166,
         'alpha_' : [1e-8, 1e-6, 1e-6, 1e-6, 1e-8],
         'epsilon_' : [1e-8, 0.001, 0.001, 1e-8, 1e-8]
     },
@@ -82,19 +61,41 @@ hyperparams = {
     }
 }
 
-num_runs = 10
+thresholds = {
+    'Computers' : {
+        20 : 86.27,
+        10 : 82.79,
+        5 : 81.64,
+        2 : 75.90,
+        1 : 66.65
+    },
+    'Photo' : {
+        20 : 93.0,
+        10 : 90.0,
+        5 : 88.0,
+        2 : 84.0,
+        1 : 82.0
+    },
+    'CoauthorCS' : {
+        20 : 91.0,
+        10 : 89.0,
+        5 : 87.0,
+        2 : 80.0,
+        1 : 66.0
+    } 
+}
+
+num_runs = 5
 for dataset in datasets:
     opt = hyperparams[dataset]
     for i, lbr in enumerate(label_rates):
         time = opt['time']
         alpha_ = opt['alpha_'][i]
         epsilon_ = opt['epsilon_'][i]
-        block = 'attention' if dataset in ['Cora', 'Citeseer', 'Pubmed'] else 'hard_attention'
+        block = 'attention' if dataset in ['Cora', 'Citeseer', 'Pubmed', 'Computers'] else 'hard_attention'
+        threshold = thresholds[dataset][lbr]
 
-        if(dataset in ['Cora', 'Citeseer', 'Pubmed']):
-            cmd = template1.format(block, time, alpha_, epsilon_, dataset, lbr, dataset)
-        else:
-            cmd = template2.format(block, time, alpha_, epsilon_, dataset, lbr, dataset)
+        cmd = template.format(block, time, alpha_, epsilon_, dataset, lbr, dataset, threshold)
 
         for i in range(num_runs):
             print(cmd)
