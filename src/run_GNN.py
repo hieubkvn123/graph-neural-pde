@@ -304,27 +304,37 @@ def main(cmd_opt):
 
             if(best_val_acc < val_acc): best_val_acc = val_acc
             if(best_test_acc < test_acc) : best_test_acc = test_acc
-
             print(log.format(epoch, opt['epoch'], time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
 
             # Garbage collection and empty cache memory
             gc.collect()
             torch.cuda.empty_cache()
+      except KeyboardInterrupt:
+            print('[INFO] Interrupted...')
+            break
       except:
             traceback.print_exc(file=sys.stdout)
 
-  print('best val accuracy {:03f} with test accuracy {:03f} at epoch {:d} and best time {:03f}'.format(val_acc, test_acc,
-                                                                                                     best_epoch,
-                                                                                                     best_time))
+      print('Re-initializing models')
+      model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
+      parameters = [p for p in model.parameters() if p.requires_grad]
+      print_model_params(model)
+      optimizer = get_optimizer(opt['optimizer'], parameters, lr=opt['lr'], weight_decay=opt['decay'])
+      best_time = best_epoch = train_acc = val_acc = test_acc = 0
+      best_val_acc = best_test_acc = 0.0
+      run_time_ls, fw_nfe_ls = [], []
+      train_accs, val_accs, test_accs, losses = [], [], [], []
+
+  print('best val accuracy {:03f} with test accuracy {:03f} at epoch {:d} and best time {:03f}'.format(val_acc, test_acc, best_epoch, best_time))
   mean_fw_nfe = np.array(fw_nfe_ls).mean()
   mean_run_time = np.array(run_time_ls).mean()
   min_run_time = min(run_time_ls)
   max_run_time = max(run_time_ls)
 
   # Store run history variables
+  print('[INFO] Logging results to ', opt['log_file'])
   with open(opt['log_file'], "a") as f:
       f.write(f"{opt['time']},{opt['alpha_']},{opt['num_per_class']},{best_val_acc},{best_test_acc},{mean_fw_nfe},{mean_run_time},{min_run_time},{max_run_time}\n")
-
   return fw_nfe_ls, losses, train_accs, val_accs, test_accs
 
 

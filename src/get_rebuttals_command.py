@@ -12,7 +12,7 @@ python3 run_GNN.py --function ext_laplacian3 \
 --epsilon_ {} \
 --log_file 'tests/rebuttals/iclr_{}_lowlabel.csv' \
 --num_per_class {} \
---epoch 150 \
+--epoch 250 \
 --experiment \
 --max_iters 1000 \
 --max_nfe 100000000 \
@@ -20,6 +20,10 @@ python3 run_GNN.py --function ext_laplacian3 \
 --decay 0.0001 \
 --dataset {} \
 --threshold {}
+'''
+
+template = '''
+python3 run_GNN.py --function ext_laplacian3 --block {} --time {} --alpha_ {} --epsilon_ {} --log_file 'tests/rebuttals/iclr_{}_lowlabel.csv' --num_per_class {} --epoch 250 --experiment --max_iters 1000 --max_nfe 100000000 --l1_weight_decay 0.0 --decay 0.0001 --dataset {} --threshold {}
 '''
 
 datasets = [
@@ -85,6 +89,7 @@ thresholds = {
     } 
 }
 
+print('rm tests/rebuttals/*.csv')
 num_runs = 5
 for dataset in datasets:
     opt = hyperparams[dataset]
