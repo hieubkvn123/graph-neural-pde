@@ -20,7 +20,7 @@ python3 run_GNN.py --function ext_laplacian3 \
 --decay 0.0001 \
 --gnp \
 --trusted_mask \
---dataset Photo \
+--dataset {} \
 --alpha_learnable \
 '''
 
@@ -72,7 +72,7 @@ for dataset in datasets:
         epsilon_ = opt['epsilon_'][i]
         block = 'attention' if dataset in ['Cora', 'Citeseer', 'Pubmed'] else 'hard_attention'
 
-        cmd = template.format(block, time, alpha_, epsilon_, dataset, lbr)
+        cmd = template.format(block, time, alpha_, epsilon_, dataset, lbr, dataset)
         for i in range(num_runs):
             print(cmd)
 

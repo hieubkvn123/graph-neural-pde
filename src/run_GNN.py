@@ -208,6 +208,7 @@ def main(cmd_opt):
     opt['num_per_class'] = cmd_opt['num_per_class']
     opt['use_labels'] = cmd_opt['use_labels']
 
+  print('[INFO] Dataset : ', opt['dataset'])
   print('[INFO] ODE function : ', opt['function'])
   print('[INFO] Block type : ', opt['block'])
   print('[INFO] T value : ', opt['time'])
