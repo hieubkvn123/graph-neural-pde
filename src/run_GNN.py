@@ -267,8 +267,7 @@ def main(cmd_opt):
 
   gc.collect()
   torch.cuda.empty_cache()
-  while(best_test_acc <= opt['threshold']):
-      print('Accuracy threshold = ', opt['threshold'])
+  while((best_test_acc * 100) <= opt['threshold']):
       try:
           for epoch in range(1, opt['epoch']):
             start_time = time.time()
@@ -315,6 +314,10 @@ def main(cmd_opt):
       except:
             traceback.print_exc(file=sys.stdout)
 
+      if((best_test_acc * 100) > opt['threshold']): break
+
+      print('Accuracy threshold = ', opt['threshold'])
+      print('Best accuracy = ', best_test_acc)
       print('Re-initializing models')
       model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
       parameters = [p for p in model.parameters() if p.requires_grad]

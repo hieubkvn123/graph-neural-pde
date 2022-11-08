@@ -103,5 +103,6 @@ for dataset in datasets:
         cmd = template.format(block, time, alpha_, epsilon_, dataset, lbr, dataset, threshold)
 
         for i in range(num_runs):
+            print(f'echo "{cmd}"')
             print(cmd)
 
