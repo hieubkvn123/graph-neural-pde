@@ -27,7 +27,8 @@ python3 run_GNN.py --function ext_laplacian3 --block {} --time {} --alpha_ {} --
 '''
 
 datasets = [
-    'Photo', 'CoauthorCS', 'Computers' # , 'Cora', 'Citeseer', 'Pubmed'
+    # 'Photo', 'CoauthorCS', 'Computers',
+    'Cora', 'Citeseer', 'Pubmed'
 ]
 
 label_rates = [1, 2, 5, 10, 20]
@@ -86,7 +87,8 @@ thresholds = {
         5 : 87.0,
         2 : 80.0,
         1 : 66.0
-    } 
+    },
+
 }
 
 print('rm tests/rebuttals/*.csv')

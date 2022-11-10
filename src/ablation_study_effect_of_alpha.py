@@ -11,7 +11,7 @@ font = {
 
 matplotlib.rc('font', **font)
 
-COLORS = ['red', 'green', 'blue']
+COLORS = ['red', 'green', 'blue', 'cyan', 'tab:blue']
 result_files = {
     'Cora' : 'tests/geom_split_results_Cora.csv',
     'Citeseer' : 'tests/geom_split_results_Citeseer.csv'
@@ -23,7 +23,7 @@ for i, ds in enumerate(result_files.keys()):
     df = pd.read_csv(result_files[ds])
 
     # For each alpha, plot the accuracy change over time
-    for j, a_ in enumerate([1e-4, 0.1, 0.5]):
+    for j, a_ in enumerate([1e-4, 1e-3, 1e-2, 0.1, 0.5]):
         df_ = df[df['alpha'] == a_]
         mean_acc = df_.groupby('time').mean()['mean_acc']
         std_acc = df_.groupby('time').std()['std_acc']
