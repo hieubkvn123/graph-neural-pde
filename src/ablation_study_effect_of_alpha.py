@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # Change the settings of matplotlib fonts
 font = {
     'weight' : 'bold',
-    'size'   : 16
+    'size'   : 14
 }
 
 matplotlib.rc('font', **font)
@@ -32,10 +32,10 @@ for i, ds in enumerate(result_files.keys()):
                             mean_acc + std_acc, alpha=0.1, color=COLORS[j])
         ax[i].set_title(ds)
         ax[i].grid()
-        ax[i].legend()
+        ax[i].legend(loc='upper right')
 
 print('Saving figure to tests/ablation_study_effect_of_alpha.png')
-fig.supxlabel('Time (T)')
+fig.supxlabel('Depth (T)')
 fig.supylabel('Mean/std of test accuracies')
 
 plt.tight_layout()
