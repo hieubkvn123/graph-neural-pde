@@ -1,9 +1,11 @@
 import pandas as pd
 
 rebuttal_files = [
-    'iclr_Photo_lowlabel.csv',
-    'iclr_CoauthorCS_lowlabel.csv',
-    'iclr_Computers_lowlabel.csv'
+    'final/iclr_Photo_lowlabel.csv',
+    'final/iclr_CoauthorCS_lowlabel.csv',
+    'final/iclr_Computers_lowlabel.csv',
+    'final/iclr_Cora_lowlabel.csv',
+    'final/iclr_Citeseer_lowlabel.csv'
 ]
 
 for _file in rebuttal_files:
