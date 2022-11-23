@@ -316,8 +316,7 @@ def main(opt):
       
     gc.collect()
     torch.cuda.empty_cache()  
-  print('best val accuracy {:03f} with test accuracy {:03f} at epoch {:d} and best time {:03f}'.format(val_acc, test_acc,
-                                                                                                     best_epoch,
+  print('best val accuracy {:03f} with test accuracy {:03f} at epoch {:d} and best time {:03f}'.format(val_acc, test_acc,  best_epoch, best_time))
   return train_acc, val_acc, test_acc
 
 if __name__ == '__main__':
