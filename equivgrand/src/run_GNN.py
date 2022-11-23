@@ -1,6 +1,5 @@
 import argparse
 import time
-import wandb 
 import gc 
 
 import numpy as np
@@ -287,15 +286,6 @@ def main(opt):
   else:
     this_train, this_test = train, test_OGB if opt['dataset'] == 'ogbn-arxiv' else test
     
-  # wandb.init(
-  #   project="equivgrand", 
-  #   config=opt, 
-  #   name=opt['block'] + "_" + ("grand" if not opt['equiv'] else "equivgrand") + "_" + opt['dataset'],
-  #   tags=[opt['dataset']]
-  # )
-  
-  # wandb.watch(model, log='gradients')
-
   for epoch in range(1, opt['epoch']):
     start_time = time.time()
 
@@ -321,15 +311,6 @@ def main(opt):
       best_time = model.odeblock.test_integrator.solver.best_time
 
     log = 'Epoch: {:03d}, Runtime {:03f}, Loss {:03f}, forward nfe {:d}, backward nfe {:d}, Train: {:.4f}, Val: {:.4f}, Test: {:.4f}, Best time: {:.4f}'
-    # wandb.log({
-    #   "train/loss": loss,
-    #   "train/acc": tmp_train_acc,
-    #   "val/acc": tmp_val_acc,
-    #   "test/acc": tmp_test_acc,
-    #   "best/val_acc": val_acc,
-    #   "best/test_acc": test_acc
-    # })
-
     if epoch % 10 == 0:
       print(log.format(epoch, time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
       
@@ -337,8 +318,6 @@ def main(opt):
     torch.cuda.empty_cache()  
   print('best val accuracy {:03f} with test accuracy {:03f} at epoch {:d} and best time {:03f}'.format(val_acc, test_acc,
                                                                                                      best_epoch,
-                                                                                                     best_time))
-  # wandb.finish()
   return train_acc, val_acc, test_acc
 
 if __name__ == '__main__':
