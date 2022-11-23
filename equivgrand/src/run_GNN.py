@@ -272,6 +272,12 @@ def main(opt):
   if not opt['planetoid_split'] and opt['dataset'] in ['Cora','Citeseer','Pubmed']:
     dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500)
 
+  print('[INFO] Dataset : ', opt['dataset'])
+  print('[INFO] ODE function : ', opt['function'])
+  print('[INFO] Block type : ', opt['block'])
+  print('[INFO] T value : ', opt['time'])
+  print('[INFO] Diffusing labels : ', opt['use_labels'])
+
   data = dataset.data.to(device)
 
   parameters = [p for p in model.parameters() if p.requires_grad]
