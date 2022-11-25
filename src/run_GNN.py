@@ -1,3 +1,4 @@
+import os
 import gc
 import time
 import sys
@@ -5,17 +6,13 @@ import traceback
 import argparse
 import numpy as np
 import torch
-from torch_geometric.nn import GCNConv, ChebConv  # noqa
-import torch.nn.functional as F
 from GNN import GNN, GNP
 from GNN_early import GNNEarly, GNPEarly
-from GNN_KNN import GNN_KNN
-from GNN_KNN_early import GNNKNNEarly
 from data import get_dataset, set_train_val_test_split
 from ogb.nodeproppred import Evaluator
-from graph_rewiring import apply_KNN, apply_beltrami, apply_edge_sampling
 from best_params import  best_params_dict
 
+os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'max_split_size_mb:64'
 
 def get_optimizer(name, parameters, lr, weight_decay=0):
   if name == 'sgd':
@@ -61,7 +58,6 @@ def train(model, optimizer, data, pos_encoding=None):
   feat = data.x
   if model.opt['use_labels']:
     train_label_idx, train_pred_idx = get_label_masks(data, model.opt['label_rate'])
-
     feat = add_labels(feat, data.y, train_label_idx, model.num_classes, model.device)
   else:
     train_pred_idx = data.train_mask
@@ -223,22 +219,14 @@ def main(cmd_opt):
   dataset = get_dataset(opt, '../data', opt['not_lcc'])
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
   if(opt['only_cpu']): device = torch.device('cpu')
+  pos_encoding = None
 
-  if opt['beltrami']:
-    pos_encoding = apply_beltrami(dataset.data, opt).to(device)
-    opt['pos_enc_dim'] = pos_encoding.shape[1]
+  if(not opt['gnp']):
+      model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
   else:
-    pos_encoding = None
-
-  if opt['rewire_KNN'] or opt['fa_layer']:
-    model = GNN_KNN(opt, dataset, device).to(device) if opt["no_early"] else GNNKNNEarly(opt, dataset, device).to(device)
-  else:
-    if(not opt['gnp']):
-        model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
-    else:
-        mask = dataset.data.train_mask.to(device)
-        opt['train_mask'] = mask
-        model = GNP(opt, dataset, device, trusted_mask=mask).to(device) if opt["no_early"] else GNPEarly(opt, dataset, device, trusted_mask=mask).to(device)
+      mask = dataset.data.train_mask.to(device)
+      opt['train_mask'] = mask
+      model = GNP(opt, dataset, device, trusted_mask=mask).to(device) if opt["no_early"] else GNPEarly(opt, dataset, device, trusted_mask=mask).to(device)
 
   # if not opt['planetoid_split'] and opt['dataset'] in ['Cora','Citeseer','Pubmed']:
   if not opt['planetoid_split']:
@@ -275,11 +263,6 @@ def main(cmd_opt):
       try:
           for epoch in range(1, opt['epoch']):
             start_time = time.time()
-
-            if opt['rewire_KNN'] and epoch % opt['rewire_KNN_epoch'] == 0 and epoch != 0:
-              ei = apply_KNN(data, pos_encoding, model, opt)
-              model.odeblock.odefunc.edge_index = ei
-
             loss = train(model, optimizer, data, pos_encoding)
             tmp_train_acc, tmp_val_acc, tmp_test_acc = this_test(model, data, pos_encoding, opt)
 
