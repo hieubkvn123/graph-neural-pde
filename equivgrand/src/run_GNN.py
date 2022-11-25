@@ -256,6 +256,7 @@ def merge_cmd_args(cmd_opt, opt):
   opt['num_per_class'] = cmd_opt['num_per_class']
   opt['threshold'] = cmd_opt['threshold']
   opt['use_labels'] = cmd_opt['use_labels']
+  opt['time'] = cmd_opt['time']
   return opt
         
 def main(opt): 
