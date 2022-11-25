@@ -1,14 +1,14 @@
-from function_transformer_attention import ODEFuncTransformerAtt
+from function_transformer_attention import ODEFuncTransformerAtt, ExtendedODEFuncTransformerAtt
 from function_GAT_attention import ODEFuncAtt
 from function_laplacian_diffusion import LaplacianODEFunc
+from function_laplacian_diffusion import ExtendedLaplacianODEFunc3
+from function_coupled_ode import CoupledODEFunc 
 from block_transformer_attention import AttODEblock
 from block_constant import ConstantODEblock
 from block_mixed import MixedODEblock
 from block_transformer_hard_attention import HardAttODEblock
 from block_transformer_rewiring import RewireAttODEblock
-
-from block_equiv_attention import EquivAttODEblock
-from function_equiv_laplacian_diffusion import EquivLaplacianODEFunc
+from block_coupled_ode import CoupledODEBlock
 
 class BlockNotDefined(Exception):
   pass
@@ -29,8 +29,8 @@ def set_block(opt):
     block = RewireAttODEblock
   elif ode_str == 'constant':
     block = ConstantODEblock
-  elif ode_str == 'equiv_attention':
-    block = EquivAttODEblock
+  elif ode_str == 'coupled':
+    block = CoupledODEBlock
   else:
     raise BlockNotDefined
   return block
@@ -38,14 +38,23 @@ def set_block(opt):
 
 def set_function(opt):
   ode_str = opt['function']
+
   if ode_str == 'laplacian':
     f = LaplacianODEFunc
   elif ode_str == 'GAT':
     f = ODEFuncAtt
   elif ode_str == 'transformer':
     f = ODEFuncTransformerAtt
-  elif ode_str == 'equiv_laplacian':
-    f= EquivLaplacianODEFunc
+  elif ode_str == 'ext_laplacian3': # Exnteded laplacian function 3 (truncated norm_x)
+    ExtendedLaplacianODEFunc3.alpha_ = opt['alpha_']
+    ExtendedLaplacianODEFunc3.epsilon_ = opt['epsilon_']
+    f = ExtendedLaplacianODEFunc3
+  elif ode_str == 'ext_transformer':
+    ExtendedODEFuncTransformerAtt.alpha_ = opt['alpha_']
+    ExtendedODEFuncTransformerAtt.epsilon_ = opt['epsilon_']
+    f = ExtendedODEFuncTransformerAtt
+  elif ode_str == 'coupled': # Coupled ODE 
+    f = CoupledODEFunc
   else:
     raise FunctionNotDefined
   return f

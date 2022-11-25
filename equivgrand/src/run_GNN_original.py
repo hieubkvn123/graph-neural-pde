@@ -6,8 +6,8 @@ import traceback
 import argparse
 import numpy as np
 import torch
-from GNN import GNN, GNP
-from GNN_early import GNNEarly, GNPEarly
+from GNN import GNN
+from GNN_early import GNNEarly
 from data import get_dataset, set_train_val_test_split
 from ogb.nodeproppred import Evaluator
 from best_params import  best_params_dict
@@ -344,7 +344,7 @@ if __name__ == '__main__':
                       help='Cora, Citeseer, Pubmed, Computers, Photo, CoauthorCS, ogbn-arxiv')
   parser.add_argument('--data_norm', type=str, default='rw',
                       help='rw for random walk, gcn for symmetric gcn norm')
-  parser.add_argument('--self_loop_weight', type=float, default=1.0, help='Weight of self-loops.')
+  parser.add_argument('--self_loop_weight', type=float, default=None, help='Weight of self-loops.')
   parser.add_argument('--use_labels', dest='use_labels', action='store_true', help='Also diffuse labels')
   parser.add_argument('--label_rate', type=float, default=0.5,
                       help='% of training labels to use when --use_labels is set.')
@@ -385,12 +385,12 @@ if __name__ == '__main__':
   parser.add_argument('--time', type=float, default=1.0, help='End time of ODE integrator.')
   parser.add_argument('--augment', action='store_true',
                       help='double the length of the feature vector by appending zeros to stabilist ODE learning')
-  parser.add_argument('--method', type=str, default='dopri5',
+  parser.add_argument('--method', type=str, default=None, # 'dopri5',
                       help="set the numerical solver: dopri5, euler, rk4, midpoint")
   parser.add_argument('--step_size', type=float, default=1,
                       help='fixed step size when using fixed step solvers e.g. rk4')
   parser.add_argument('--max_iters', type=float, default=100, help='maximum number of integration steps')
-  parser.add_argument("--adjoint_method", type=str, default="adaptive_heun",
+  parser.add_argument("--adjoint_method", type=str, default=None, # "adaptive_heun",
                       help="set the numerical solver for the backward pass: dopri5, euler, rk4, midpoint")
   parser.add_argument('--adjoint', dest='adjoint', action='store_true',
                       help='use the adjoint ODE method to reduce memory footprint')

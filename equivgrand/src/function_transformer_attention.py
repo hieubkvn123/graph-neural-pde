@@ -8,11 +8,68 @@ from data import get_dataset
 from utils import MaxNFEException, squareplus
 from base_classes import ODEFunc
 
-
-class ODEFuncTransformerAtt(ODEFunc):
+class ExtendedODEFuncTransformerAtt(ODEFunc):
+  # Set global attributes
+  alpha_ = 1.0
+  epsilon_ = 1e-6
+  clipping_bound = 0.05
 
   def __init__(self, in_features, out_features, opt, data, device):
+    super(ExtendedODEFuncTransformerAtt, self).__init__(opt, data, device)
+
+    ### Log information ###
+    print('****************** Extended Transformer Function V.3 ******************')
+    print('Clipping Bound = ', self.clipping_bound)
+    print('Alpha = ', self.alpha_)
+    print('*********************************************************************')
+    
+    if opt['self_loop_weight'] > 0:
+      self.edge_index, self.edge_weight = add_remaining_self_loops(data.edge_index, data.edge_attr,
+                                                                   fill_value=opt['self_loop_weight'])
+    else:
+      self.edge_index, self.edge_weight = data.edge_index, data.edge_attr
+    self.multihead_att_layer = SpGraphTransAttentionLayer(in_features, out_features, opt,
+                                                          device, edge_weights=self.edge_weight).to(device)
+
+  def multiply_attention(self, x, attention, v=None):
+    # todo would be nice if this was more efficient
+    if self.opt['mix_features']:
+      vx = torch.mean(torch.stack(
+        [torch_sparse.spmm(self.edge_index, attention[:, idx], v.shape[0], v.shape[0], v[:, :, idx]) for idx in
+         range(self.opt['heads'])], dim=0),
+        dim=0)
+      ax = self.multihead_att_layer.Wout(vx)
+    else:
+      mean_attention = attention.mean(dim=1)
+      ax = torch_sparse.spmm(self.edge_index, mean_attention, x.shape[0], x.shape[0], x)
+    return ax
+
+  def forward(self, t, x):  # the t param is needed by the ODE solver.
+    if self.nfe > self.opt["max_nfe"]:
+      raise MaxNFEException
+    self.nfe += 1
+    
+    if not self.opt['no_alpha_sigmoid']:
+      alpha = torch.sigmoid(self.alpha_train)
+    else:
+      alpha = self.alpha_train
+
+    # Shape = 2045 x 80 (2045 = Number of nodes; 80 = Feature shape)
+    attention, values = self.multihead_att_layer(x, self.edge_index)
+    ax = self.multiply_attention(x, attention, values)
+
+    x_norm = torch.linalg.norm(x, 2, dim=0)
+    f = alpha * (ax - (1 + self.epsilon_) * x) * (x_norm ** self.alpha_) 
+
+    return f
+
+  def __repr__(self):
+    return self.__class__.__name__ + ' (' + str(self.in_features) + ' -> ' + str(self.out_features) + ')'
+
+class ODEFuncTransformerAtt(ODEFunc):
+  def __init__(self, in_features, out_features, opt, data, device):
     super(ODEFuncTransformerAtt, self).__init__(opt, data, device)
+    self.alpha_train = nn.Parameter(torch.ones(1), requires_grad=False)
 
     if opt['self_loop_weight'] > 0:
       self.edge_index, self.edge_weight = add_remaining_self_loops(data.edge_index, data.edge_attr,
@@ -47,9 +104,8 @@ class ODEFuncTransformerAtt(ODEFunc):
       alpha = torch.sigmoid(self.alpha_train)
     else:
       alpha = self.alpha_train
+
     f = alpha * (ax - x)
-    if self.opt['add_source']:
-      f = f + self.beta_train * self.x0
     return f
 
   def __repr__(self):
@@ -189,6 +245,7 @@ class SpGraphTransAttentionLayer(nn.Module):
 
       src = q[edge[0, :], :, :]
       dst_k = k[edge[1, :], :, :]
+
     if not self.opt['beltrami'] and self.opt['attention_type'] == "exp_kernel":
       prods = self.output_var ** 2 * torch.exp(-(torch.sum((src - dst_k) ** 2, dim=1) / (2 * self.lengthscale ** 2)))
     elif self.opt['attention_type'] == "scaled_dot":

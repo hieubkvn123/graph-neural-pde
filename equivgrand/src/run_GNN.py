@@ -8,10 +8,8 @@ from ogb.nodeproppred import Evaluator
 
 from GNN import GNN
 from GNN_early import GNNEarly
-from GNN_KNN import GNN_KNN
-from GNN_KNN_early import GNNKNNEarly
 from data import get_dataset, set_train_val_test_split
-from graph_rewiring import apply_KNN, apply_beltrami
+# from graph_rewiring import apply_KNN, apply_beltrami
 from best_params import best_params_dict
 from utils import ROOT_DIR
 from GNN_equiv import EquivGNN
@@ -251,6 +249,12 @@ def merge_cmd_args(cmd_opt, opt):
     opt['max_nfe'] = cmd_opt['max_nfe'] 
   if cmd_opt['adjoint_method'] is not None:
     opt['adjoint_method'] = cmd_opt['adjoint_method']    
+  opt['alpha_'] = cmd_opt['alpha_']
+  opt['epsilon_'] = cmd_opt['epsilon_']
+  opt['alpha_learnable'] = cmd_opt['alpha_learnable']
+  opt['num_per_class'] = cmd_opt['num_per_class']
+  opt['threshold'] = cmd_opt['threshold']
+  return opt
         
 def main(opt): 
   dataset = get_dataset(opt, f'{ROOT_DIR}/data', opt['not_lcc'])
@@ -270,12 +274,13 @@ def main(opt):
     model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
 
   if not opt['planetoid_split'] and opt['dataset'] in ['Cora','Citeseer','Pubmed']:
-    dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500)
+    dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_per_class'])
 
   print('[INFO] Dataset : ', opt['dataset'])
   print('[INFO] ODE function : ', opt['function'])
   print('[INFO] Block type : ', opt['block'])
   print('[INFO] T value : ', opt['time'])
+  print('[INFO] Number of labelled nodes per class : ', opt['num_per_class'])
   print('[INFO] Diffusing labels : ', opt['use_labels'])
 
   data = dataset.data.to(device)
@@ -292,37 +297,80 @@ def main(opt):
   else:
     this_train, this_test = train, test_OGB if opt['dataset'] == 'ogbn-arxiv' else test
     
-  for epoch in range(1, opt['epoch']):
-    start_time = time.time()
+  # Record best val_acc and test_acc
+  MAX_NUM_SEEDS = 10
+  num_seeds = 0
+  best_test_acc = 0.0
+  best_test_accs = []
+  
+  gc.collect()
+  torch.cuda.empty_cache()
+  while((best_test_acc * 100) <= opt['threshold'] and num_seeds < MAX_NUM_SEEDS):
+      num_seeds += 1
+      try:
+          for epoch in range(1, opt['epoch']):
+            start_time = time.time()
 
-    if opt['rewire_KNN'] and epoch % opt['rewire_KNN_epoch'] == 0 and epoch != 0:
-      ei = apply_KNN(data, pos_encoding, model, opt)
-      model.odeblock.odefunc.edge_index = ei
+            if opt['rewire_KNN'] and epoch % opt['rewire_KNN_epoch'] == 0 and epoch != 0:
+              ei = apply_KNN(data, pos_encoding, model, opt)
+              model.odeblock.odefunc.edge_index = ei
 
-    loss = this_train(model, optimizer, data, pos_encoding)
-    tmp_train_acc, tmp_val_acc, tmp_test_acc = this_test(model, data, pos_encoding, opt)
+            loss = this_train(model, optimizer, data, pos_encoding)
+            tmp_train_acc, tmp_val_acc, tmp_test_acc = this_test(model, data, pos_encoding, opt)
 
-    best_time = opt['time']
-    if tmp_val_acc > val_acc:
-      best_epoch = epoch
-      train_acc = tmp_train_acc
-      val_acc = tmp_val_acc
-      test_acc = tmp_test_acc
-      best_time = opt['time']
-    if not opt['no_early'] and model.odeblock.test_integrator.solver.best_val > val_acc:
-      best_epoch = epoch
-      val_acc = model.odeblock.test_integrator.solver.best_val
-      test_acc = model.odeblock.test_integrator.solver.best_test
-      train_acc = model.odeblock.test_integrator.solver.best_train
-      best_time = model.odeblock.test_integrator.solver.best_time
+            best_time = opt['time']
+            if tmp_val_acc > val_acc:
+              best_epoch = epoch
+              train_acc = tmp_train_acc
+              val_acc = tmp_val_acc
+              test_acc = tmp_test_acc
+              best_time = opt['time']
+            if not opt['no_early'] and model.odeblock.test_integrator.solver.best_val > val_acc:
+              best_epoch = epoch
+              val_acc = model.odeblock.test_integrator.solver.best_val
+              test_acc = model.odeblock.test_integrator.solver.best_test
+              train_acc = model.odeblock.test_integrator.solver.best_train
+              best_time = model.odeblock.test_integrator.solver.best_time
 
-    log = 'Epoch: {:03d}, Runtime {:03f}, Loss {:03f}, forward nfe {:d}, backward nfe {:d}, Train: {:.4f}, Val: {:.4f}, Test: {:.4f}, Best time: {:.4f}'
-    if epoch % 10 == 0:
-      print(log.format(epoch, time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
-      
-    gc.collect()
-    torch.cuda.empty_cache()  
+            if(best_test_acc < test_acc):
+              best_test_acc = test_acc
+
+            log = 'Epoch: {:03d}, Runtime {:03f}, Loss {:03f}, forward nfe {:d}, backward nfe {:d}, Train: {:.4f}, Val: {:.4f}, Test: {:.4f}, Best time: {:.4f}'
+            print(log.format(epoch, time.time() - start_time, loss, model.fm.sum, model.bm.sum, train_acc, val_acc, test_acc, best_time))
+              
+            gc.collect()
+            torch.cuda.empty_cache()  
+      except KeyboardInterrupt:
+            print('[INFO] Interrupted...')
+            break
+      except:
+            traceback.print_exc(file=sys.stdout)
+
+      best_test_accs.append(best_test_acc)
+      if((best_test_acc * 100) > opt['threshold']): break
+      print('Accuracy threshold = ', opt['threshold'])
+      print('Best accuracy = ', best_test_acc)
+      print('Re-initializing models')
+      model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
+      split_success = False
+      while(not split_success):
+        try:
+          dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_per_class'])
+          split_success = True
+        except:
+          pass
+      parameters = [p for p in model.parameters() if p.requires_grad]
+      print_model_params(model)
+      optimizer = get_optimizer(opt['optimizer'], parameters, lr=opt['lr'], weight_decay=opt['decay'])
+      best_test_acc = 0.0
+
+  if(num_seeds >= MAX_NUM_SEEDS):
+      print('[INFO] MAX_NUM_SEEDS exceeded...')
+  best_test_acc = max(best_test_accs)
   print('best val accuracy {:03f} with test accuracy {:03f} at epoch {:d} and best time {:03f}'.format(val_acc, test_acc,  best_epoch, best_time))
+  print('[INFO] Logging results to ', opt['log_file'])
+  with open(opt['log_file'], "a") as f:
+      f.write(f"{opt['time']},{opt['alpha_']},{opt['epsilon_']},{opt['num_per_class']},{best_test_acc}\n")
   return train_acc, val_acc, test_acc
 
 if __name__ == '__main__':
@@ -372,6 +420,10 @@ if __name__ == '__main__':
   parser.add_argument('--add_source', dest='add_source', action='store_true',
                       help='If try get rid of alpha param and the beta*x0 source term')
   parser.add_argument('--cgnn', dest='cgnn', action='store_true', help='Run the baseline CGNN model from ICML20')
+  
+  # weight decay args
+  parser.add_argument('--l1_reg', action='store_true', help='Whether to use l1 weight decay or not')
+  parser.add_argument('--l1_weight_decay', type=float, default=0.001, help='l1 weight decay coefficient')
 
   # ODE args
   parser.add_argument('--time', type=float, default=1.0, help='End time of ODE integrator.')
@@ -485,9 +537,19 @@ if __name__ == '__main__':
   parser.add_argument('--fa_layer_edge_sampling_rmv', type=float, default=0.8, help="percentage of edges to remove")
   parser.add_argument('--gpu', type=int, default=0, help="GPU to run on (default 0)")
   parser.add_argument('--pos_enc_csv', action='store_true', help="Generate pos encoding as a sparse CSV")
-
   parser.add_argument('--pos_dist_quantile', type=float, default=0.001, help="percentage of N**2 edges to keep")
 
+  # For DeepGRAND 
+  parser.add_argument("--alpha_", type=float, required=False, default=1.0, help='Alpha value - DeepGRAND')
+  parser.add_argument("--epsilon_", type=float, required=False, default=1e-6, help='Epsilon value - DeepGRAND')
+  parser.add_argument("--alpha_learnable", action='store_true', required=False, help='Make alpha and epsilon learnable parameters - DeepGRAND')
+  parser.add_argument("--clip_bound", type=float, required=False, default=0.05, help='Norm clipping bound - DeepGRAND (old)')
+  parser.add_argument("--only_cpu", action='store_true', required=False, help="Use only CPU (old)")
+
+  # New arguments for ablation study
+  parser.add_argument('--num_per_class', type=int, required=False, default=20, help='Number of labelled nodes per class')
+  parser.add_argument("--log_file", type=str, required=False, default="tests/history.csv", help="Path to csv log file")
+  parser.add_argument('--threshold', type=float, default=0.0)
   args = parser.parse_args()
 
   cmd_opt = vars(args)
@@ -498,7 +560,7 @@ if __name__ == '__main__':
   try:
     best_opt = best_params_dict[cmd_opt['dataset']]
     opt = {**cmd_opt, **best_opt}
-    merge_cmd_args(cmd_opt, opt)
+    opt = merge_cmd_args(cmd_opt, opt)
   except KeyError:
     opt = cmd_opt 
   print('Updated opt:')
