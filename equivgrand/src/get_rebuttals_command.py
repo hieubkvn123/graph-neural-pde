@@ -5,7 +5,7 @@ rebuttal_dir = 'tests/rebuttals'
 pathlib.Path(rebuttal_dir).mkdir(exist_ok=True, parents=True)
 
 template = '''
-python3 run_GNN.py --function ext_laplacian3 --block {} --time {} --alpha_ {} --epsilon_ {} --log_file 'tests/rebuttals/iclr_{}_lowlabel.csv' --num_per_class {} --epoch 150 --max_iters 1000 --max_nfe 100000000 --l1_weight_decay 0.0 --decay 0.0001 --dataset {} --threshold {}
+python3 run_GNN.py --function ext_laplacian3 --block {} --time {} --alpha_ {} --epsilon_ {} --log_file 'tests/rebuttals/iclr_{}_lowlabel.csv' --num_per_class {} --epoch 151 --max_iters 1000 --max_nfe 100000000 --l1_weight_decay 0.0 --decay 0.0001 --dataset {} --threshold {}
 '''
 
 datasets = [
@@ -14,7 +14,9 @@ datasets = [
     'ogbn-arxiv'
 ]
 
-label_rates = [1, 2, 5, 10, 20]
+label_rates = [ #1,
+    2, 5, 10, 20
+][::-1]
 
 hyperparams = {
     'Computers': {
@@ -100,9 +102,9 @@ thresholds = {
     'ogbn-arxiv' : {
         20 : 71,
         10 : 67,
-        5 : 65,
-        2 : 63,
-        1 : 62
+        5 :  65,
+        2 :  63,
+        1 :  62
     }
 }
 

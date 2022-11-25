@@ -149,6 +149,7 @@ def set_train_val_test_split(
         data: Data,
         num_development: int = 1500,
         num_per_class: int = 20) -> Data:
+  print('INSIDE DATA.PY, num_per_class = ', num_per_class)
   rnd_state = np.random.RandomState(seed)
   num_nodes = data.y.shape[0]
   development_idx = rnd_state.choice(num_nodes, num_development, replace=False)
@@ -158,7 +159,7 @@ def set_train_val_test_split(
   rnd_state = np.random.RandomState(seed)
   for c in range(data.y.max() + 1):
     class_idx = development_idx[np.where(data.y[development_idx].cpu() == c)[0]]
-    train_idx.extend(rnd_state.choice(class_idx, num_per_class, replace=False))
+    train_idx.extend(rnd_state.choice(class_idx, num_per_class, replace=True))
 
   val_idx = [i for i in development_idx if i not in train_idx]
 

@@ -1,3 +1,4 @@
+import sys, traceback
 import argparse
 import time
 import gc 
@@ -254,6 +255,7 @@ def merge_cmd_args(cmd_opt, opt):
   opt['alpha_learnable'] = cmd_opt['alpha_learnable']
   opt['num_per_class'] = cmd_opt['num_per_class']
   opt['threshold'] = cmd_opt['threshold']
+  opt['use_labels'] = cmd_opt['use_labels']
   return opt
         
 def main(opt): 
@@ -273,8 +275,16 @@ def main(opt):
   else:
     model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
 
-  if not opt['planetoid_split'] and opt['dataset'] in ['Cora','Citeseer','Pubmed']:
-    dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_per_class'])
+  if not opt['planetoid_split']:
+    split_success = False
+    while(not split_success):
+      try:
+        dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_per_class'])
+        split_success = True
+        print('[INFO] Split succeeded')
+      except:
+        pass
+        # traceback.print_exc(file=sys.stdout)
 
   print('[INFO] Dataset : ', opt['dataset'])
   print('[INFO] ODE function : ', opt['function'])
@@ -352,13 +362,15 @@ def main(opt):
       print('Best accuracy = ', best_test_acc)
       print('Re-initializing models')
       model = GNN(opt, dataset, device).to(device) if opt["no_early"] else GNNEarly(opt, dataset, device).to(device)
-      split_success = False
-      while(not split_success):
-        try:
-          dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_per_class'])
-          split_success = True
-        except:
-          pass
+      if(not opt['planetoid_split']):
+          split_success = False
+          while(not split_success):
+            try:
+              dataset.data = set_train_val_test_split(np.random.randint(0, 1000), dataset.data, num_development=5000 if opt["dataset"] == "CoauthorCS" else 1500, num_per_class=opt['num_per_class'])
+              split_success = True
+              print('[INFO] Split data succeeded')
+            except:
+              traceback.print_exc(file=sys.stdout)
       parameters = [p for p in model.parameters() if p.requires_grad]
       print_model_params(model)
       optimizer = get_optimizer(opt['optimizer'], parameters, lr=opt['lr'], weight_decay=opt['decay'])
@@ -572,20 +584,4 @@ if __name__ == '__main__':
   model_name = 'GRAND' if not opt['equiv'] else 'EquivGRAND'
   if opt['rewiring']:
     model_name = model_name + '_rewire'
-    
-  file_name = '../result/{}/{}_{}_{}.json'.format(opt['dataset'], opt['block'], model_name, dt_string) 
-
-  test_acc = []
-  for i in range(20):
-    print('='*50)
-    print('Running number', i+1)
-    print()        
-    _, _, acc = main(opt)
-    test_acc.append(acc)
-    
-  opt['test_acc'] = test_acc 
-  opt['test_acc_mean'] = np.array(test_acc).mean().item()
-  opt['test_acc_std'] = np.array(test_acc).std().item()
-  
-  json.dump(opt, open(file_name, 'w'), indent=4)
-  
+  _, _, acc = main(opt)
