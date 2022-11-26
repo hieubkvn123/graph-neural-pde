@@ -1,6 +1,6 @@
 from function_transformer_attention import ODEFuncTransformerAtt
 from function_GAT_attention import ODEFuncAtt
-from function_dorsey_attention import ODEFuncDorseyAtt
+# from function_dorsey_attention import ODEFuncDorseyAtt
 from function_laplacian_diffusion import LaplacianODEFunc
 from function_deepgrand_diffusion import ExtendedLaplacianODEFunc3
 from sde import SDEFunc, SDEblock

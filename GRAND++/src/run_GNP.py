@@ -12,10 +12,12 @@ from ogb.nodeproppred import Evaluator
 from best_params import best_params_dict
 from recorder import Recorder
 import os
+import gc
 import random
 import time
 import fcntl
 
+os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'max_split_size_mb:64'
 
 def get_optimizer(name, parameters, lr, weight_decay=0):
     if name == 'sgd':
@@ -201,6 +203,8 @@ def main(cmd_opt):
     best_time = val_acc = test_acc = train_acc = best_epoch = 0
     this_test = test_OGB if opt['dataset'] == 'ogbn-arxiv' else test
     for epoch in range(1, opt['epoch']):
+        gc.collect()
+        torch.cuda.empty_cache()
         start_time = time.time()
 
         tmp_train_acc, tmp_val_acc, tmp_test_acc = this_test(model, data, opt)
